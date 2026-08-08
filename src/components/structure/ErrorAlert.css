@@ -1,0 +1,41 @@
+.errorContainer{
+    border: 2px red solid;
+    justify-self: center;
+    align-self:center;
+    width: 90%;
+    padding: 5px;
+    font-weight: bold;
+    
+    margin-bottom: 1%;
+    h1{
+        color: red;
+        text-align: center;
+        font-size: 1em;
+    }
+    p{
+        padding: 5px;
+        display: block;
+        width: 100%;
+        text-wrap: wrap;
+        text-align: center;
+    }
+}
+#loadingBar{
+    width: 0%;
+    height: 5px;
+    background-color: red;
+    animation: 5s loadingBar;
+}
+@keyframes loadingBar {
+    0%{
+        width: 100%;
+    }
+    100%{
+        width: 0%;
+    }
+}
+.errorContainer{
+    border-radius: 5px;
+        background-color: var(--color-fondo);
+        scroll-margin-top: 12vh;
+}

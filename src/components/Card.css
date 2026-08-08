@@ -1,0 +1,121 @@
+.container-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--color-fondo);
+}
+
+#image {
+    position: relative;
+}
+
+.card {
+    position: relative;
+    background: var(--color-fondo);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    border: 5px solid var(--color-principal);
+    margin: 1%;
+    width: 10cqw
+}
+.card:hover{
+    scale: 1.1;
+}
+.cardInfo{
+    position: relative;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* min-height: 10%; */
+}
+
+.head .title {
+    margin-right: 10%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 5%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: wrap;
+
+}
+
+.head .quantity {
+    background-color: var(--color-principal);
+    width: 2cqw;
+    height: 2cqw;
+    font-size: calc(100% + 10px);
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    top: -3%;
+    right: -5%;
+    border-radius: 100%;
+    text-align: center;
+    z-index: 10;
+
+}
+
+.body img {
+    width: 100%;
+    position: relative;
+}
+/* Ajustes para PC (Pantallas mayores a 768px) */
+@media (min-width: 1000px) {
+    .container-cards {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+        padding: 40px;
+    }
+    .cardInfo h3 {
+        font-size: 1.2rem;
+    }
+
+    .cardInfo {
+        min-height: 5vh;
+    }
+}
+
+@media (max-width: 1000px) {
+    .card {
+        width: 15%;
+    }
+
+    .head .quantity {
+        width: 3cqw;
+        height: 3cqw;
+        top: -3%;
+        right: -5%;
+    }
+    .head .title {
+        font-size: 0.5rem;
+    }
+    
+}
+
+@media (max-width: 1000px) {
+    .card {
+        width: 20%;
+    }
+    .head .quantity {
+        width: 5cqw;
+        height: 5cqw;
+        top: -3%;
+        right: -5%;
+        font-size: 1em;
+    }
+    .head .title {
+        font-size: 0.5rem;
+    }
+    .cardInfo h3{
+        font-size: 1cqw;
+    }
+}

@@ -1,0 +1,48 @@
+
+@media (min-width: 1200px) {
+    .mainContainer{
+        display: flex;
+        flex-direction: row;
+    }
+    .form{
+        min-width: 20%;
+        max-width: 20%;
+        padding: 1%;
+        padding-top: 0%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .error{
+           width: 100%;
+           font-weight: bold;
+           display: flex;
+           text-align: center;
+    }
+    .textArea{
+        width: 100%;
+    }
+    .showDeck{
+        min-width: 70%;
+    }
+}
+@media (max-width: 1200px) {
+    .mainContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .showDeck{
+        width: 100%;
+    }
+    .form{
+        width: 100%;
+        margin-bottom: 2%;
+        height: fit-content;
+    }
+}

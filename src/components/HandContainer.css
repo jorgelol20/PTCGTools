@@ -1,0 +1,64 @@
+button {
+    width: 100%;
+    height: 50px;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.cards {
+    background-color: transparent;
+    border: none;
+    width: 90%;
+}
+
+button {
+    color: rgb(11, 15, 24);
+    width: max-content;
+    margin-bottom: 20px;
+    text-decoration: none;
+    padding: 5px;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+}
+
+button {
+    background-color: var(--color-secundario);
+    color: rgb(226, 235, 255);
+    border: 2px var(--color-borde) solid;
+}
+
+button:hover {
+    background-color: var(--color-principal)
+}
+
+.container {
+    border: 2px rgb(226, 235, 255) solid;
+}
+.upButton {
+    width: 2cqw; 
+    height: 2cqw;
+    min-width: 40px; /* Safety: prevents button from becoming microscopic */
+    min-height: 40px;
+    border-radius: 50%; /* 50% is standard for a perfect circle */
+    
+    position: sticky; 
+    bottom: 2rem; 
+    top: 10%;
+    
+    /* Pushes it to the right within a flex or block container */
+    margin-left: auto; 
+    right: 2cqw; 
+    
+    display: block;
+    z-index: 100;
+}

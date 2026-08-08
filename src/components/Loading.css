@@ -1,0 +1,21 @@
+.heracross{
+    width: 5em;
+    animation: rotate 2s infinite ;
+    cursor:crosshair;
+}
+.heracross-btn{
+    width: max-content;
+    background: none;
+    border: none;
+}
+.loading{
+    margin-bottom: 2em;
+}
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

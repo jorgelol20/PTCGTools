@@ -1,0 +1,80 @@
+.finalResults {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: max-content;
+    margin-top: -3em;
+    #graphViwer {
+        margin-top: -1.5em;
+        border: 2px var(--color-borde) solid;
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        width: 100%;
+        margin-bottom: 5em;
+        background-color: var(--color-secundario);
+
+        #mulligans {
+            flex: 1;
+            width: 100%;
+            min-width: 0;
+            min-height: 30cqh;
+            max-height: 60cqh;
+        }
+
+        #cards {
+            flex: 1;
+            width: 98%;
+            min-height: 70cqh;
+            max-height: 80cqh;
+            margin: 1%;
+            margin-bottom: 5%;
+        }
+    }
+
+    #graphViwer:focus {
+        animation: display 1s 1;
+    }
+
+}
+
+button {
+    font-size: 1em;
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .finalResults {
+        flex-direction: column;
+
+        #graphViwer {
+            margin-bottom: 25px;
+            flex-direction: column;
+            width: 100%;
+            margin-left: 5%;
+            margin-right: 5%;
+
+            #mulligans {
+                margin-bottom: 3em;
+            }
+
+            #cards {
+                margin-left: 1%;
+                margin-bottom: 10em;
+            }
+        }
+    }
+}
+
+@keyframes display {
+    0% {
+        height: 0%;
+    }
+
+    100% {
+        height: 100%;
+    }
+}

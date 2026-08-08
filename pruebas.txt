@@ -1,0 +1,151 @@
+Pokémon: 17
+4 Charmander MEW 4
+2 Charmeleon PAF 8
+3 Charizard ex OBF 125
+2 Pidgey MEW 16
+2 Pidgeotto MEW 17
+2 Pidgeot ex OBF 164
+1 Moltres MEW 146
+1 Bloodmoon Ursaluna ex TWM 141
+
+Trainer: 33
+4 Arven SVI 166
+3 Boss's Orders PAL 172
+2 Professor's Research SVI 189
+2 Iono PAL 185
+4 Buddy-Buddy Poffin TEF 144
+4 Ultra Ball SVI 196
+4 Rare Candy SVI 191
+2 Nest Ball SVI 181
+2 Super Rod PAL 188
+2 Energy Retrieval SVI 171
+1 Superior Energy Retrieval PAL 189
+1 Switch SVI 194
+1 Defiance Band SVI 169
+1 Grand Tree SCR 136
+
+Energy: 10
+10 Fire Energy SVE 2
+
+
+
+
+Pokémon: 11
+4 Team Rocket's Porygon DRI 153
+3 Team Rocket's Porygon2 DRI 154
+3 Team Rocket's Porygon-Z DRI 155
+1 Team Rocket's Articuno DRI 51
+
+Trainer: 41
+4 Team Rocket's Ariana DRI 171
+4 Team Rocket's Giovanni DRI 174
+4 Team Rocket's Archer DRI 170
+4 Team Rocket's Proton DRI 177
+3 Team Rocket's Petrel DRI 176
+4 Ultra Ball SVI 196
+3 Night Stretcher SFA 61
+4 Team Rocket's Transceiver DRI 178
+3 Rare Candy SVI 191
+1 Brilliant Blender SSP 164
+1 Pokégear 3.0 SVI 186
+1 Counter Catcher PAR 160
+1 Air Balloon BLK 79
+4 Team Rocket's Factory DRI 173
+
+Energy: 8
+4 Ignition Energy WHT 86
+4 Team Rocket's Energy DRI 182
+
+
+
+
+
+Pokémon: 5
+1 Snover MEG 140
+2 Kyogre MEG 34
+3 Mega Abomasnow ex MEG 36
+1 Budew PRE 4
+3 Snover MEG 35
+
+Entrenador: 9
+4 Lillie's Determination MEG 119
+2 Ciphermaniac's Codebreaking TEF 145
+1 Energy Recycler DRI 164
+2 Ultra Ball MEG 131
+2 Nest Ball SVI 181
+1 Secret Box TWM 163
+2 Academy at Night SFA 54
+1 Surfing Beach MEG 129
+2 Boss's Orders PAL 172
+
+Energía: 1
+33 Basic {W} Energy SVE 3
+
+Cartas totales: 60
+
+
+
+
+Pokémon: 0
+
+Entrenador: 0
+
+Energía: 8
+1 Basic {D} Energy SVE 15
+1 Basic {F} Energy SVE 14
+1 Basic {G} Energy SVE 1
+1 Basic {L} Energy SVE 12
+1 Basic {M} Energy SVE 16
+1 Basic {P} Energy SVE 13
+1 Basic {R} Energy SVE 10
+1 Basic {W} Energy SVE 11
+
+Cartas totales: 8
+
+ 
+
+
+
+Pokémon: 11
+2 Munkidori SFA 72
+1 Bloodmoon Ursaluna ex PRE 168
+2 Arboliva ex DRI 23
+3 Smoliv DRI 21
+1 Froslass TWM 53
+1 Dolliv PAF 103
+1 Budew PRE 4
+2 Froslass TWM 174
+2 Snorunt PAR 188
+1 Shaymin DRI 10
+1 Snorunt PAR 37
+
+Entrenador: 22
+2 Drayton SSP 174
+2 Counter Catcher PAR 160
+1 Artazon OBF 229
+1 Professor Turo's Scenario PAR 257
+1 Jacq SVI 175
+1 Earthen Vessel SFA 96
+3 Pokégear 3.0 SVI 186
+1 Night Stretcher SFA 61
+1 Rescue Board TEF 159
+2 Nest Ball SVI 181
+1 Arven PAF 235
+1 Switch MEW 206
+1 Drayton PRE 172
+2 Night Stretcher SSP 251
+1 Boss's Orders PAL 248
+3 Arven SVI 166
+1 Technical Machine: Devolution PAR 177
+2 Colress's Tenacity SFA 57
+4 Buddy-Buddy Poffin TEF 144
+3 Ultra Ball SVI 196
+2 Rare Candy SVI 191
+1 Earthen Vessel PAR 163
+
+Energía: 3
+1 Legacy Energy TWM 167
+3 Basic {D} Energy Energy 15
+2 Basic {G} Energy Energy 1
+
+Cartas totales: 60
