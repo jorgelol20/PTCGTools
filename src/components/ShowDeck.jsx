@@ -9,6 +9,7 @@ import Advice from './structure/Advice.jsx';
 import { errorContext } from '../context/ErrorProvider.jsx';
 import { useTranslation } from 'react-i18next';
 import CardInfo from "./CardInfo.jsx";
+import Search from './Search.jsx';
 
 const ShowDeck = ({ deck }) => {
     const { deckAPI, loading } = usePokeAPI(deck);
@@ -52,20 +53,21 @@ const ShowDeck = ({ deck }) => {
     // Actualiza la cantidad de una carta de forma inmutable
     const handleUpdateQuantity = (cardToUpdate, cantidad) => {
         setContextDeck(prevDeck => {
-            return prevDeck.map(card => {
-                const isMatch = card.cardId ? card.cardId === cardToUpdate.cardId : card.name === cardToUpdate.name;
-                if (isMatch) {
-                    const currentQty = Number(card.quantity) || 0;
-                    return { ...card, quantity: Math.max(0, currentQty + cantidad) };
-                }
-                return card;
-            });
+            return prevDeck
+                .map(card => {
+                    const isMatch = card.cardId ? card.cardId === cardToUpdate.cardId : card.name === cardToUpdate.name;
+                    if (isMatch) {
+                        const currentQty = Number(card.quantity) || 0;
+                        return { ...card, quantity: currentQty + cantidad };
+                    }
+                    return card;
+                })
+                .filter(card => card.quantity > 0);
         });
     };
-
-    const changePriceDolar = async (totalMinPrice = 0,totalAvgPrice = 0) => {
-        setDolarsDeckLowPrice(await convert('EUR','USD',Number(totalMinPrice.toFixed(2))))
-        setDolarsDeckAvgPrice(await convert('EUR','USD',Number(totalAvgPrice.toFixed(2))))
+    const changePriceDolar = async (totalMinPrice = 0, totalAvgPrice = 0) => {
+        setDolarsDeckLowPrice(await convert('EUR', 'USD', Number(totalMinPrice.toFixed(2))))
+        setDolarsDeckAvgPrice(await convert('EUR', 'USD', Number(totalAvgPrice.toFixed(2))))
     }
 
     // Recalcula el total de cartas cuando contextDeck cambia
@@ -77,7 +79,7 @@ const ShowDeck = ({ deck }) => {
             setCardQuantity(total);
             setDeckAvgPrice(Number(totalAvgPrice.toFixed(2)));
             setDeckLowPrice(Number(totalMinPrice.toFixed(2)));
-            changePriceDolar(totalMinPrice,totalAvgPrice)
+            changePriceDolar(totalMinPrice, totalAvgPrice)
 
         } else {
             setCardQuantity(0);
@@ -138,7 +140,7 @@ const ShowDeck = ({ deck }) => {
         }
     }
     async function convert(from, to, amount) {
-        if(from === undefined){
+        if (from === undefined) {
             console.log()
             return 0
         }
@@ -169,6 +171,9 @@ const ShowDeck = ({ deck }) => {
                             : <div id='calc'>{t('minCardText')}</div>
                         : <></>
                 }
+                <div className='cardSearch'>
+                    <Search />
+                </div>
                 {
                     advises(numberOfHands)
                 }
@@ -205,7 +210,7 @@ const ShowDeck = ({ deck }) => {
                                 if (card !== undefined) {
                                     return <Card
                                         className="card"
-                                        key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)}
+                                        key={card.id}
                                         cardInfo={card}
                                         setNewCardInfo={setNewCardInfo}
                                         onUpdateQuantity={handleUpdateQuantity}

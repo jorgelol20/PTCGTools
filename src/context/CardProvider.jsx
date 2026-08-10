@@ -1,4 +1,4 @@
-import React, {Fragment, createContext, useState, useEffect} from "react";
+import React, { Fragment, createContext, useState, useEffect } from "react";
 
 const cardsContext = createContext();
 
@@ -10,6 +10,26 @@ const CardProvider = (props) => {
     const setContextDeck = (newDeck) => {
         setDeck(newDeck);
     }
+
+    const addCardToDeck = (newCard) => {
+        setDeck((prevDeck) => {
+            const currentDeck = prevDeck || [];
+            const cardExists = currentDeck.some((card) => card.id === newCard.id);
+
+            if (cardExists) {
+                return currentDeck.map((card) =>
+                    card.id === newCard.id
+                        ? { ...card, quantity: Number(card.quantity || 1) + 1 }
+                        : card
+                );
+            }
+
+            return [
+                ...currentDeck,
+                { ...newCard, quantity: Number(newCard.quantity || 1) }
+            ];
+        });
+    };
 
     const setContextNumberOfHands = (newNumber) => {
         setNumberOfHands(newNumber);
@@ -24,15 +44,16 @@ const CardProvider = (props) => {
         saveUserDecks();
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const tempUserDecks = localStorage.getItem("user_decks");
-        if(tempUserDecks !== null && tempUserDecks !== undefined) setUserDecks(tempUserDecks)
-    },[]);
+        if (tempUserDecks !== null && tempUserDecks !== undefined) setUserDecks(tempUserDecks)
+    }, []);
     const exports = {
         contextDeck,
         userDecks,
         contextNumberOfHands,
         setContextDeck,
+        addCardToDeck,
         setUserDecks,
         addNewDeck,
         setContextNumberOfHands,
