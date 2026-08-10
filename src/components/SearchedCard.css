@@ -1,14 +1,35 @@
-.result-card{
+.result-card {
     width: 10em;
     min-width: 12em;
     text-align: center;
-    h1{
+
+    h1 {
         margin: 0;
         font-size: 0.7em;
     }
-    img{
+
+    img {
         max-width: 10em;
         padding: 1em;
     }
-    
+
+}
+
+@media (max-width: 1000px) {
+    .result-card {
+        width: 9em;
+        min-width: 6em;
+        text-align: center;
+
+        h1 {
+            margin: 0;
+            font-size: 0.7em;
+        }
+
+        img {
+            max-width: 8em;
+            padding: 1em;
+        }
+
+    }
 }

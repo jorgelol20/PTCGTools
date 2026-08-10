@@ -92,8 +92,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
                         abilitieText: card[0].abilities.effect,
                         image: card[0].image + '/low.webp',
                         quantity: card[1],
-                        avgPrice: card[0].pricing.cardmarket.avg,
-                        lowPrice: card[0].pricing.cardmarket.low,
+                        avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
+                        lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
+                        avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
+                        lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
                     }
                 } else {
                     return {
@@ -106,8 +108,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
                         rarity: card[0].rarity,
                         image: card[0].image + '/low.webp',
                         quantity: card[1],
-                        avgPrice: card[0].pricing.cardmarket.avg,
-                        lowPrice: card[0].pricing.cardmarket.low,
+                        avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
+                        lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
+                        avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
+                        lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
                     }
                 }
             default:
@@ -120,8 +124,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
                     rarity: card[0].rarity,
                     image: card[0].image + '/low.webp',
                     quantity: card[1],
-                    avgPrice: card[0].pricing.cardmarket.avg,
-                    lowPrice: card[0].pricing.cardmarket.low,
+                    avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
+                    lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
+                    avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
+                    lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
                 }
         }
     }
@@ -130,11 +136,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
         return (
             <Fragment>
                 <div className="result-card"
-                    onClick={() => {
-                        console.log(cardInfo)
+                    onClick={async () => {
                         const card = [cardInfo, 1];
                         const newCard = formatCard(card)
-                            addCardToDeck(newCard)
+                        await addCardToDeck(newCard)
                         handleClear();
                     }}
                 >

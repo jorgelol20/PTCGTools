@@ -14,8 +14,7 @@ const CardProvider = (props) => {
     const addCardToDeck = (newCard) => {
         setDeck((prevDeck) => {
             const currentDeck = prevDeck || [];
-            const cardExists = currentDeck.some((card) => card.id === newCard.id);
-
+            const cardExists = currentDeck.some((card) => card.cardId === newCard.cardId);
             if (cardExists) {
                 return currentDeck.map((card) =>
                     card.id === newCard.id

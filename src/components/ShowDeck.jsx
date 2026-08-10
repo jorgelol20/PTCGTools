@@ -72,22 +72,65 @@ const ShowDeck = ({ deck }) => {
 
     // Recalcula el total de cartas cuando contextDeck cambia
     useEffect(() => {
-        if (contextDeck && contextDeck.length > 0) {
-            const total = contextDeck.reduce((cont, card) => cont + (Number(card?.quantity) || 0), 0);
-            const totalAvgPrice = contextDeck.reduce((cont, card) => cont + ((Number(card?.avgPrice) * Number(card?.quantity)) || 0), 0)
-            const totalMinPrice = contextDeck.reduce((cont, card) => cont + ((Number(card?.lowPrice) * Number(card?.quantity)) || 0), 0)
-            setCardQuantity(total);
-            setDeckAvgPrice(Number(totalAvgPrice.toFixed(2)));
-            setDeckLowPrice(Number(totalMinPrice.toFixed(2)));
-            changePriceDolar(totalMinPrice, totalAvgPrice)
-
-        } else {
+        // Si no hay cartas, reseteamos todos los estados
+        if (!contextDeck || contextDeck.length === 0) {
             setCardQuantity(0);
             setDeckAvgPrice(0);
             setDeckLowPrice(0);
-            changePriceDolar()
-
+            changePriceDolar(0, 0);
+            return;
         }
+
+        // Tasa de cambio aproximada para la suma directa en EUR (USD -> EUR)
+        // Cambia 0.92 por la tasa actual o la variable que uses para convertir
+        const USD_TO_EUR_RATE = 0.92;
+
+        const getValidPriceInEur = (cmPrice, tpPrice) => {
+            const cm = Number(cmPrice);
+            const tp = Number(tpPrice);
+
+            // 1. Si Cardmarket (EUR) es válido y mayor a 0, lo usamos directo
+            if (Number.isFinite(cm) && cm > 0) {
+                return cm;
+            }
+
+            // 2. Si Cardmarket falla (es NaN o 0), pero TCGPlayer (USD) es válido
+            // Convertimos el precio de TP de USD a EUR
+            if (Number.isFinite(tp) && tp > 0) {
+                return tp * USD_TO_EUR_RATE;
+            }
+
+            // 3. Si ninguno es válido
+            return 0;
+        };
+
+        // Calculamos el total de cartas
+        const totalQuantity = contextDeck.reduce(
+            (cont, card) => cont + (Number(card?.quantity) || 0),
+            0
+        );
+
+        // Calculamos los totales acumulados en Euros
+        const totalAvgPrice = contextDeck.reduce((cont, card) => {
+            const priceInEur = getValidPriceInEur(card?.avgCMPrice, card?.avgTPPrice);
+            const qty = Number(card?.quantity) || 0;
+            return cont + (priceInEur * qty);
+        }, 0);
+
+        const totalMinPrice = contextDeck.reduce((cont, card) => {
+            const priceInEur = getValidPriceInEur(card?.lowCMPrice, card?.lowTPPrice);
+            const qty = Number(card?.quantity) || 0;
+            return cont + (priceInEur * qty);
+        }, 0);
+
+        // Guardamos los valores finales redondeados
+        setCardQuantity(totalQuantity);
+        setDeckAvgPrice(Number(totalAvgPrice.toFixed(2)));
+        setDeckLowPrice(Number(totalMinPrice.toFixed(2)));
+
+        // Convertimos el total final a dólares para la otra vista
+        changePriceDolar(totalMinPrice, totalAvgPrice);
+
     }, [contextDeck]);
 
     /**
@@ -141,14 +184,12 @@ const ShowDeck = ({ deck }) => {
     }
     async function convert(from, to, amount) {
         if (from === undefined) {
-            console.log()
             return 0
         }
         return await fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`)
             .then((resp) => resp.json())
             .then((data) => {
                 const convertedAmount = (amount * data.rates[to]).toFixed(2);
-                console.log(convertedAmount)
                 return convertedAmount
             });
     }
@@ -210,7 +251,7 @@ const ShowDeck = ({ deck }) => {
                                 if (card !== undefined) {
                                     return <Card
                                         className="card"
-                                        key={card.id}
+                                        key={card.cardId}
                                         cardInfo={card}
                                         setNewCardInfo={setNewCardInfo}
                                         onUpdateQuantity={handleUpdateQuantity}
