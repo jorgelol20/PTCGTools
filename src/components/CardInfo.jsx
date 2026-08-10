@@ -3,8 +3,8 @@ import './CardInfo.css'
 const CardInfo = ({ cardInfo, setNewCardInfo }) => {
     return (
         <Fragment>
-            <div className="cardInfoContainer" onClick={(event)=>{
-                if(event.target.classList.contains("cardInfoContainer")){
+            <div className="cardInfoContainer" onClick={(event) => {
+                if (event.target.classList.contains("cardInfoContainer")) {
                     setNewCardInfo(null);
                 }
             }}>
@@ -17,7 +17,7 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                             {
                                 cardInfo.image ?
                                     <img
-                                        src={cardInfo.image.replace('low','high')}
+                                        src={cardInfo.image.replace('low', 'high')}
                                         onError={(e) => {
                                             e.preventDefault();
                                             e.currentTarget.onerror = null;
@@ -34,11 +34,13 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                             cardInfo.expansion && <div id="setInfo">
                                 <h1>Set: {cardInfo.expansion}</h1>
                                 <h1>ID: {cardInfo.cardNumber}</h1>
-                                <h1>AVG Cardmarket: {cardInfo.avgPrice}€</h1>
-                                <h1>LOW Cardmarket: {cardInfo.lowPrice}€</h1>
+                                <h1>AVG Cardmarket: {cardInfo.avgCMPrice !== 'NaN'?cardInfo.avgCMPrice:'-'}€</h1>
+                                <h1>LOW Cardmarket: {cardInfo.lowCMPrice??'-'}€</h1>
+                                <h1>AVG TCGPlayer: {cardInfo.avgTPPrice}€</h1>
+                                <h1>LOW TCGPlayer: {cardInfo.lowTPPrice}€</h1>
                             </div>
                         }
-                        
+
                     </div>
                 </div>
             </div>

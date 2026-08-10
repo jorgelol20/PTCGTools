@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { result } from "lodash";
 
 import './Search.css';
+import { Fragment } from "react";
 
 const Search = () => {
     const [searchText, setSearchText] = useState("");
@@ -31,7 +32,7 @@ const Search = () => {
                 Query.create()
                     .contains('name', searchText)
                     .sort('localId', 'ASC')
-                    .not.contains('image','tcgp')
+                    .not.contains('image', 'tcgp')
             );
             const resultsIds = results.map((card) => card.id);
             setAllCards(resultsIds || []);
@@ -58,50 +59,52 @@ const Search = () => {
     };
 
     // Obtenemos únicamente las 20 cartas de la página actual
-    const displayedCards = allCards.slice((Math.max(0,searchPage - 1)) * 20, searchPage * 20);
+    const displayedCards = allCards.slice((Math.max(0, searchPage - 1)) * 20, searchPage * 20);
 
     return (
-        <>
-            <div className="search">
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <input
-                        className="searchbar"
-                        type="text"
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        placeholder="Buscar carta..."
-                    />
-                </form>
-                <button onClick={handleClear}>Limpiar</button>
-            </div>
+        <Fragment >
+            <div className="searchmenu">
+                <div className="search">
+                    <form onSubmit={(e) => e.preventDefault()}>
+                        <input
+                            className="searchbar"
+                            type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            placeholder="Buscar carta..."
+                        />
+                    </form>
+                    <button onClick={handleClear}>Limpiar</button>
+                </div>
 
-            <div className="filters">
-            </div>
+                <div className="filters">
+                </div>
 
-            <div className="pageButtons">
-                <button onClick={() => setSearchPage(prev => Math.max(Math.min(Math.floor(allCards.length/20 + 0.5),0),prev - 1))}>
-                    Página Anterior
-                </button>
-                <button onClick={() => setSearchPage(prev => Math.min(Math.floor(allCards.length/20 + 0.5),prev + 1))}>
-                    Siguiente Página
-                </button>
-                <h1>{searchPage}/{Math.floor(allCards.length/20 + 0.5)}</h1>
-            </div>
+                <div className="pageButtons">
+                    <button onClick={() => setSearchPage(prev => Math.max(Math.min(Math.floor(allCards.length / 20 + 0.5), 1), prev - 1))}>
+                        Página Anterior
+                    </button>
+                    <button onClick={() => setSearchPage(prev => Math.min(Math.floor(allCards.length / 20 + 0.5), prev + 1))}>
+                        Siguiente Página
+                    </button>
+                    <h1>{searchPage}/{Math.floor(allCards.length / 20 + 0.5)}</h1>
+                </div>
 
-            <div className="results">
-                {loading && <p>Cargando cartas...</p>}
+                <div className="results">
+                    {loading && <p>Cargando cartas...</p>}
 
-                {!loading && allCards.length === 0 && searchText && (
-                    <p>No se encontraron cartas.</p>
-                )}
-                <div className="results-cards">
-                    {!loading &&
-                        displayedCards.map((card) => (
-                            <SearchedCard cardId={card} key={card} handleClear={handleClear} />
-                        ))}
+                    {!loading && allCards.length === 0 && searchText && (
+                        <p>No se encontraron cartas.</p>
+                    )}
+                    <div className="results-cards">
+                        {!loading &&
+                            displayedCards.map((card) => (
+                                <SearchedCard cardId={card} key={card} handleClear={handleClear} />
+                            ))}
+                    </div>
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 };
 

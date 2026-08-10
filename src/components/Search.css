@@ -1,13 +1,22 @@
+.searchmenu{
+    width:100%;
+    position: relative;
+}
+
 .results-cards{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     margin-top: 2em;
     justify-content: center;
+    align-items: center;
     padding-bottom: 2em;
+    width: 66cqw;
 }
 .results{
+    align-items: center;
     min-height: 20em;
+    min-width: 90%;
     overflow-y: scroll;
     box-shadow:
         0 0 5px #fff,
