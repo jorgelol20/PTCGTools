@@ -176,7 +176,9 @@ const usePokeAPI = (deck) => {
                                     rarity: card[0].rarity,
                                     abilitieText: card[0].abilities.effect,
                                     image: card[0].image + '/low.webp',
-                                    quantity: card[1]
+                                    quantity: card[1],
+                                    avgPrice: card[0].pricing.cardmarket.avg,
+                                    lowPrice: card[0].pricing.cardmarket.low,
                                 }
                             } else {
                                 return {
@@ -188,7 +190,9 @@ const usePokeAPI = (deck) => {
                                     pokemonType: card[0].stage,
                                     rarity: card[0].rarity,
                                     image: card[0].image + '/low.webp',
-                                    quantity: card[1]
+                                    quantity: card[1],
+                                    avgPrice: card[0].pricing.cardmarket.avg,
+                                    lowPrice: card[0].pricing.cardmarket.low,
                                 }
                             }
                         default:
@@ -200,7 +204,9 @@ const usePokeAPI = (deck) => {
                                 cardType: card[0].category,
                                 rarity: card[0].rarity,
                                 image: card[0].image + '/low.webp',
-                                quantity: card[1]
+                                quantity: card[1],
+                                avgPrice: card[0].pricing.cardmarket.avg,
+                                lowPrice: card[0].pricing.cardmarket.low,
                             }
                     }
                 }

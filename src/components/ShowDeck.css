@@ -13,6 +13,8 @@
     min-width: 15cqw;
 }
 
+
+
 section {
     display: flex;
     flex-direction: column;
@@ -120,6 +122,12 @@ section {
 }
 
 @media (max-width: 1200px) {
+    .deckInfo {
+        h1 {
+            font-size: 0.8em;
+        }
+    }
+
     section {
         justify-content: center;
         align-items: center;

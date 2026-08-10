@@ -1,6 +1,6 @@
 {
     "pageHeadertitle": "How to use the Pokémon TCG Mulligan Calculator",
-    "mainTitle" : "Calculadora de Mulligans",
+    "mainTitle" : "PTCGTools",
     "textArea" : "Se aceptan mazos importados desde TCG Live y el creador de mazos de Limitless",
     "errorFormat" : "Error al procesar las cartas, comprueba que se haya copiado correctamente",
     "checkButton" : "Comprobar mazo",
@@ -31,13 +31,20 @@
     "mulliganPercent": "% de mulligans",
     "copyright": "Mulligan Calculator es una herramienta fan-made sin fines de lucro. Este sitio no está afiliado, respaldado ni apoyado por Nintendo, Game Freak o The Pokémon Company.Todas las imagenes de las cartas y su información han sido suministradas mediante el uso de TCGDex API",
 
-    "welcome-subtitle": "Toma decisiones basadas en datos reales, no en instintos.",
-    "welcome-howItWorks": "¿Cómo funciona?",
-    "welcome-step1": "Importa tu mazo directamente desde el creador de mazos de Limitless o Pokémon TCG Live.",
-    "welcome-step2": "Configura el número de simulaciones para obtener una muestra estadística fiable.",
-    "welcome-step3": "Analiza el porcentaje de 'Mulligans' y la probabilidad de aparición de cada carta en tu mano inicial.",
+    "calculator-subtitle": "Toma decisiones basadas en datos reales, no en instintos.",
+    "calculator-howItWorks": "¿Cómo funciona?",
+    "calculator-step1": "Importa tu mazo directamente desde el creador de mazos de Limitless, Pokémon TCG Live o el creador de mazos.",
+    "calculator-step2": "Configura el número de simulaciones para obtener una muestra estadística fiable.",
+    "calculator-step3": "Analiza el porcentaje de 'Mulligans' y la probabilidad de aparición de cada carta en tu mano inicial.",
     "welcome-startToCalc": "¡Empieza a calcular!",
     "welcome-goToCalc": "Ir a la calculadora",
+    "builder-goToCreate": "Crear mazos",
+    "builder-howItWorks": "Importa tus mazos desde Limitless, Pokémon TCG Live o utilizando el buscador de cartas.",
     "numberOf": "La carta aparece en el ",
-    "numberOf2": " de las manos iniciales."
+    "numberOf2": " de las manos iniciales.",
+    "deckBuilder": "Creador de mazos",
+    "builder-subtitle": "Crea y personaliza tus mazos",
+    "mulliganCalculator": "Calculadora de Mulligans",
+    "lowPriceText": "Precio mínimo del mazo",
+    "avgPriceText": "Precio medio del mazo"
 }
