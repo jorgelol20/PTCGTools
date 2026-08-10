@@ -11,6 +11,9 @@
         background-color: var(--color-fondo);
         padding-left: 1%;
         padding-right: 1%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         h1 {
             display: flex;
             align-items: center;
@@ -43,23 +46,44 @@
     }
 }
 
-@media (min-width: 1000px) or (orientation: landscape) {
-    .mainWelcome .mainContent {
-        padding: 1%;
-        padding-top: 0;
-        margin-top: 1%;
-        margin-bottom: 1%;
-        border-radius: 10px;
-        border: 4px solid rgb(235, 237, 243) !important;
+.menuContainer{
+    margin-top: 1%;
+    border: 4px solid rgb(235, 237, 243) !important;
         color-scheme: dark;
         box-shadow:
             0 0 5px #fff,
             0 0 5px #fff,
             0 0 5px #2836ff,
             0 0 5px #5246ff;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    align-items: center;
+}
+
+@media (min-width: 1000px) or (orientation: landscape) {
+    .menuContainer{
+        width: 50%;
+        height: 100%;
+        justify-content: center;
+    }
+    .mainWelcome .mainContent {
+        padding: 1%;
+        padding-top: 0;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        border-radius: 10px;
+        
     }
 }
 @media (max-width: 1000px) {
+    .mainContent{
+        display: flex;
+        flex-direction: column;
+    }
+    .menuContainer{
+        width: 100%;
+    }
     .mainWelcome .mainContent .title{
         width: 100%;
         background-image: url("/locales/welcome-background-image.webp");    

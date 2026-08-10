@@ -11,6 +11,8 @@ import Light_Energy from './../assets/img/energies/Light_Energy.png';
 import Metal_Energy from './../assets/img/energies/Metal_Energy.png';
 import Placeholder from './../assets/img/placeHolder.png';
 import { useSSR, useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const selectImage = (card) => {
     switch (card) {
@@ -36,8 +38,9 @@ const selectImage = (card) => {
             return null;
     }
 }
-const Card = ({ cardInfo, setNewCardInfo }) => {
+const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
     const [displayInfo, setDisplay] = useState(false);
+
     const { t, i18n } = useTranslation();
     if (cardInfo.cardType == t('pokemon') || cardInfo.cardType == t('trainer')) {
         return (
@@ -58,11 +61,23 @@ const Card = ({ cardInfo, setNewCardInfo }) => {
                                     e.currentTarget.onerror = null;
                                     e.currentTarget.src = Placeholder;
                                 }}
-                                alt={cardInfo.name +" Pokémon TCG"}
-                                title={cardInfo.name +" Pokémon TCG"}
+                                alt={cardInfo.name + " Pokémon TCG"}
+                                title={cardInfo.name + " Pokémon TCG"}
                             />
                         </picture>
                     </div>
+                </div>
+                <div className="quantity-buttons">
+                    <button className="quantity"
+                    onClick={() => {
+                        onUpdateQuantity(cardInfo, 1);
+                    }}
+                    >+</button>
+                    <button className="quantity"
+                    onClick={() => {
+                        onUpdateQuantity(cardInfo, -1);
+                    }}
+                    >-</button>
                 </div>
             </Fragment>
         )
@@ -88,16 +103,28 @@ const Card = ({ cardInfo, setNewCardInfo }) => {
                                     e.currentTarget.onerror = null;
                                     e.currentTarget.src = Placeholder;
                                 }}
-                                alt={cardInfo.name +" Pokémon TCG"}
-                                title={cardInfo.name +" Pokémon TCG"}
+                                alt={cardInfo.name + " Pokémon TCG"}
+                                title={cardInfo.name + " Pokémon TCG"}
                             />
                             : <img
                                 src={selectImage(cardInfo.name)}
-                                alt={"Pokémon TCG "+cardInfo.name}
-                                title={"Pokémon TCG "+cardInfo.name}
-                                 />
+                                alt={"Pokémon TCG " + cardInfo.name}
+                                title={"Pokémon TCG " + cardInfo.name}
+                            />
                     }
                 </div>
+            </div>
+            <div className="quantity-buttons">
+                <button className="quantity"
+                onClick={() => {
+                    onUpdateQuantity(cardInfo, 1);
+                }}
+                >+</button>
+                <button className="quantity"
+                onClick={() => {
+                    onUpdateQuantity(cardInfo, -1);
+                }}
+                >-</button>
             </div>
         </Fragment>
         )

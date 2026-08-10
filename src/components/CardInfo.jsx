@@ -34,8 +34,11 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                             cardInfo.expansion && <div id="setInfo">
                                 <h1>Set: {cardInfo.expansion}</h1>
                                 <h1>ID: {cardInfo.cardNumber}</h1>
+                                <h1>AVG Cardmarket: {cardInfo.avgPrice}€</h1>
+                                <h1>LOW Cardmarket: {cardInfo.lowPrice}€</h1>
                             </div>
                         }
+                        
                     </div>
                 </div>
             </div>
