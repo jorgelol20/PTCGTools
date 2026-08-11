@@ -1,6 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
-import './deckPreview.css';
+import './DeckPreview.css';
 import { useContext } from "react";
 import { cardsContext } from "../context/CardProvider";
 import { useTranslation } from "react-i18next";
