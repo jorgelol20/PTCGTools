@@ -220,7 +220,12 @@ const usePokeAPI = (deck) => {
             })
         }
         setLoading(false);
-        setDeckAPI(formatedDeckAPI);
+        const newDeckList = {
+            name: 'TempDeck',
+            cards: formatedDeckAPI,
+            id: crypto.randomUUID()
+        }
+        setDeckAPI(newDeckList);
     }
 
     //

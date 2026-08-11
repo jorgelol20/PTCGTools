@@ -7,13 +7,14 @@ import { result } from "lodash";
 
 import './Search.css';
 import { Fragment } from "react";
+import Loading from "./Loading";
 
 const Search = () => {
     const [searchText, setSearchText] = useState("");
     const [searchPage, setSearchPage] = useState(1);
     const [allCards, setAllCards] = useState([]); // State para almacenar la consulta completa
     const [loading, setLoading] = useState(false);
-    const { i18n } = useTranslation();
+    const { t,i18n } = useTranslation();
 
     const clearTCGdexCache = () => {
         Object.keys(localStorage).forEach((key) => {
@@ -27,7 +28,6 @@ const Search = () => {
         setLoading(true);
         try {
             const tcgdex = new TCGdex(i18n.language);
-            localStorage.clear();
             const results = await tcgdex.card.list(
                 Query.create()
                     .contains('name', searchText)
@@ -79,22 +79,11 @@ const Search = () => {
 
                 <div className="filters">
                 </div>
-
-                <div className="pageButtons">
-                    <button onClick={() => setSearchPage(prev => Math.max(Math.min(Math.floor(allCards.length / 20 + 0.5), 1), prev - 1))}>
-                        Página Anterior
-                    </button>
-                    <button onClick={() => setSearchPage(prev => Math.min(Math.floor(allCards.length / 20 + 0.5), prev + 1))}>
-                        Siguiente Página
-                    </button>
-                    <h1>{searchPage}/{Math.floor(allCards.length / 20 + 0.5)}</h1>
-                </div>
-
-                <div className="results">
-                    {loading && <p>Cargando cartas...</p>}
+                <div className="search-results" style={{display:`${(allCards.length === 0) ? "none":""}`}}>
+                    {loading && <Loading key={Math.random().toString(36).substring(2, 15)} />}
 
                     {!loading && allCards.length === 0 && searchText && (
-                        <p>No se encontraron cartas.</p>
+                        <p>{t('notFound')}</p>
                     )}
                     <div className="results-cards">
                         {!loading &&
@@ -102,6 +91,15 @@ const Search = () => {
                                 <SearchedCard cardId={card} key={card} handleClear={handleClear} />
                             ))}
                     </div>
+                    <div className="pageButtons">
+                    <button onClick={() => setSearchPage(prev => Math.max(Math.min(Math.floor(allCards.length / 20 + 0.5), 1), prev - 1))}>
+                        {t('previousPage')}
+                    </button>
+                    <button onClick={() => setSearchPage(prev => Math.min(Math.floor(allCards.length / 20 + 0.5), prev + 1))}>
+                        {t('nextPage')}
+                    </button>
+                    <h1>{searchPage}/{Math.floor(allCards.length / 20 + 0.5)}</h1>
+                </div>
                 </div>
             </div>
         </Fragment>

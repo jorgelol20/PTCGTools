@@ -49,7 +49,7 @@
 
             #cardImage {
                 position: relative;
-
+                margin-right: 1em;
                 img {
                     width: 15cqw;
                     border: 5px solid var(--color-principal);
@@ -83,7 +83,12 @@
     }
 
 }
-
+.prices{
+    display: flex;
+}
+.card-body{
+    display: flex;
+}
 .cardInfoContainer h3 {
     font-size: 0.7rem;
     color: var(--color-texto-secundario);

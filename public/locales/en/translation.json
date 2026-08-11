@@ -45,5 +45,10 @@
     "builder-subtitle": "Create and modify your own decks",
     "mulliganCalculator": "Mulligan Calculator",
     "lowPriceText": "Minimum deck price",
-    "avgPriceText": "Average deck price"
+    "avgPriceText": "Average deck price",
+    "notFound": "Cards not found.",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "newDeck": "New deck ",
+    "cardsOnDeck": "Cards on deck: "
 }

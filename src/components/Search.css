@@ -1,19 +1,24 @@
-.searchmenu{
-    width:100%;
+.searchmenu {
+    width: 100%;
     position: relative;
+
+    button {
+        font-size:70%;
+        
+    }
 }
 
-.results-cards{
+.results-cards {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     margin-top: 2em;
-    justify-content: center;
-    align-items: center;
+    padding-left: 3em;
     padding-bottom: 2em;
     width: 66cqw;
 }
-.results{
+
+.search-results {
     align-items: center;
     min-height: 20em;
     min-width: 90%;
@@ -27,18 +32,21 @@
     position: relative;
     height: 20em;
 }
-.search{
+
+.search {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-bottom: 1em;
-    button{
+
+    button {
         width: 10%;
         margin: 0;
     }
 }
-.searchbar{
+
+.searchbar {
     width: 80%;
     width: 60cqw;
     height: 3em;
@@ -48,8 +56,9 @@
     font-size: 1.2em;
     border: white 2px solid;
 }
-.pageButtons{
-    position:absolute;
+
+.pageButtons {
+    position: absolute;
     display: flex;
     z-index: 10;
 }

@@ -1,5 +1,6 @@
 .container-cards {
-    display: grid;
+    display: flex;
+    flex-wrap: nowrap;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     padding: 12px;
@@ -8,6 +9,11 @@
 
 #image {
     position: relative;
+}
+.card-main{
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0.5em;
 }
 
 .card {
@@ -68,6 +74,7 @@
     width: 100%;
     position: relative;
 }
+
 /* Ajustes para PC (Pantallas mayores a 768px) */
 @media (min-width: 1000px) {
     .container-cards {

@@ -45,5 +45,10 @@
     "builder-subtitle": "Crea y personaliza tus mazos",
     "mulliganCalculator": "Calculadora de Mulligans",
     "lowPriceText": "Precio mínimo del mazo",
-    "avgPriceText": "Precio medio del mazo"
+    "avgPriceText": "Precio medio del mazo",
+    "notFound": "No se encontraron cartas.",
+    "nextPage": "Siguiente página",
+    "previousPage": "Página anterior",
+    "newDeck": "Nuevo mazo ",
+    "cardsOnDeck": "Cartas en el mazo: "
 }
