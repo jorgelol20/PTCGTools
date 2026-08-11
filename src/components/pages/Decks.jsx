@@ -67,6 +67,18 @@ const Decks = () => {
         setActualDeckName(contextDeck.name)
     }, [load])
 
+    async function convert(from, to, amount) {
+        if (from === undefined) {
+            return 0
+        }
+        return await fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`)
+            .then((resp) => resp.json())
+            .then((data) => {
+                const convertedAmount = (amount * data.rates[to]).toFixed(2);
+                return convertedAmount
+            });
+    }
+
     const changePriceDolar = async (totalMinPrice = 0, totalAvgPrice = 0) => {
         setDolarsDeckLowPrice(await convert('EUR', 'USD', Number(totalMinPrice.toFixed(2))))
         setDolarsDeckAvgPrice(await convert('EUR', 'USD', Number(totalAvgPrice.toFixed(2))))
