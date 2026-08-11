@@ -98,3 +98,8 @@ header {
     font-size: 4em;
   }
 }
+@media (max-width: 1000px){
+  #mainTitle{
+    margin-bottom:15%;
+  }
+}
