@@ -10,10 +10,12 @@
 #image {
     position: relative;
 }
-.card-main{
+
+.card-main {
     display: flex;
     flex-wrap: nowrap;
     margin: 0.5em;
+    width: 12cqw;
 }
 
 .card {
@@ -27,12 +29,15 @@
     margin: 1%;
     width: 10cqw
 }
-.card:hover{
+
+.card:hover {
     scale: 1.1;
 }
-.cardInfo{
+
+.cardInfo {
     position: relative;
 }
+
 .head {
     display: flex;
     justify-content: space-between;
@@ -82,6 +87,7 @@
         gap: 20px;
         padding: 40px;
     }
+
     .cardInfo h3 {
         font-size: 1.2rem;
     }
@@ -92,8 +98,15 @@
 }
 
 @media (max-width: 1000px) {
-    .card {
-        width: 15%;
+    .card-main {
+        display: grid;
+        margin: 0.5em;
+        width: 125px;
+
+    }
+    .quantity-buttons{
+        width: 100px;
+        display: flex;
     }
 
     .head .quantity {
@@ -102,16 +115,18 @@
         top: -3%;
         right: -5%;
     }
+
     .head .title {
         font-size: 0.5rem;
     }
-    
+
 }
 
 @media (max-width: 1000px) {
     .card {
-        width: 20%;
+        width: 100%;
     }
+
     .head .quantity {
         width: 5cqw;
         height: 5cqw;
@@ -119,10 +134,12 @@
         right: -5%;
         font-size: 1em;
     }
+
     .head .title {
         font-size: 0.5rem;
     }
-    .cardInfo h3{
+
+    .cardInfo h3 {
         font-size: 1cqw;
     }
 }
