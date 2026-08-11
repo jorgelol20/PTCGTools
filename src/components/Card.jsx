@@ -45,86 +45,90 @@ const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
     if (cardInfo.cardType == t('pokemon') || cardInfo.cardType == t('trainer')) {
         return (
             <Fragment key={cardInfo.cardId}>
-                <div onClick={() => {
-                    setNewCardInfo(cardInfo);
-                }} className="card" key={cardInfo.cardId}>
-                    <div className="head">
-                        {/* <label className="title">{cardInfo.name}</label> */}
-                        <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
+                <div className="card-main">
+                    <div onClick={() => {
+                        setNewCardInfo(cardInfo);
+                    }} className="card" key={cardInfo.cardId}>
+                        <div className="head">
+                            {/* <label className="title">{cardInfo.name}</label> */}
+                            <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
+                        </div>
+                        <div className="body">
+                            <picture id="image">
+                                <img
+                                    src={cardInfo.image}
+                                    onError={(e) => {
+                                        e.preventDefault();
+                                        e.currentTarget.onerror = null;
+                                        e.currentTarget.src = Placeholder;
+                                    }}
+                                    alt={cardInfo.name + " Pokémon TCG"}
+                                    title={cardInfo.name + " Pokémon TCG"}
+                                />
+                            </picture>
+                        </div>
                     </div>
-                    <div className="body">
-                        <picture id="image">
-                            <img
-                                src={cardInfo.image}
-                                onError={(e) => {
-                                    e.preventDefault();
-                                    e.currentTarget.onerror = null;
-                                    e.currentTarget.src = Placeholder;
-                                }}
-                                alt={cardInfo.name + " Pokémon TCG"}
-                                title={cardInfo.name + " Pokémon TCG"}
-                            />
-                        </picture>
+                    <div className="quantity-buttons">
+                        <button className="quantity"
+                            onClick={() => {
+                                onUpdateQuantity(cardInfo, 1);
+                            }}
+                        >+</button>
+                        <button className="quantity"
+                            onClick={() => {
+                                onUpdateQuantity(cardInfo, -1);
+                            }}
+                        >-</button>
                     </div>
-                </div>
-                <div className="quantity-buttons">
-                    <button className="quantity"
-                    onClick={() => {
-                        onUpdateQuantity(cardInfo, 1);
-                    }}
-                    >+</button>
-                    <button className="quantity"
-                    onClick={() => {
-                        onUpdateQuantity(cardInfo, -1);
-                    }}
-                    >-</button>
                 </div>
             </Fragment>
         )
     } else {
         return (<Fragment key={cardInfo.name}>
-            <div className="card" key={cardInfo.name} onClick={() => {
-                if (cardInfo.expansion) {
-                    setNewCardInfo(cardInfo);
-                }
-            }}>
-                <div className="head">
-                    {/* <label className="title">{cardInfo.name}</label> */}
-                    <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
-                </div>
-
-                <div className="body">
-                    {
-                        cardInfo.image ?
-                            <img
-                                src={cardInfo.image}
-                                onError={(e) => {
-                                    e.preventDefault();
-                                    e.currentTarget.onerror = null;
-                                    e.currentTarget.src = Placeholder;
-                                }}
-                                alt={cardInfo.name + " Pokémon TCG"}
-                                title={cardInfo.name + " Pokémon TCG"}
-                            />
-                            : <img
-                                src={selectImage(cardInfo.name)}
-                                alt={"Pokémon TCG " + cardInfo.name}
-                                title={"Pokémon TCG " + cardInfo.name}
-                            />
+            <div className="card-main">
+                <div className="card" key={cardInfo.name} onClick={() => {
+                    if (cardInfo.expansion) {
+                        setNewCardInfo(cardInfo);
                     }
+                }}>
+                    <div className="head">
+                        {/* <label className="title">{cardInfo.name}</label> */}
+                        <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
+                    </div>
+
+                    <div className="body">
+                        {
+                            cardInfo.image ?
+                                <img
+                                    src={cardInfo.image}
+                                    onError={(e) => {
+                                        e.preventDefault();
+                                        e.currentTarget.onerror = null;
+                                        e.currentTarget.src = Placeholder;
+                                    }}
+                                    alt={cardInfo.name + " Pokémon TCG"}
+                                    title={cardInfo.name + " Pokémon TCG"}
+                                />
+                                : <img
+                                    src={selectImage(cardInfo.name)}
+                                    alt={"Pokémon TCG " + cardInfo.name}
+                                    title={"Pokémon TCG " + cardInfo.name}
+                                />
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className="quantity-buttons">
-                <button className="quantity"
-                onClick={() => {
-                    onUpdateQuantity(cardInfo, 1);
-                }}
-                >+</button>
-                <button className="quantity"
-                onClick={() => {
-                    onUpdateQuantity(cardInfo, -1);
-                }}
-                >-</button>
+                <div className="quantity-buttons">
+                    <button className="quantity"
+                        onClick={() => {
+                            onUpdateQuantity(cardInfo, 1);
+                        }}
+                    >+</button>
+                    <button className="quantity"
+                        onClick={() => {
+                            onUpdateQuantity(cardInfo, -1);
+                        }}
+                    >-</button>
+                </div>
             </div>
         </Fragment>
         )

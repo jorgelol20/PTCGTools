@@ -1,0 +1,7 @@
+.deck-list{
+    height: 30em;
+    overflow-y: scroll;
+    padding-right: 0.5em;
+    border-right: 
+    3px solid white;
+}

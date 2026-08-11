@@ -1,6 +1,6 @@
 .cards {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     width: 100%;
     border: 2px var(--color-borde) solid;

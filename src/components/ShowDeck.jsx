@@ -52,28 +52,35 @@ const ShowDeck = ({ deck }) => {
 
     // Actualiza la cantidad de una carta de forma inmutable
     const handleUpdateQuantity = (cardToUpdate, cantidad) => {
-        setContextDeck(prevDeck => {
-            return prevDeck
-                .map(card => {
-                    const isMatch = card.cardId ? card.cardId === cardToUpdate.cardId : card.name === cardToUpdate.name;
-                    if (isMatch) {
-                        const currentQty = Number(card.quantity) || 0;
-                        return { ...card, quantity: currentQty + cantidad };
-                    }
-                    return card;
-                })
-                .filter(card => card.quantity > 0);
-        });
-    };
+    setContextDeck(prevDeck => {
+        const currentCards = prevDeck?.cards || [];
+        const updatedCards = currentCards
+            .map(card => {
+                const isMatch = card.cardId 
+                    ? card.cardId === cardToUpdate.cardId 
+                    : card.name === cardToUpdate.name;
+
+                if (isMatch) {
+                    const currentQty = Number(card.quantity) || 0;
+                    return { ...card, quantity: currentQty + cantidad };
+                }
+                return card;
+            })
+            .filter(card => card.quantity > 0);
+        return {
+            ...prevDeck,
+            cards: updatedCards
+        };
+    });
+};
     const changePriceDolar = async (totalMinPrice = 0, totalAvgPrice = 0) => {
         setDolarsDeckLowPrice(await convert('EUR', 'USD', Number(totalMinPrice.toFixed(2))))
         setDolarsDeckAvgPrice(await convert('EUR', 'USD', Number(totalAvgPrice.toFixed(2))))
     }
 
-    // Recalcula el total de cartas cuando contextDeck cambia
     useEffect(() => {
         // Si no hay cartas, reseteamos todos los estados
-        if (!contextDeck || contextDeck.length === 0) {
+        if ( !contextDeck || !contextDeck.cards || contextDeck.cards.length === 0) {
             setCardQuantity(0);
             setDeckAvgPrice(0);
             setDeckLowPrice(0);
@@ -81,43 +88,36 @@ const ShowDeck = ({ deck }) => {
             return;
         }
 
-        // Tasa de cambio aproximada para la suma directa en EUR (USD -> EUR)
-        // Cambia 0.92 por la tasa actual o la variable que uses para convertir
         const USD_TO_EUR_RATE = 0.92;
 
         const getValidPriceInEur = (cmPrice, tpPrice) => {
             const cm = Number(cmPrice);
             const tp = Number(tpPrice);
 
-            // 1. Si Cardmarket (EUR) es válido y mayor a 0, lo usamos directo
+
             if (Number.isFinite(cm) && cm > 0) {
                 return cm;
             }
 
-            // 2. Si Cardmarket falla (es NaN o 0), pero TCGPlayer (USD) es válido
-            // Convertimos el precio de TP de USD a EUR
+
             if (Number.isFinite(tp) && tp > 0) {
                 return tp * USD_TO_EUR_RATE;
             }
 
-            // 3. Si ninguno es válido
             return 0;
         };
-
-        // Calculamos el total de cartas
-        const totalQuantity = contextDeck.reduce(
+        const totalQuantity = contextDeck.cards.reduce(
             (cont, card) => cont + (Number(card?.quantity) || 0),
             0
         );
 
-        // Calculamos los totales acumulados en Euros
-        const totalAvgPrice = contextDeck.reduce((cont, card) => {
+        const totalAvgPrice = contextDeck.cards.reduce((cont, card) => {
             const priceInEur = getValidPriceInEur(card?.avgCMPrice, card?.avgTPPrice);
             const qty = Number(card?.quantity) || 0;
             return cont + (priceInEur * qty);
         }, 0);
 
-        const totalMinPrice = contextDeck.reduce((cont, card) => {
+        const totalMinPrice = contextDeck.cards.reduce((cont, card) => {
             const priceInEur = getValidPriceInEur(card?.lowCMPrice, card?.lowTPPrice);
             const qty = Number(card?.quantity) || 0;
             return cont + (priceInEur * qty);
@@ -141,15 +141,19 @@ const ShowDeck = ({ deck }) => {
      * Nota: Primero se comprueba si se ha setteado el 'deckAPI' o sigue siendo Undefined para realizar las acciones.
      */
     useEffect(() => {
-        if (deckAPI !== undefined && deckAPI.length > 0) {
-            if (deckAPI.includes(undefined)) {
+        if (deckAPI !== undefined && deckAPI.cards !== undefined && deckAPI.cards.length > 0) {
+            if (deckAPI.cards.includes(undefined)) {
                 errorMessage();
             }
             setContextNumberOfHands(numberOfHands);
-            setContextDeck(deckAPI.filter((card) => {
+            const newContextDeck = {
+                ...deckAPI,
+                cards: deckAPI.cards.filter((card) => {
                 return card !== undefined;
-            }));
-            const cards = deckAPI.reduce((acc, card) => card !== undefined ? acc + Number(card.quantity) : acc + 0, 0);
+            })
+            }
+            setContextDeck(newContextDeck);
+            const cards = deckAPI.cards.reduce((acc, card) => card !== undefined ? acc + Number(card.quantity) : acc + 0, 0);
             setCardQuantity(cards);
         }
     }, [deckAPI])
@@ -165,7 +169,7 @@ const ShowDeck = ({ deck }) => {
     /* COMPROBACIONES Y CARGAS */
     //Comprobaciones básicas para saber si deben cargar los componentes
     //Si el deck del contexto no es undefined, no está vacío y tampoco están cargando las cartas: true 
-    const load = contextDeck != undefined && contextDeck.length > 0 && !loading;
+    const load = contextDeck !== undefined && contextDeck.cards !== undefined && contextDeck.cards.length > 0 && !loading;
 
     //Cargar avisos si el número de manos es mayor a 100
     const advises = (numberOfHands) => {
@@ -193,7 +197,7 @@ const ShowDeck = ({ deck }) => {
                 return convertedAmount
             });
     }
-    //Return
+    //Retur
     return (
         <Fragment>
             <section>
@@ -207,14 +211,11 @@ const ShowDeck = ({ deck }) => {
                      * 
                      */
                     load ?
-                        cardQuantity > 7 ?
+                        cardQuantity >= 7 ?
                             <NavLink key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)} id='calc' to="/results" onClick={redirectRoute} >{t('calcButton')} {numberOfHands}</NavLink>
                             : <div id='calc'>{t('minCardText')}</div>
                         : <></>
                 }
-                <div className='cardSearch'>
-                    <Search />
-                </div>
                 {
                     advises(numberOfHands)
                 }
@@ -222,7 +223,7 @@ const ShowDeck = ({ deck }) => {
                     /**
                      * 
                      */
-                    load && cardQuantity > 7 && <div>
+                    load && cardQuantity >= 7 && <div>
                         <h1 htmlFor="numberOfHands">{t('numberOfTestText')}  <select ref={numberOfHandsRef} className='numberOfHands' name="numberOfHands" id="numberOfHands" onChange={() => {
                             setContextNumberOfHands(numberOfHandsRef.current.value);
                             setNumberOfHands(numberOfHandsRef.current.value);
@@ -238,6 +239,9 @@ const ShowDeck = ({ deck }) => {
                         </h1>
                     </div>
                 }
+                <div className='cardSearch'>
+                    <Search />
+                </div>
                 {
                     /**
                      * 
@@ -247,7 +251,7 @@ const ShowDeck = ({ deck }) => {
                             loading && <Loading />
                         }
                         {
-                            load ? contextDeck.map((card) => {
+                            load ? contextDeck.cards.map((card) => {
                                 if (card !== undefined) {
                                     return <Card
                                         className="card"
