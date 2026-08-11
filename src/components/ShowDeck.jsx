@@ -197,7 +197,6 @@ const ShowDeck = ({ deck }) => {
                 return convertedAmount
             });
     }
-    //Retur
     return (
         <Fragment>
             <section>
