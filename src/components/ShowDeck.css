@@ -1,6 +1,6 @@
 .cards {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     width: 100%;
     border: 2px var(--color-borde) solid;
@@ -12,6 +12,8 @@
     text-wrap: nowrap;
     min-width: 15cqw;
 }
+
+
 
 section {
     display: flex;
@@ -120,6 +122,12 @@ section {
 }
 
 @media (max-width: 1200px) {
+    .deckInfo {
+        h1 {
+            font-size: 0.8em;
+        }
+    }
+
     section {
         justify-content: center;
         align-items: center;

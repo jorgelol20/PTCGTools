@@ -176,7 +176,11 @@ const usePokeAPI = (deck) => {
                                     rarity: card[0].rarity,
                                     abilitieText: card[0].abilities.effect,
                                     image: card[0].image + '/low.webp',
-                                    quantity: card[1]
+                                    quantity: card[1],
+                                    avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
+                                    lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
+                                    avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
+                                    lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
                                 }
                             } else {
                                 return {
@@ -188,7 +192,11 @@ const usePokeAPI = (deck) => {
                                     pokemonType: card[0].stage,
                                     rarity: card[0].rarity,
                                     image: card[0].image + '/low.webp',
-                                    quantity: card[1]
+                                    quantity: card[1],
+                                    avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
+                                    lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
+                                    avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
+                                    lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
                                 }
                             }
                         default:
@@ -200,7 +208,11 @@ const usePokeAPI = (deck) => {
                                 cardType: card[0].category,
                                 rarity: card[0].rarity,
                                 image: card[0].image + '/low.webp',
-                                quantity: card[1]
+                                quantity: card[1],
+                                avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
+                                lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
+                                avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
+                                lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
                             }
                     }
                 }
@@ -208,7 +220,12 @@ const usePokeAPI = (deck) => {
             })
         }
         setLoading(false);
-        setDeckAPI(formatedDeckAPI);
+        const newDeckList = {
+            name: 'TempDeck',
+            cards: formatedDeckAPI,
+            id: crypto.randomUUID()
+        }
+        setDeckAPI(newDeckList);
     }
 
     //

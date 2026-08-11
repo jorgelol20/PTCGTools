@@ -1,0 +1,32 @@
+.decks-list{
+    width: 15%;
+    
+}
+.decks{
+    display: flex;
+}
+.cards{
+    width: 100%;
+    margin-left: 1em;
+}
+.deck-cards{
+    width: 95%;
+}
+.deck-name{
+    width: max-content;
+    background-color: var(--color-fondo);
+    font-size: 2em;
+    margin-left: 0.5em;
+    margin-bottom: 0.2em;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 1px solid rgba(255, 255, 255, 0.26);
+    border-top: 0px;
+}
+
+@media (max-width: 1000px) {
+    .decks-list{
+        width: 100%;
+    }
+}
