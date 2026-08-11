@@ -1,9 +1,10 @@
 .decks-list{
     width: 15%;
-    
+    transition: transform 0.3s ease;
 }
 .decks{
     display: flex;
+    position: relative;
 }
 .cards{
     width: 100%;
@@ -11,6 +12,14 @@
 }
 .deck-cards{
     width: 95%;
+}
+.deck-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1{
+        font-size: 1em;
+    }
 }
 .deck-name{
     width: max-content;
@@ -25,8 +34,80 @@
     border-top: 0px;
 }
 
+/* Botón hamburguesa oculto por defecto (solo aparece en mobile) */
+.hamburger-btn{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    position: fixed;
+    top: 1em;
+    left: 1em;
+}
+.hamburger-btn span{
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.decks-list-overlay{
+    display: none;
+}
+
 @media (max-width: 1000px) {
+    .decks{
+        position: relative;
+    }
+
+    .hamburger-btn{
+        display: flex;
+    }
+    .deck-info{
+        margin-left: 10%;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+    }
+
     .decks-list{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 70%;
+        max-width: 300px;
+        background-color: var(--color-fondo);
+        transform: translateX(-100%);
+        z-index: 1000;
+        padding-top: 4em;
+        overflow-y: auto;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
+
+    .decks-list.open{
+        transform: translateX(0);
+    }
+
+    .decks-list-overlay{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+
+    .deck-cards{
         width: 100%;
     }
 }
