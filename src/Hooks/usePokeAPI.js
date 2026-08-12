@@ -15,7 +15,7 @@ const usePokeAPI = (deck) => {
     const [loading, setLoading] = useState(false);
 
     //Context
-    const { addNewBadCard } = useContext(errorContext);
+    const { addNewBadCard, setNewError } = useContext(errorContext);
 
     //Functions
     /**
