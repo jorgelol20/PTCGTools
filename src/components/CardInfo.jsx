@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import './CardInfo.css'
+import Placeholder from './../assets/img/placeHolder.png';
 const CardInfo = ({ cardInfo, setNewCardInfo }) => {
     return (
         <Fragment>

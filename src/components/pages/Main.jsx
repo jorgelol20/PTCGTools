@@ -6,6 +6,8 @@ import './Main.css';
 import { errorContext } from "../../context/ErrorProvider.jsx";
 import { cardsContext } from "../../context/CardProvider.jsx";
 import ErrorAlert from "../structure/ErrorAlert.jsx";
+import DecksList from "../DecksList.jsx";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -14,6 +16,8 @@ const Main = () => {
     const [error, setError] = useState(false);
     const { contextError } = useContext(errorContext);
     const { setContextDeck } = useContext(cardsContext);
+    const [isOpen, setIsOpen] = useState(false);
+    const {t} = useTranslation();
     const location = useLocation();
 
     const moveToError = () => {
@@ -30,11 +34,11 @@ const Main = () => {
         contextError !== "" && contextError !== undefined ? setError(true) : setError(false);
     }, [contextError])
 
-    useEffect(() => {
-        if (location !== "/results") {
-            setContextDeck(undefined);
-        }
-    }, [location]);
+    // useEffect(() => {
+    //     if (location.pathname !== "/results") {
+    //         setContextDeck(null);
+    //     }
+    // }, [location]);
 
     return (
         <Fragment>
@@ -45,10 +49,22 @@ const Main = () => {
                             error && moveToError() && <ErrorAlert id="error" errorMessage={contextError} />
                         }
                     </div>
+                    <div className={`textArea ${isOpen ? "open" : "closed"}`}>
+                        <button
+                            className="textAreaToggle"
+                            onClick={() => setIsOpen(!isOpen)}
+                            type="button"
+                        >
+                            {isOpen ? t('showTextArea') : t('hideTextArea')}
+                        </button>
+                        <div className="textAreaContent">
+                            <Form
+                                setNewDeck={setNewDeck}
+                            />
+                        </div>
+                    </div>
                     <div className="textArea">
-                        <Form
-                            setNewDeck={setNewDeck}
-                        />
+                        <DecksList />
                     </div>
                 </div>
 

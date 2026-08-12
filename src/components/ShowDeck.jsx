@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState, useRef, act } from 'react';
 import { NavLink } from 'react-router-dom';
 import './ShowDeck.css';
-import usePokeAPI from '../Hooks/usePokeAPI.js';
+import usePokeAPI from '../hooks/usePokeAPI.js';
 import { cardsContext } from '../context/CardProvider.jsx';
 import Card from './Card.jsx';
 import Loading from './Loading.jsx';
@@ -169,7 +169,7 @@ const ShowDeck = ({ deck }) => {
     /* COMPROBACIONES Y CARGAS */
     //Comprobaciones básicas para saber si deben cargar los componentes
     //Si el deck del contexto no es undefined, no está vacío y tampoco están cargando las cartas: true 
-    const load = contextDeck !== undefined && contextDeck.cards !== undefined && contextDeck.cards.length > 0 && !loading;
+    const load = contextDeck !== undefined && contextDeck?.cards !== undefined && contextDeck.cards.length > 0 && !loading;
 
     //Cargar avisos si el número de manos es mayor a 100
     const advises = (numberOfHands) => {
@@ -211,7 +211,7 @@ const ShowDeck = ({ deck }) => {
                      */
                     load ?
                         cardQuantity >= 7 ?
-                            <NavLink key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)} id='calc' to="/results" onClick={redirectRoute} >{t('calcButton')} {numberOfHands}</NavLink>
+                            <NavLink key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)} id='calc' to="/results" onClick={redirectRoute} >{t('calcButton')} {numberOfHands})</NavLink>
                             : <div id='calc'>{t('minCardText')}</div>
                         : <></>
                 }

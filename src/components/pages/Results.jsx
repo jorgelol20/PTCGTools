@@ -20,7 +20,7 @@ const Results = () => {
     const { t, i18n } = useTranslation();
 
 
-    if (contextDeck === undefined || contextDeck.length == 0) {
+    if (contextDeck === undefined || contextDeck.cards.length == 0) {
         return (
             <Fragment>
                 <h1>{t("errorResultsTitle")}</h1>
@@ -33,7 +33,7 @@ const Results = () => {
         let tempHands = [];
 
         let cards = [];
-        for (let card of contextDeck) {
+        for (let card of contextDeck.cards) {
             const qty = Number(card.quantity) || 1;
             for (let i = 0; i < qty; i++) {
                 cards.push({ ...card, appears: 0 });
@@ -41,7 +41,7 @@ const Results = () => {
         }
 
         const appearancesMap = new Map();
-        contextDeck.forEach((card) => {
+        contextDeck.cards.forEach((card) => {
             const key = card.cardId || card.name;
             appearancesMap.set(key, { ...card, appears: 0 });
         });

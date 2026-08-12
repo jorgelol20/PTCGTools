@@ -50,5 +50,9 @@
     "nextPage": "Siguiente página",
     "previousPage": "Página anterior",
     "newDeck": "Nuevo mazo ",
-    "cardsOnDeck": "Cartas en el mazo: "
+    "cardsOnDeck": "Cartas en el mazo: ",
+    "importDeck": "Importar desde el portapapeles",
+    "calcDeck": "Calcular mulligans",
+    "hideTextArea": "Ocultar cuadro de texto",
+    "showTextArea": "Mostrar cuadro de texto"
 }
