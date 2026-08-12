@@ -1,9 +1,8 @@
-import React, { Fragment, createContext, useState, useEffect } from "react";
+import React, { Fragment, createContext, useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import usePokeAPI from "../hooks/usePokeAPI.js";
+import usePokeAPI from "../hooks/usePokeAPI";
 import { errorContext } from "./ErrorProvider.jsx";
-import { parseDeckList } from "./../utils/parseDeckList.jsx";
-import { useContext } from "react";
+import { parseDeckList } from "../utils/parseDeckList";
 
 const cardsContext = createContext();
 
