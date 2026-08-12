@@ -1,15 +1,15 @@
-# [Mulligan Calculator](https://mulligan-calculator.vercel.app/) (Para Pokémon TCG)
+# [PTCGTools](https://ptcg-tools.vercel.app)(Para Pokémon TCG)
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Status](https://img.shields.io/badge/Status-En_Desarrollo-blue?style=for-the-badge)
 
-**Mulligan Calculator** es una herramienta diseñada para la comunidad de Pokémon TCG a la que pertenezco desde hace un tiempo. Su objetivo es calcular, según las necesidades del usuario, las probabilidades de que tu mazo tenga un inicio válido, evitando los odiosos mulligans.
+**PTCGTools** es un conjunto de herramientas para la creación de mazos que permite a los usuarios conocer de antemano las estadísticas de sus mazos como la probabilidad de mulligans en la mano inicial y que cartas son las más probables de salir en esta mano.
 
 > **¿Qué es un Mulligan?** <br> Ocurre cuando al empezar la partida no robas ningún Pokémon básico en tu mano inicial. Esto obliga a barajar de nuevo y permite al rival robar una carta extra, dándole una ventaja desde antes de empezar el primer turno.
 
 ---
 
-## ¿Por qué esta calculadora?
+## ¿Por qué esta herramienta?
 
 A diferencia de otras herramientas "rudimentarias" donde debes introducir los datos a mano, esta aplicación se centra en **ser útil y fácil de usar**:
 
@@ -34,16 +34,15 @@ Si quieres ejecutar el proyecto en local, debes realizar los siguientes pasos:
    git clone [https://github.com/tu-usuario/mulligan-calculator.git](https://github.com/tu-usuario/mulligan-calculator.git)
 2. **Instalar las librerias**
     ```bash
-    npm install
+    pnpm install
 3. **Ejecutar la aplicación**
     ```bash
-    npm start
+    pnpm start
 ## Objetivos del proyecto
 1. Ayudar a la comunidad a la que pertenezco brindando de una herramienta fácil de usar y que sea capaz de dar bastante información de sus mazos.
-2. Poner a prueba los conocimientos adquiridos estas últimas semanas sobre React
+2. Seguir poniendo en práctica lo aprendido sobre desarrollo frontend con el framework React.
 
 ## Próximas mejoras e implementaciones
-* **Rediseño Visual:** Mejora completa del apartado estético.
 * **Cálculo de Premios:** Función extra para visualizar la probabilidad de que cartas irán a premios en caso de que la mano no sea mulligan.
 * **Refactorización:** Limpieza y optimización del código para mejorar la velocidad y facilitar las mejoras a futuro.
 
