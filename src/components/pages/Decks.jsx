@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { Fragment } from "react";
 import { cardsContext } from "../../context/CardProvider";
-import usePokeAPI from "../../Hooks/usePokeAPI";
+import usePokeAPI from "./../../hooks/usePokeAPI";
 import Loading from "../Loading";
 import DecksList from "../DecksList";
 import './Decks.css'
