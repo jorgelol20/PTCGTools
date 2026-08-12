@@ -50,5 +50,9 @@
     "nextPage": "Next page",
     "previousPage": "Previous page",
     "newDeck": "New deck ",
-    "cardsOnDeck": "Cards on deck: "
+    "cardsOnDeck": "Cards on deck: ",
+    "importDeck": "Import from clipboard",
+    "calcDeck": "Calculate mulligans",
+    "hideTextArea": "Hide text area",
+    "showTextArea": "Show text area"
 }

@@ -12,10 +12,11 @@ import Card from "../Card";
 import { useEffect } from "react";
 import CardInfo from "../CardInfo";
 import { useTranslation } from "react-i18next";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Decks = () => {
     const { contextDeck, setContextDeck, saveDeck } = useContext(cardsContext)
-    const [deckName, setDeckName] = useState(contextDeck.name)
+    const [deckName, setDeckName] = useState(contextDeck?.name??'')
     const { deckAPI, loading } = usePokeAPI();
     const [actualCardInfo, setActualCard] = useState(null);
     const [actualDeckName, setActualDeckName] = useState(null);
@@ -28,8 +29,12 @@ const Decks = () => {
     const [deckLowPrice, setDeckLowPrice] = useState(0);
     const [dolarsDeckLowPrice, setDolarsDeckLowPrice] = useState(0);
 
+    const location = useLocation();
+
     useEffect(() => {
-        setDeckName(contextDeck.name)
+        if(contextDeck !== null){
+            setDeckName(contextDeck.name)
+        }
     }, [contextDeck])
 
     const setNewCardInfo = (newCardInfo) => {
@@ -64,7 +69,9 @@ const Decks = () => {
     const load = contextDeck != undefined && contextDeck.cards !== undefined && !loading;
 
     useEffect(() => {
-        setActualDeckName(contextDeck.name)
+        if(contextDeck !== null){
+            setActualDeckName(contextDeck.name)
+        }
     }, [load])
 
     async function convert(from, to, amount) {
@@ -139,12 +146,14 @@ const Decks = () => {
 
     }, [contextDeck]);
 
+    
+
 
 
     return (
         <Fragment>
             <div className="decks">
-                {/* Botón hamburguesa: solo visible via CSS en <=1000px */}
+                {/* Solo visible a 1000px de resolución (width) mediante CSS */}
                 <button
                     className="hamburger-btn"
                     aria-label="Abrir lista de decks"
@@ -168,7 +177,7 @@ const Decks = () => {
                 </div>
                 <div className="deck-cards">
                     {
-                        load ?
+                        load && contextDeck!== undefined ?
                             <div>
                                 <button
                                     onClick={() => {
@@ -179,7 +188,12 @@ const Decks = () => {
                                         }
                                         saveDeck(newInfo)
                                     }}
-                                >Guardar</button>
+                                >{t('saveDeck')}</button>
+                                <NavLink to='/calc'><button
+                                    onClick={()=>{
+                                        location('/calc')
+                                    }}
+                                >{t('calcDeck')}</button></NavLink>
                                 <input className="deck-name" type="text" value={deckName} onChange={(e) => setDeckName(e.target.value)} />
                                 <div className="deck-info">
 
@@ -204,7 +218,6 @@ const Decks = () => {
                                             }
 
                                         })
-
                                     }
                                 </div>
                             </div>

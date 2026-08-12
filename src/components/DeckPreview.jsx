@@ -4,36 +4,45 @@ import './DeckPreview.css';
 import { useContext } from "react";
 import { cardsContext } from "../context/CardProvider";
 import { useTranslation } from "react-i18next";
+import Delete_Icon from './../assets/img/delete.svg';
+import { useEffect } from "react";
+import { useState } from "react";
 
 const DeckPreview = ({ deckInfo }) => {
-    const { setContextDeck } = useContext(cardsContext);
-    const {t} = useTranslation();
+    const { contextDeck, setContextDeck, deleteDeck } = useContext(cardsContext);
+    const [active, setActive] = useState(false);
+    const { t } = useTranslation();
+    useEffect(() => {
+        if (contextDeck !== null) {
+            if (contextDeck.id === deckInfo.id) {
+                setActive(true)
+            } else {
+                setActive(false)
+            }
+        } else{
+            setActive(false)
+        }
+    }, [contextDeck])
     return (
         <Fragment>
-            <div className="deck-preview"
-                onClick={() => {
-                    setContextDeck(deckInfo)
-                }}
+            <div className={active ? "preview active" : "preview"}
+                style={{ backgroundImage: `url(${deckInfo.cards[0]?.image})` }}
             >
-                <div className="preview-images">
-                    {
-                        deckInfo.cards?.length >= 1 ?
-                            <div>
-                                <img src={deckInfo.cards[0]?.image} alt={`${deckInfo.cards[0]?.name} ${deckInfo.cards[0]?.expansion}`} />
-                                {
-                                    deckInfo.cards?.length >= 2 ?<img src={deckInfo.cards[1]?.image} alt={`${deckInfo.cards[1]?.name} ${deckInfo.cards[1]?.expansion}`} /> : ""
-                                }
-                                {
-                                    deckInfo.cards?.length >= 3 ?<img src={deckInfo.cards[1]?.image} alt={`${deckInfo.cards[1]?.name} ${deckInfo.cards[1]?.expansion}`} /> : ""
-                                }
-                                
-                            </div>
-                            : ""
-                    }
-                </div>
-                <h1>{deckInfo.name}</h1>
+                <div className="deck-preview"
+                    onClick={() => {
+                        setContextDeck(deckInfo)
+                    }}
 
-                <p>{t("cardsOnDeck")} {deckInfo.cards?.length ?? 0}</p>
+                >
+                    <div className="deck-preview-info">
+                        <div >
+                            <h1>{deckInfo.name}</h1>
+                            <p>{t("cardsOnDeck")} {deckInfo.cards?.length ?? 0}</p>
+                        </div>
+
+                    </div>
+                </div>
+                <button onClick={() => { deleteDeck(deckInfo) }} className="delete-icon"><img src={Delete_Icon} alt="Botón borrar" title="Eliminar mazo" /></button>
             </div>
         </Fragment>
     )

@@ -5,3 +5,9 @@
     border-right: 
     3px solid white;
 }
+.decks-list-buttons{
+    margin-top: 1em;
+}
+.import-button{
+    font-size: 0.8em;
+}
