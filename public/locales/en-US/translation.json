@@ -54,5 +54,6 @@
     "importDeck": "Import from clipboard",
     "calcDeck": "Calculate mulligans",
     "hideTextArea": "Hide text area",
-    "showTextArea": "Show text area"
+    "showTextArea": "Show text area",
+    "saveDeck": "Save"
 }

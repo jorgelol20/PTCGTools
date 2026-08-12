@@ -55,5 +55,6 @@
     "importDeck": "Importar desde el portapapeles",
     "calcDeck": "Calcular mulligans",
     "hideTextArea": "Ocultar cuadro de texto",
-    "showTextArea": "Mostrar cuadro de texto"
+    "showTextArea": "Mostrar cuadro de texto",
+    "saveDeck": "Guardar"
 }
