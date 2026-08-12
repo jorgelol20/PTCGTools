@@ -92,13 +92,13 @@ const Search = () => {
                             ))}
                     </div>
                     <div className="pageButtons">
-                    <button onClick={() => setSearchPage(prev => Math.max(Math.min(Math.floor(allCards.length / 20 + 0.5), 1), prev - 1))}>
+                    <button onClick={() => setSearchPage(prev => Math.max(Math.min(Math.floor(allCards.length / 20 + 1), 1), prev - 1))}>
                         {t('previousPage')}
                     </button>
-                    <button onClick={() => setSearchPage(prev => Math.min(Math.floor(allCards.length / 20 + 0.5), prev + 1))}>
+                    <button onClick={() => setSearchPage(prev => Math.min(Math.floor(allCards.length / 20 + 1), prev + 1))}>
                         {t('nextPage')}
                     </button>
-                    <h1>{searchPage}/{Math.floor(allCards.length / 20 + 0.5)}</h1>
+                    <h1>{searchPage}/{Math.floor(allCards.length / 20 + 1)}</h1>
                 </div>
                 </div>
             </div>

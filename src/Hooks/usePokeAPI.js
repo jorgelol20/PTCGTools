@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import TCGdex from '@tcgdex/sdk';
-import expansionDictionary from './../assets/db/expansionSet.json';
+import expansionDictionary from '../assets/db/expansionSet.json';
 import { errorContext } from '../context/ErrorProvider.jsx';
 import { useTranslation } from 'react-i18next';
 

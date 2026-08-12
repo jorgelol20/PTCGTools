@@ -1,4 +1,30 @@
 
+.textArea {
+    width: 100%;
+}
+
+.textAreaToggle {
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background: none;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    text-align: left;
+}
+
+.textAreaContent {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 1000px; /* valor suficientemente grande para el contenido abierto */
+    opacity: 1;
+}
+
+.textArea.closed .textAreaContent {
+    max-height: 0;
+    opacity: 0;
+}
+
 @media (min-width: 1200px) {
     .mainContainer{
         display: flex;
@@ -22,9 +48,31 @@
            display: flex;
            text-align: center;
     }
-    .textArea{
-        width: 100%;
-    }
+    .textArea {
+    width: 100%;
+}
+
+.textAreaToggle {
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background: none;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    text-align: left;
+}
+
+.textAreaContent {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 1000px; /* valor suficientemente grande para el contenido abierto */
+    opacity: 1;
+}
+
+.textArea.closed .textAreaContent {
+    max-height: 0;
+    opacity: 0;
+}
     .showDeck{
         min-width: 70%;
     }
