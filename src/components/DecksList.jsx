@@ -14,27 +14,18 @@ import { errorContext } from "../context/ErrorProvider";
 import ErrorAlert from "./structure/ErrorAlert";
 
 
+
 const DecksList = () => {
     const [decksList, setDecksList] = useState([]);
     const { userDecks, addNewDeck, importDeckFromClipboard } = useContext(cardsContext);
     const { t, i18n } = useTranslation();
     const location = useLocation();
-    const [error, setError] = useState(false);
-    const { contextError } = useContext(errorContext);
-    const moveToError = () => {
-        window.scrollTo({
-            top: "10vh",
-            behavior: 'smooth'
-        });
-        return true;
-    }
+    
+
     useEffect(() => {
         setDecksList(userDecks);
     }, [userDecks])
 
-    useEffect(() => {
-        contextError !== "" && contextError !== undefined ? setError(true) : setError(false);
-    }, [contextError])
 
     return (
         <Fragment>

@@ -1,27 +1,49 @@
-.decks-list{
+.decks-list {
     width: 25%;
     transition: transform 0.3s ease;
 }
-.decks{
+
+.decks {
     display: flex;
     position: relative;
 }
-.cards{
+
+.cards {
     width: 100%;
     margin-left: 1em;
 }
-.deck-cards{
+
+.deck-cards {
     width: 95%;
 }
-.deck-info{
+
+.deck-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    h1{
+
+    h1 {
         font-size: 1em;
     }
 }
-.deck-name{
+
+.deck-inputs {
+    display: flex;
+
+    .deck-buttons {
+        width: 40%;
+        display: flex;
+        margin-left: 1em;
+
+        .button {
+            max-width: 50%;
+            width: 50%;
+            font-size: 100%;
+        }
+    }
+}
+
+.deck-name {
     width: max-content;
     background-color: var(--color-fondo);
     font-size: 2em;
@@ -35,7 +57,7 @@
 }
 
 /* Botón hamburguesa oculto por defecto (solo aparece en mobile) */
-.hamburger-btn{
+.hamburger-btn {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -46,11 +68,12 @@
     border: none;
     cursor: pointer;
     z-index: 1001;
-    position:fixed;
+    position: fixed;
     top: -3em;
     left: 1em;
 }
-.hamburger-btn span{
+
+.hamburger-btn span {
     display: block;
     width: 100%;
     height: 3px;
@@ -58,28 +81,29 @@
     border-radius: 2px;
 }
 
-.decks-list-overlay{
+.decks-list-overlay {
     display: none;
 }
 
 @media (max-width: 1000px) {
-    .decks{
+    .decks {
         position: relative;
     }
 
-    .hamburger-btn{
+    .hamburger-btn {
         display: flex;
         margin-top: 10%;
         top: -1em;
     }
-    .deck-info{
+
+    .deck-info {
         margin-left: 10%;
         align-items: start;
         justify-content: start;
         flex-direction: column;
     }
 
-    .decks-list{
+    .decks-list {
         position: fixed;
         top: 0;
         left: 0;
@@ -93,25 +117,28 @@
         z-index: 1000;
         padding-top: 4em;
         overflow-y: auto;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
     }
 
-    .decks-list.open{
+    .decks-list.open {
         transform: translateX(0);
     }
 
-    .decks-list-overlay{
+    .decks-list-overlay {
         display: block;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
     }
 
-    .deck-cards{
+    .deck-cards {
         width: 100%;
+    }
+    .deck-inputs{
+        flex-direction: column;
     }
 }

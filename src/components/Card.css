@@ -5,17 +5,25 @@
     gap: 12px;
     padding: 12px;
     background-color: var(--color-fondo);
+    position: relative;
 }
 
 #image {
     position: relative;
 }
-
+.languaje-icon{
+    width: 25px;
+    position:absolute;
+    z-index: 100;
+    margin-left: 0%;
+    top: 0%;
+}
 .card-main {
     display: flex;
     flex-wrap: nowrap;
     margin: 0.5em;
     width: 12cqw;
+    position: relative;
 }
 
 .card {
