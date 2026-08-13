@@ -20,7 +20,8 @@ export function parseDeckList(text) {
         })
         .map((card) => {
             card = card.trim();
-            const match = card.match(/^(\d+)\s+(.+?)\s+([A-Z\d]{2,})\s+(\d+)$/i);
+            // El último grupo captura el número + un sufijo de letra opcional (se descarta)
+            const match = card.match(/^(\d+)\s+(.+?)\s+([A-Z\d]{2,})\s+(\d+)[a-zA-Z]?$/i);
             let returnCard = undefined;
             if (match !== null) {
                 if (match[2].includes('Energy') || match[2].includes('Energía')) {

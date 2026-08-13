@@ -1,5 +1,5 @@
 .decks-list{
-    width: 15%;
+    width: 25%;
     transition: transform 0.3s ease;
 }
 .decks{
@@ -46,8 +46,8 @@
     border: none;
     cursor: pointer;
     z-index: 1001;
-    position: fixed;
-    top: 1em;
+    position:fixed;
+    top: -3em;
     left: 1em;
 }
 .hamburger-btn span{
@@ -70,6 +70,7 @@
     .hamburger-btn{
         display: flex;
         margin-top: 10%;
+        top: -1em;
     }
     .deck-info{
         margin-left: 10%;
@@ -83,7 +84,9 @@
         top: 0;
         left: 0;
         height: 100%;
+        min-height: 100cqh;
         width: 70%;
+        min-width: 80cqw;
         max-width: 300px;
         background-color: var(--color-fondo);
         transform: translateX(-100%);
