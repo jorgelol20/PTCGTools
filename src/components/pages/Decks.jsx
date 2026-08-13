@@ -13,15 +13,20 @@ import { useEffect } from "react";
 import CardInfo from "../CardInfo";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
+import { errorContext } from "./../../context/ErrorProvider";
+import ErrorAlert from "./../structure/ErrorAlert.jsx";
+import Advice from "../structure/Advice.jsx";
 
 const Decks = () => {
     const { contextDeck, setContextDeck, saveDeck } = useContext(cardsContext)
-    const [deckName, setDeckName] = useState(contextDeck?.name??'')
+    const [deckName, setDeckName] = useState(contextDeck?.name ?? '')
     const { deckAPI, loading } = usePokeAPI();
     const [actualCardInfo, setActualCard] = useState(null);
     const [actualDeckName, setActualDeckName] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { t } = useTranslation();
+    const [error, setError] = useState(false);
+    const { contextError } = useContext(errorContext);
+    const { t, i18n } = useTranslation();
 
     const [cardQuantity, setCardQuantity] = useState(0);
     const [deckAvgPrice, setDeckAvgPrice] = useState(0);
@@ -32,10 +37,21 @@ const Decks = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if(contextDeck !== null){
+        if (contextDeck !== null) {
             setDeckName(contextDeck.name)
         }
     }, [contextDeck])
+
+    const moveToError = () => {
+        window.scrollTo({
+            top: "10vh",
+            behavior: 'smooth'
+        });
+        return true;
+    }
+    useEffect(() => {
+        contextError !== "" && contextError !== undefined ? setError(true) : setError(false);
+    }, [contextError])
 
     const setNewCardInfo = (newCardInfo) => {
         setActualCard(newCardInfo);
@@ -69,7 +85,7 @@ const Decks = () => {
     const load = contextDeck != undefined && contextDeck.cards !== undefined && !loading;
 
     useEffect(() => {
-        if(contextDeck !== null){
+        if (contextDeck !== null) {
             setActualDeckName(contextDeck.name)
         }
     }, [load])
@@ -146,7 +162,7 @@ const Decks = () => {
 
     }, [contextDeck]);
 
-    
+
 
 
 
@@ -176,25 +192,39 @@ const Decks = () => {
                     <DecksList />
                 </div>
                 <div className="deck-cards">
+                    <div className="error">
+                        {
+                            error && moveToError() && <ErrorAlert id="error" errorMessage={contextError} />
+                        }
+                    </div>
                     {
-                        load && contextDeck!== undefined ?
+                        load && contextDeck !== undefined ?
                             <div>
-                                <button
-                                    onClick={() => {
-                                        const newInfo = {
-                                            name: deckName,
-                                            id: contextDeck.id,
-                                            cards: contextDeck.cards
-                                        }
-                                        saveDeck(newInfo)
-                                    }}
-                                >{t('saveDeck')}</button>
-                                <NavLink to='/calc'><button
-                                    onClick={()=>{
-                                        location('/calc')
-                                    }}
-                                >{t('calcDeck')}</button></NavLink>
-                                <input className="deck-name" type="text" value={deckName} onChange={(e) => setDeckName(e.target.value)} />
+                                <div className='adviceBox'>
+                                    {
+                                        <Advice text={t("cardsAdvice")} type={"importante"} />
+                                    }
+                                </div>
+                                <div className="deck-inputs">
+                                    <input className="deck-name" type="text" value={deckName} onChange={(e) => setDeckName(e.target.value)} />
+                                    <div className="deck-buttons">
+                                        <button className="button"
+                                            onClick={() => {
+                                                const newInfo = {
+                                                    name: deckName,
+                                                    id: contextDeck.id,
+                                                    cards: contextDeck.cards
+                                                }
+                                                saveDeck(newInfo)
+                                            }}
+                                        >{t('saveDeck')}</button>
+                                        <NavLink className="button" to='/calc'><button
+                                            onClick={() => {
+                                                location('/calc')
+                                            }}
+                                        >{t('calcDeck')}</button></NavLink>
+                                    </div>
+                                </div>
                                 <div className="deck-info">
 
                                     <h1 id='title'> {t('cardListTitle')} (Total: <label style={cardQuantity != 60 ? { color: 'red' } : { color: 'green' }}> {cardQuantity} </label>)</h1>

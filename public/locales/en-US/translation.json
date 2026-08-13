@@ -54,5 +54,7 @@
     "importDeck": "Import from clipboard",
     "calcDeck": "Calculate mulligans",
     "hideTextArea": "Hide text area",
-    "showTextArea": "Show text area"
+    "showTextArea": "Show text area",
+    "saveDeck": "Save",
+    "cardsAdvice": "Some expansions are still not available, and their availability may vary depending on the language. We apologize for any inconvenience."
 }

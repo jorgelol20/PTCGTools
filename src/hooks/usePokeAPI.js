@@ -8,6 +8,11 @@ const usePokeAPI = (deck) => {
     const { t, i18n } = useTranslation();
     //Utils
     const tcgdex = new TCGdex(i18n.language);
+
+    // Idioma de fallback: es -> en, en -> es (y cualquier otro caso cae a "en" por defecto)
+    const fallbackLanguage = i18n.language === 'es' ? 'en' : 'es';
+    const tcgdexFallback = new TCGdex(fallbackLanguage);
+
     const expansions = expansionDictionary;
 
     //States
@@ -15,7 +20,7 @@ const usePokeAPI = (deck) => {
     const [loading, setLoading] = useState(false);
 
     //Context
-    const { addNewBadCard, setNewError } = useContext(errorContext);
+const { addNewBadCard, addFallbackCard, setNewError } = useContext(errorContext);
 
     //Functions
     /**
@@ -24,12 +29,25 @@ const usePokeAPI = (deck) => {
      * @returns 
      */
     const getCard = async (card) => {
-        const responseCard = await tcgdex.card.get(`${card}`);
-        if (!responseCard) {
-            return undefined;
-        } else {
-            return responseCard;
+        let responseCard;
+        try {
+            responseCard = await tcgdex.card.get(`${card}`);
+            if (responseCard) {
+                return { card: responseCard, isFallback: false };
+            }
+        } catch (error) {
+            // sigue al fallback
         }
+
+        try {
+            responseCard = await tcgdexFallback.card.get(`${card}`);
+            if (responseCard) {
+                return { card: responseCard, isFallback: true };
+            }
+        } catch (error) {
+            return undefined;
+        }
+        return undefined;
     }
 
     /**
@@ -125,9 +143,12 @@ const usePokeAPI = (deck) => {
                             type: "Energy"
                         }
                     }
-                    let cardAPI = await getCard(formatedCard[0]);
-                    if (cardAPI !== undefined) {
-                        return [cardAPI, formatedCard[1]];
+                    let result = await getCard(formatedCard[0]);
+                    if (result !== undefined) {
+                        if (result.isFallback) {
+                            addFallbackCard(" " + (card.name) + " " + (card.expansion));
+                        }
+                        return [result.card, formatedCard[1], result.isFallback];
                     }
                     addNewBadCard(" " + (card.name) + " " + (card.expansion));
                     return null;
@@ -140,7 +161,6 @@ const usePokeAPI = (deck) => {
         } else {
             setNewError(t('loadingErrorAPI'));
         }
-
     }
 
     /**
@@ -180,9 +200,11 @@ const usePokeAPI = (deck) => {
                                     productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                                     avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                                     lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
-                                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
-                                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
+                                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
+                                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
+                                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
+                                    isFallbackLanguage: card[2] ?? false,
+                                    language: card[2]?fallbackLanguage:i18n.language
                                 }
                             } else {
                                 return {
@@ -198,9 +220,11 @@ const usePokeAPI = (deck) => {
                                     productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                                     avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                                     lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
-                                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
-                                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
+                                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
+                                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
+                                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
+                                    isFallbackLanguage: card[2] ?? false,
+                                    language: card[2]?fallbackLanguage:i18n.language
                                 }
                             }
                         default:
@@ -219,7 +243,8 @@ const usePokeAPI = (deck) => {
                                 productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
                                 avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
                                 lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
-
+                                isFallbackLanguage: card[2] ?? false,
+                                language: card[2]?fallbackLanguage:i18n.language
                             }
                     }
                 }

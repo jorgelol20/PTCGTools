@@ -8,6 +8,7 @@ import { cardsContext } from "../../context/CardProvider.jsx";
 import ErrorAlert from "../structure/ErrorAlert.jsx";
 import DecksList from "../DecksList.jsx";
 import { useTranslation } from "react-i18next";
+import Advice from "../structure/Advice.jsx";
 
 
 
@@ -17,7 +18,7 @@ const Main = () => {
     const { contextError } = useContext(errorContext);
     const { setContextDeck } = useContext(cardsContext);
     const [isOpen, setIsOpen] = useState(false);
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const location = useLocation();
 
     const moveToError = () => {
@@ -44,6 +45,11 @@ const Main = () => {
         <Fragment>
             <div className="mainContainer">
                 <div className="form">
+                    <div className='adviceBox'>
+                        {
+                            <Advice text={t("cardsAdvice")} type={"importante"} />
+                        }
+                    </div>
                     <div className="error">
                         {
                             error && moveToError() && <ErrorAlert id="error" errorMessage={contextError} />

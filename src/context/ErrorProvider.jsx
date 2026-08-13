@@ -5,13 +5,22 @@ const errorContext = createContext();
 const ErrorProvider = (props) => {
     const [contextError, setError] = useState("");
     const [badCards, setBadCards] = useState("");
-    const addNewBadCard = (badCard) => {
+    const [fallbackCards, setFallbackCards] = useState("");
 
+    const addNewBadCard = (badCard) => {
         setBadCards((prevCards) => [...prevCards, badCard]);
     }
     const resetBadCards = () => {
         setBadCards("");
     }
+
+    const addFallbackCard = (fallbackCard) => {
+        setFallbackCards((prevCards) => [...prevCards, fallbackCard]);
+    }
+    const resetFallbackCards = () => {
+        setFallbackCards("");
+    }
+
     const setNewError = (newError) => {
         setError(newError);
     }
@@ -22,7 +31,9 @@ const ErrorProvider = (props) => {
         addNewBadCard,
         resetBadCards,
         badCards,
-
+        addFallbackCard,
+        resetFallbackCards,
+        fallbackCards,
     }
     return (
         <Fragment>

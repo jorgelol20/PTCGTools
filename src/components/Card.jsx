@@ -10,6 +10,8 @@ import Fairy_Energy from './../assets/img/energies/Fairy_Energy.png';
 import Light_Energy from './../assets/img/energies/Light_Energy.png';
 import Metal_Energy from './../assets/img/energies/Metal_Energy.png';
 import Placeholder from './../assets/img/placeHolder.png';
+import SpainFlag from './../assets/img/Flag-Spain.png';
+import USAFlag from './../assets/img/Flag-USA.png';
 import { useSSR, useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -42,15 +44,15 @@ const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
     const [displayInfo, setDisplay] = useState(false);
 
     const { t, i18n } = useTranslation();
-    if (cardInfo.cardType == t('pokemon') || cardInfo.cardType == t('trainer')) {
+    if (cardInfo.cardType == "Pokémon" || cardInfo.cardType == "Entrenador" || cardInfo.cardType == "Trainer") {
         return (
             <Fragment key={cardInfo.cardId}>
                 <div className="card-main">
                     <div onClick={() => {
                         setNewCardInfo(cardInfo);
                     }} className="card" key={cardInfo.cardId}>
+                        <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                         <div className="head">
-                            {/* <label className="title">{cardInfo.name}</label> */}
                             <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
                         </div>
                         <div className="body">
@@ -91,6 +93,7 @@ const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
                         setNewCardInfo(cardInfo);
                     }
                 }}>
+                    <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                     <div className="head">
                         {/* <label className="title">{cardInfo.name}</label> */}
                         <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
