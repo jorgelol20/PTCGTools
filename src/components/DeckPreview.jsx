@@ -10,6 +10,7 @@ import { useState } from "react";
 
 const DeckPreview = ({ deckInfo }) => {
     const { contextDeck, setContextDeck, deleteDeck } = useContext(cardsContext);
+    const [cardsQuantity, setCardsQuantity] = useState();
     const [active, setActive] = useState(false);
     const { t } = useTranslation();
     useEffect(() => {
@@ -19,10 +20,17 @@ const DeckPreview = ({ deckInfo }) => {
             } else {
                 setActive(false)
             }
-        } else{
+        } else {
             setActive(false)
         }
     }, [contextDeck])
+    useEffect(() => {
+        const tempCont = deckInfo.cards.reduce(
+            (cont, card) => cont + (Number(card?.quantity) || 0),
+            0
+        );
+        setCardsQuantity(tempCont)
+    }, [])
     return (
         <Fragment>
             <div className={active ? "preview active" : "preview"}
@@ -37,7 +45,7 @@ const DeckPreview = ({ deckInfo }) => {
                     <div className="deck-preview-info">
                         <div >
                             <h1>{deckInfo.name}</h1>
-                            <p>{t("cardsOnDeck")} {deckInfo.cards?.length ?? 0}</p>
+                            <p>{t("cardsOnDeck")} {cardsQuantity}</p>
                         </div>
 
                     </div>

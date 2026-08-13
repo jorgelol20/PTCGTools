@@ -55,5 +55,6 @@
     "calcDeck": "Calcular mulligans",
     "hideTextArea": "Ocultar cuadro de texto",
     "showTextArea": "Mostrar cuadro de texto",
-    "saveDeck": "Guardar"
+    "saveDeck": "Guardar",
+    "cardsAdvice": "Algunas expansiones no están disponibles aún pudiendo variar su disponibilidad según el idioma. Disculpen las molestias."
 }

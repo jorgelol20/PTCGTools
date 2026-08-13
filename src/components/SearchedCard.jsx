@@ -95,9 +95,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
                         productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                         avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                         lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
-                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
-                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
+                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
+                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
+                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
+                        language: card[2]?fallbackLanguage:i18n.language
                     }
                 } else {
                     return {
@@ -113,9 +114,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
                         productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                         avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                         lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
-                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
-                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
+                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
+                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
+                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
+                        language: card[2]?fallbackLanguage:i18n.language
                     }
                 }
             default:
@@ -131,9 +133,10 @@ const SearchedCard = ({ cardId, handleClear }) => {
                     productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                     avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                     lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
-                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
-                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
+                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
+                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
+                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
+                    language: card[2]?fallbackLanguage:i18n.language
                 }
         }
     }
