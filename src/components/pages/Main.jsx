@@ -61,7 +61,7 @@ const Main = () => {
                             onClick={() => setIsOpen(!isOpen)}
                             type="button"
                         >
-                            {isOpen ? t('showTextArea') : t('hideTextArea')}
+                            {isOpen ? t('hideTextArea') : t('showTextArea')}
                         </button>
                         <div className="textAreaContent">
                             <Form
