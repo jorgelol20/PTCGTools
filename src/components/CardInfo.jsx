@@ -56,7 +56,7 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
 
                                     </div>
                                     <div className="card-links">
-                                        <a target="_blank" href={`https://www.cardmarket.com/Pokemon/Products?idProduct=${cardInfo.productIdCM}`}>Cardmarket link</a>
+                                        <a target="_blank" href={`https://www.cardmarket.com/Pokemon/Products?idProduct=${cardInfo.productIdCM}&language=${cardInfo.language == 'es' ? 4 : 1}`}>Cardmarket link</a>
                                         <a target="_blank" href={`https://www.tcgplayer.com/product/${cardInfo.productIdTPP}`}>TCGPlayer link</a>
                                     </div>
                                 </div>
