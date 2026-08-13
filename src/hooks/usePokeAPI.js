@@ -45,7 +45,7 @@ const usePokeAPI = (deck) => {
             }
             if (expansion !== undefined) {
                 let cardNumber = card.number;
-                if (expansion.includes("me") || expansion.includes("sv")) {
+                if (expansion.includes("me") || expansion.includes("sv") || (expansion.includes("swsh") && !(expansion.includes(".5") || (expansion.includes("swsh1") && !expansion.includes("swsh10")) || expansion.includes("swsh7")))) {
                     if (cardNumber < 10) {
                         cardNumber = "00" + cardNumber;
                     } else if (cardNumber < 100) {
@@ -177,10 +177,12 @@ const usePokeAPI = (deck) => {
                                     abilitieText: card[0].abilities.effect,
                                     image: card[0].image + '/low.webp',
                                     quantity: card[1],
+                                    productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                                     avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                                     lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                                    avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
-                                    lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
+                                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
+                                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
+                                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
                                 }
                             } else {
                                 return {
@@ -193,10 +195,12 @@ const usePokeAPI = (deck) => {
                                     rarity: card[0].rarity,
                                     image: card[0].image + '/low.webp',
                                     quantity: card[1],
+                                    productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                                     avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                                     lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                                    avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
-                                    lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
+                                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
+                                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
+                                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
                                 }
                             }
                         default:
@@ -209,10 +213,13 @@ const usePokeAPI = (deck) => {
                                 rarity: card[0].rarity,
                                 image: card[0].image + '/low.webp',
                                 quantity: card[1],
+                                productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                                 avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                                 lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                                avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
-                                lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
+                                productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
+                                avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
+                                lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
+
                             }
                     }
                 }

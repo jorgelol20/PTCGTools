@@ -44,12 +44,13 @@
 
             #cardName {
                 font-size: 2em;
-                text-decoration:underline;
+                text-decoration: underline;
             }
 
             #cardImage {
                 position: relative;
                 margin-right: 1em;
+
                 img {
                     width: 15cqw;
                     border: 5px solid var(--color-principal);
@@ -83,12 +84,33 @@
     }
 
 }
-.prices{
+
+.prices {
+    display: flex;
+    justify-content: space-around;
+
+    h2 {
+        display: flex;
+        align-items: center;
+        margin-left: 1em;
+    }
+}
+
+.card-body {
     display: flex;
 }
-.card-body{
+
+.card-links {
     display: flex;
+    justify-content: space-between;
+
+    a {
+        color: var(--color-principal);
+        font-weight: bold;
+        text-decoration: underline;
+    }
 }
+
 .cardInfoContainer h3 {
     font-size: 0.7rem;
     color: var(--color-texto-secundario);
@@ -104,7 +126,20 @@
     }
 }
 
+.price-icon {
+    width: 50px;
+    background-color: white;
+    border-radius: 5px;
+
+}
+
 @media (max-width: 1100px) {
+    .card-body{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
     .cardInfoContainer .cardInfo {
         height: 50vh;
         top: 20%;
@@ -120,126 +155,148 @@
             background-color: var(--color-fondo);
             border: none;
             justify-content: center;
+
             #cardName {
                 text-align: center;
                 font-size: 1em;
+                margin-top: 50px;
             }
-            #setInfo{
+
+            #setInfo {
                 font-size: 0.5em;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100cqw;
             }
-            #cardImage img {    
+
+            #cardImage img {
                 width: 20cqw;
             }
-            #cardImage:hover{
+
+            #cardImage:hover {
                 scale: 1.5;
             }
-            #cardImage .quantity{
+
+            #cardImage .quantity {
                 width: 2em;
                 height: 2em;
                 font-size: 1em;
                 right: -2%;
                 top: -3%;
             }
-            
+
         }
     }
+
     @media (max-width: 800px) {
         .cardInfoContainer .cardInfo {
-        height: 50%;
-        top: 20%;
-        width: 60%;
+            height: 50%;
+            top: 20%;
+            width: 60%;
 
-        button {
-            height: 3em;
-        }
+            button {
+                height: 3em;
+            }
 
-        .info {
-            height: 60%;
-            margin-bottom: 15%;
-            width: 40%;
-            background-color: var(--color-fondo);
-            border: none;
-            justify-content: center;
-            #cardName {
-                text-align: center;
-                font-size: 1em;
+            .info {
+                height: 60%;
+                margin-bottom: 15%;
+                width: 40%;
+                background-color: var(--color-fondo);
+                border: none;
+                justify-content: center;
+
+                #cardName {
+                    text-align: center;
+                    font-size: 1em;
+                }
+
+                #setInfo {
+                    font-size: 0.5em;
+                }
+
+                #cardImage img {
+                    width: 25cqw;
+                }
+
+                #cardImage:hover {
+                    scale: 1.5;
+                }
+
+                #cardImage .quantity {
+                    width: 1.5em;
+                    height: 1.5em;
+                    font-size: 1em;
+                    right: -7%;
+                    top: -7%;
+                }
             }
-            #setInfo{
-                font-size: 0.5em;
-            }
-            #cardImage img {    
-                width: 25cqw;
-            }
-            #cardImage:hover{
-                scale: 1.5;
-            }
-            #cardImage .quantity{
-                width: 1.5em;
-                height: 1.5em;
-                font-size: 1em;
-                right: -7%;
-                top: -7%;
-            }
-            
         }
     }
-    }
+
     @media (orientation:landscape) and (max-width: 800px) {
         .cardInfoContainer .cardInfo {
-        height: 55%;
-        min-height: 55vh;
-        top: 20%;
-        width: 60%;
+            height: 55%;
+            min-height: 55vh;
+            top: 20%;
+            width: 60%;
 
-        button {
-            height: 3em;
-            z-index: 1;
-        }
+            button {
+                height: 3em;
+                z-index: 1;
+            }
 
-        .info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 50px 1fr;
-            height: 50%;
-            width: 40%;
-            margin-top: -15px;
-            background-color: var(--color-fondo);
-            border: none;
-            justify-content: center;
-            #cardName {
-                text-align: center;
-                font-size: 1em;
-                grid-column: 2;
-                grid-row: 1;
+            .info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 50px 1fr;
+                height: 50%;
+                width: 40%;
+                margin-top: -15px;
+                background-color: var(--color-fondo);
+                border: none;
+                justify-content: center;
+
+                #cardName {
+                    text-align: center;
+                    font-size: 1em;
+                    grid-column: 2;
+                    grid-row: 1;
+                }
+
+                #setInfo {
+                    font-size: 0.5em;
+                    grid-row: 2;
+                }
+
+                #cardImage {
+                    margin-right: 1%;
+                    grid-column: 1;
+                    grid-row: 1/3;
+                }
+
+                #cardImage img {
+                    border-width: 2px;
+                    border-radius: 5px;
+                    width: 35cqh;
+                }
+
+                #cardImage:hover {
+                    scale: 1.5;
+                    z-index: 30;
+                }
+
+                #cardImage .quantity {
+                    grid-column: 1;
+                    width: 1.5em;
+                    height: 1.5em;
+                    font-size: 1em;
+                    right: 15%;
+                    top: -7%;
+                }
+
             }
-            #setInfo{
-                font-size: 0.5em;
-                grid-row: 2;
-            }
-            #cardImage{
-                margin-right: 1%;
-                grid-column: 1;
-                grid-row: 1/3;
-            }
-            #cardImage img {   
-                border-width: 2px;
-                border-radius: 5px; 
-                width: 35cqh;
-            }
-            #cardImage:hover{
-                scale: 1.5;
-                z-index: 30;
-            }
-            #cardImage .quantity{
-                grid-column: 1;
-                width: 1.5em;
-                height: 1.5em;
-                font-size: 1em;
-                right: 15%;
-                top: -7%;
-            }
-            
         }
-    }
     }
 }

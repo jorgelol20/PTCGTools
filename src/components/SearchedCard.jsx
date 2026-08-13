@@ -92,10 +92,12 @@ const SearchedCard = ({ cardId, handleClear }) => {
                         abilitieText: card[0].abilities.effect,
                         image: card[0].image + '/low.webp',
                         quantity: card[1],
+                        productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                         avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                         lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                        avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
-                        lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
+                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
+                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
+                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
                     }
                 } else {
                     return {
@@ -108,10 +110,12 @@ const SearchedCard = ({ cardId, handleClear }) => {
                         rarity: card[0].rarity,
                         image: card[0].image + '/low.webp',
                         quantity: card[1],
+                        productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                         avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                         lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                        avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
-                        lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
+                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
+                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
+                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
                     }
                 }
             default:
@@ -124,10 +128,12 @@ const SearchedCard = ({ cardId, handleClear }) => {
                     rarity: card[0].rarity,
                     image: card[0].image + '/low.webp',
                     quantity: card[1],
+                    productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
                     avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
                     lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                    avgTPPrice: card[0].pricing.tcgplayer?.holofoil?.midPrice ?? NaN,
-                    lowTPPrice: card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? NaN,
+                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.reverse - holofoil?.productId ?? NaN,
+                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.midPrice ?? NaN,
+                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.reverse - holofoil?.lowPrice ?? NaN,
                 }
         }
     }
