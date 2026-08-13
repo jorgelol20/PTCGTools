@@ -18,10 +18,9 @@ import ErrorAlert from "./../structure/ErrorAlert.jsx";
 import Advice from "../structure/Advice.jsx";
 
 const Decks = () => {
-    const { contextDeck, setContextDeck, saveDeck } = useContext(cardsContext)
+    const { contextDeck, setContextDeck, saveDeck, setActualCard } = useContext(cardsContext)
     const [deckName, setDeckName] = useState(contextDeck?.name ?? '')
     const { deckAPI, loading } = usePokeAPI();
-    const [actualCardInfo, setActualCard] = useState(null);
     const [actualDeckName, setActualDeckName] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [error, setError] = useState(false);
@@ -242,7 +241,7 @@ const Decks = () => {
                                                     className="card"
                                                     key={card.cardId}
                                                     cardInfo={card}
-                                                    setNewCardInfo={setNewCardInfo}
+                                                    setNewCardInfo={setActualCard}
                                                     onUpdateQuantity={handleUpdateQuantity}
                                                 />
                                             }
@@ -253,11 +252,7 @@ const Decks = () => {
                             </div>
                             : ''
                     }
-                    <div className='cardInfo'>
-                        {
-                            load && actualCardInfo !== null && <CardInfo cardInfo={actualCardInfo} setNewCardInfo={setNewCardInfo} />
-                        }
-                    </div>
+                    
 
                 </div>
 

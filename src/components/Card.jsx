@@ -15,6 +15,8 @@ import USAFlag from './../assets/img/Flag-USA.png';
 import { useSSR, useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { cardsContext } from "../context/CardProvider";
+import { useContext } from "react";
 
 const selectImage = (card) => {
     switch (card) {
@@ -40,8 +42,9 @@ const selectImage = (card) => {
             return null;
     }
 }
-const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
+const Card = ({ cardInfo, onUpdateQuantity }) => {
     const [displayInfo, setDisplay] = useState(false);
+    const {setActualCard } = useContext(cardsContext)
 
     const { t, i18n } = useTranslation();
     if (cardInfo.cardType == "Pokémon" || cardInfo.cardType == "Entrenador" || cardInfo.cardType == "Trainer") {
@@ -49,7 +52,7 @@ const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
             <Fragment key={cardInfo.cardId}>
                 <div className="card-main">
                     <div onClick={() => {
-                        setNewCardInfo(cardInfo);
+                        setActualCard(cardInfo);
                     }} className="card" key={cardInfo.cardId}>
                         <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                         <div className="head">
@@ -90,7 +93,7 @@ const Card = ({ cardInfo, setNewCardInfo, onUpdateQuantity }) => {
             <div className="card-main">
                 <div className="card" key={cardInfo.name} onClick={() => {
                     if (cardInfo.expansion) {
-                        setNewCardInfo(cardInfo);
+                        setActualCard(cardInfo);
                     }
                 }}>
                     <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
