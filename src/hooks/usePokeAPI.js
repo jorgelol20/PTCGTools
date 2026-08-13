@@ -63,7 +63,7 @@ const { addNewBadCard, addFallbackCard, setNewError } = useContext(errorContext)
             }
             if (expansion !== undefined) {
                 let cardNumber = card.number;
-                if (expansion.includes("me") || expansion.includes("sv") || (expansion.includes("swsh") && !(expansion.includes(".5") || (expansion.includes("swsh1") && !expansion.includes("swsh10")) || expansion.includes("swsh7")))) {
+                if (expansion.includes("me") || expansion.includes("sv") || (expansion.includes("swsh") && !(expansion.includes(".5") || (expansion.includes("swsh1") && !expansion.includes("swsh10") && !expansion.includes("swsh11")) || expansion.includes("swsh7")))) {
                     if (cardNumber < 10) {
                         cardNumber = "00" + cardNumber;
                     } else if (cardNumber < 100) {
