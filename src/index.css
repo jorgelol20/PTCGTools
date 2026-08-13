@@ -12,4 +12,5 @@
 html {
     color-scheme: dark;
     font-family: 'Arial Narrow Bold', sans-serif;
+    transform: scale(0.99)
 }

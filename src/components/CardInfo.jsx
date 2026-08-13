@@ -1,6 +1,11 @@
 import React, { Fragment } from "react";
 import './CardInfo.css'
 import Placeholder from './../assets/img/placeHolder.png';
+import CMAvg from './../assets/img/CM-Avg.webp';
+import CMLow from './../assets/img/CM-Low.webp';
+import TPAvg from './../assets/img/TP-Avg.webp';
+import TPLow from './../assets/img/TP-Low.webp';
+
 const CardInfo = ({ cardInfo, setNewCardInfo }) => {
     return (
         <Fragment>
@@ -38,13 +43,18 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                                     <h1>ID: {cardInfo.cardNumber}</h1>
                                     <div className="prices">
                                         <div>
-                                            <h2>AVG Cardmarket: {isNaN(cardInfo.avgCMPrice) ? '-' : cardInfo.avgCMPrice}€</h2>
-                                            <h2>LOW Cardmarket: {isNaN(cardInfo.lowCMPrice) ? '-' : cardInfo.lowCMPrice}€</h2>
+                                            <h2><img className="price-icon" src={CMAvg} alt="Cardmarket Average Price" /> {isNaN(cardInfo.avgCMPrice) ? '-' : cardInfo.avgCMPrice}€</h2>
+                                            <h2><img className="price-icon" src={CMLow} alt="Cardmarket Low Price" /> {isNaN(cardInfo.lowCMPrice) ? '-' : cardInfo.lowCMPrice}€</h2>
                                         </div>
                                         <div>
-                                            <h2>AVG TCGPlayer: {isNaN(cardInfo.avgTPPrice) ? '-' : cardInfo.avgTPPrice}$</h2>
-                                            <h2>LOW TCGPlayer: {isNaN(cardInfo.lowTPPrice) ? '-' : cardInfo.lowTPPrice}$</h2>
+                                            <h2><img className="price-icon" src={TPAvg} alt="TCGPlayer Average Price" /> {isNaN(cardInfo.avgTPPrice) ? '-' : cardInfo.avgTPPrice}$</h2>
+                                            <h2><img className="price-icon" src={TPLow} alt="TCGPlayer Lower Price" /> {isNaN(cardInfo.lowTPPrice) ? '-' : cardInfo.lowTPPrice}$</h2>
                                         </div>
+
+                                    </div>
+                                    <div className="card-links">
+                                        <a target="_blank" href={`https://www.cardmarket.com/Pokemon/Products?idProduct=${cardInfo.productIdCM}`}>Cardmarket link</a>
+                                        <a target="_blank" href={`https://www.tcgplayer.com/product/${cardInfo.productIdTPP}`}>TCGPlayer link</a>
                                     </div>
                                 </div>
                             }
