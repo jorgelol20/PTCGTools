@@ -11,6 +11,7 @@ const CardProvider = (props) => {
     const [contextDeck, setDeck] = useState(null);
     const [userDecks, setUserDecks] = useState([])
     const [contextNumberOfHands, setNumberOfHands] = useState(0);
+    const [actualCardInfo, setActualCard] = useState(null)
 
     const [clipboardCards, setClipboardCards] = useState(undefined);
     const { deckAPI } = usePokeAPI(clipboardCards);
@@ -148,17 +149,22 @@ const CardProvider = (props) => {
         const tempUserDecks = JSON.parse(localStorage.getItem("user_decks"));
         if (tempUserDecks !== null && tempUserDecks !== undefined) setUserDecks(tempUserDecks)
     }, []);
+    useEffect(()=>{
+        console.log(actualCardInfo)
+    },[actualCardInfo])
 
     const exports = {
         contextDeck,
         userDecks,
         contextNumberOfHands,
+        actualCardInfo,
         setContextDeck,
         addCardToDeck,
         setUserDecks,
         deleteDeck,
         saveDeck,
         addNewDeck,
+        setActualCard,
         importDeckFromClipboard,
         setContextNumberOfHands,
     }

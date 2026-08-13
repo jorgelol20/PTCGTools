@@ -15,8 +15,8 @@
     width: 25px;
     position:absolute;
     z-index: 100;
-    margin-left: 0%;
-    top: 0%;
+    right: 0;
+    bottom: 0;
 }
 .card-main {
     display: flex;

@@ -5,6 +5,8 @@ import CMAvg from './../assets/img/CM-Avg.webp';
 import CMLow from './../assets/img/CM-Low.webp';
 import TPAvg from './../assets/img/TP-Avg.webp';
 import TPLow from './../assets/img/TP-Low.webp';
+import SpainFlag from './../assets/img/Flag-Spain.png';
+import USAFlag from './../assets/img/Flag-USA.png';
 
 const CardInfo = ({ cardInfo, setNewCardInfo }) => {
     return (
@@ -14,13 +16,14 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                     setNewCardInfo(null);
                 }
             }}>
-                <div className="cardInfo">
+                <div className="cardInfoModal">
                     <button onClick={() => { setNewCardInfo(null) }}>X</button>
                     <div className="info">
                         <h1 id="cardName">{cardInfo.name}</h1>
                         <div className="card-body">
                             <div id="cardImage">
                                 <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
+                                <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                                 {
                                     cardInfo.image ?
                                         <img
