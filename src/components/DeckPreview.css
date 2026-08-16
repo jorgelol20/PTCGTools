@@ -3,7 +3,7 @@
     padding: 0.5em;
     position: relative;
     height: 4em;
-    transition: 0.2s;
+    transition: 0.5s;
     width: 80%;
 
     p {
@@ -47,6 +47,7 @@
     background-size: 20em;
     background-repeat: no-repeat;
     filter: brightness(0.8);
+    transition: 0.s;
 }
 
 .preview:hover {
@@ -57,6 +58,7 @@
         0 0 10px #5246ff;
     background-color: var(--color-principal);
     filter: brightness(1.1);
+    transition: 0.2s;
 }
 
 .active {
