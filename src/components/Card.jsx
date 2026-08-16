@@ -105,7 +105,7 @@ const Card = ({ cardInfo, onUpdateQuantity }) => {
 
                     <div className="body">
                         <img
-                            src={`${cardInfo?.image}/low.webp`}
+                            src={`${cardInfo?.image}`}
                             alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
                             title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
                             id={cardInfo?.category}
