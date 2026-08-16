@@ -20,18 +20,22 @@ import Metal_Energy from './../assets/img/energies/Metal_Energy.png';
 import Placeholder from './../assets/img/placeHolder.png';
 
 import './SearchedCard.css'
+import { formatCard } from "../utils/formatCard.js";
+import { checkFormat } from "../utils/checkFormat.js";
 
 
-const SearchedCard = ({ cardId, handleClear }) => {
+const SearchedCard = ({ cardId, language }) => {
     const [cardInfo, setCardInfo] = useState([]);
     const { t, i18n } = useTranslation();
-    const tcgdex = new TCGdex(i18n.language);
+    const tcgdex = new TCGdex(language);
     const { addCardToDeck } = useContext(cardsContext);
+    const [legality, setLegality] = useState("other")
 
     const selectImage = (card) => {
         switch (card) {
             case "Energía Lucha":
             case "Fight Energy":
+            case "Fighting Energy":
                 return Fight_Energy;
             case "Energía Oscura":
             case "Darkness Energy":
@@ -73,94 +77,56 @@ const SearchedCard = ({ cardId, handleClear }) => {
     }, [])
 
 
-    const formatCard = (card) => {
-        switch (card[0].category) {
-            case "Pokémon":
-            case "Pokemon":
-                if (card[0].abilities) {
-                    if (card[0].id === "me01-028") {
-                        card[0].stage = t('basic');
-                    }
-                    return {
-                        name: card[0].name,
-                        expansion: card[0].set.name,
-                        cardNumber: card[0].localId,
-                        cardId: card[0].id,
-                        cardType: card[0].category,
-                        pokemonType: card[0].stage,
-                        rarity: card[0].rarity,
-                        abilitieText: card[0].abilities.effect,
-                        image: card[0].image + '/low.webp',
-                        quantity: card[1],
-                        productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
-                        avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
-                        lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
-                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
-                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
-                        language: card[2]?fallbackLanguage:i18n.language
-                    }
-                } else {
-                    return {
-                        name: card[0].name,
-                        expansion: card[0].set.name,
-                        cardNumber: card[0].localId,
-                        cardId: card[0].id,
-                        cardType: card[0].category,
-                        pokemonType: card[0].stage,
-                        rarity: card[0].rarity,
-                        image: card[0].image + '/low.webp',
-                        quantity: card[1],
-                        productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
-                        avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
-                        lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                        productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
-                        avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
-                        lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
-                        language: card[2]?fallbackLanguage:i18n.language
-                    }
-                }
-            default:
-                return {
-                    name: card[0].name,
-                    expansion: card[0].set.name,
-                    cardNumber: card[0].localId,
-                    cardId: card[0].id,
-                    cardType: card[0].category,
-                    rarity: card[0].rarity,
-                    image: card[0].image + '/low.webp',
-                    quantity: card[1],
-                    productIdCM: card[0].pricing.cardmarket?.idProduct ?? NaN,
-                    avgCMPrice: card[0].pricing.cardmarket?.avg ?? NaN,
-                    lowCMPrice: card[0].pricing.cardmarket?.low ?? NaN,
-                    productIdTPP: card[0].pricing.tcgplayer?.normal?.productId ?? card[0].pricing.tcgplayer?.holofoil?.productId ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.productId ?? NaN,
-                    avgTPPrice: card[0].pricing.tcgplayer?.normal?.midPrice ?? card[0].pricing.tcgplayer?.holofoil?.midPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.midPrice ?? NaN,
-                    lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
-                    language: card[2]?fallbackLanguage:i18n.language
-                }
-        }
-    }
 
-    if (cardInfo !== undefined) {
+    if (cardInfo !== undefined && (cardInfo?.category === 'Energy' || cardInfo?.category === 'Energía')) {
         return (
             <Fragment>
                 <div className="result-card"
                     onClick={async () => {
                         const card = [cardInfo, 1];
-                        const newCard = formatCard(card)
+                        const newCard = formatCard(card, language)
                         await addCardToDeck(newCard)
-                        handleClear();
                     }}
                 >
-                    {
-                        cardInfo.category === "Energy" || cardInfo.category === "Energía" ?
-                            <img style={{ background: "none" }} src={selectImage(cardInfo.name)} alt={`${cardInfo?.name} ${cardInfo?.set?.name}`} title={`${cardInfo?.name} ${cardInfo?.set?.name}`} />
-                            : <img src={`${cardInfo?.image}/low.webp`} alt={`${cardInfo?.name} ${cardInfo?.set?.name}`} title={`${cardInfo?.name} ${cardInfo?.set?.name}`} onError={(e) => {
-                                e.preventDefault();
-                                e.currentTarget.onerror = null;
-                                e.currentTarget.src = Placeholder;
-                            }} />
-                    }
+                    <img
+                        src={`${cardInfo?.image}/low.webp`}
+                        alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
+                        title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
+                        className={`${checkFormat(cardInfo.legal)}`}
+                        id={cardInfo?.category}
+                        onError={(e) => {
+                            e.preventDefault();
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = selectImage(cardInfo.name);
+                        }}
+                        style={{ background: "none" }}
+                    />
+                    <h1>{`${cardInfo?.name} `}<br />{` ${cardInfo?.set?.name}`}</h1>
+                </div>
+            </Fragment>
+        )
+    } else {
+        return (
+            <Fragment>
+                <div className="result-card"
+                    onClick={async () => {
+                        const card = [cardInfo, 1];
+                        const newCard = formatCard(card, language)
+                        await addCardToDeck(newCard)
+                    }}
+                >
+                    <img
+                        src={`${cardInfo?.image}/low.webp`}
+                        alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
+                        title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
+                        className={`${checkFormat(cardInfo.legal)}`}
+                        id={cardInfo?.category}
+                        onError={(e) => {
+                            e.preventDefault();
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = Placeholder;
+                        }} />
+
                     <h1>{`${cardInfo?.name} `}<br />{` ${cardInfo?.set?.name}`}</h1>
                 </div>
             </Fragment>

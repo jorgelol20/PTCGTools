@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { cardsContext } from "../context/CardProvider";
 import { useContext } from "react";
+import { checkFormat } from "../utils/checkFormat";
 
 const selectImage = (card) => {
     switch (card) {
@@ -44,16 +45,16 @@ const selectImage = (card) => {
 }
 const Card = ({ cardInfo, onUpdateQuantity }) => {
     const [displayInfo, setDisplay] = useState(false);
-    const {setActualCard } = useContext(cardsContext)
+    const { setActualCard } = useContext(cardsContext)
 
     const { t, i18n } = useTranslation();
-    if (cardInfo.cardType == "Pokémon" || cardInfo.cardType == "Entrenador" || cardInfo.cardType == "Trainer") {
+    if (cardInfo.category == "Pokémon" || cardInfo.category == "Entrenador" || cardInfo.category == "Trainer" || cardInfo.category == "Pokemon") {
         return (
             <Fragment key={cardInfo.cardId}>
                 <div className="card-main">
                     <div onClick={() => {
                         setActualCard(cardInfo);
-                    }} className="card" key={cardInfo.cardId}>
+                    }} className={`${checkFormat(cardInfo.legal)} card`} key={cardInfo.cardId}>
                         <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                         <div className="head">
                             <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
@@ -91,7 +92,7 @@ const Card = ({ cardInfo, onUpdateQuantity }) => {
     } else {
         return (<Fragment key={cardInfo.name}>
             <div className="card-main">
-                <div className="card" key={cardInfo.name} onClick={() => {
+                <div className={`${checkFormat(cardInfo.legal)} card`} key={cardInfo.name} onClick={() => {
                     if (cardInfo.expansion) {
                         setActualCard(cardInfo);
                     }
@@ -103,24 +104,18 @@ const Card = ({ cardInfo, onUpdateQuantity }) => {
                     </div>
 
                     <div className="body">
-                        {
-                            cardInfo.image ?
-                                <img
-                                    src={cardInfo.image}
-                                    onError={(e) => {
-                                        e.preventDefault();
-                                        e.currentTarget.onerror = null;
-                                        e.currentTarget.src = Placeholder;
-                                    }}
-                                    alt={cardInfo.name + " Pokémon TCG"}
-                                    title={cardInfo.name + " Pokémon TCG"}
-                                />
-                                : <img
-                                    src={selectImage(cardInfo.name)}
-                                    alt={"Pokémon TCG " + cardInfo.name}
-                                    title={"Pokémon TCG " + cardInfo.name}
-                                />
-                        }
+                        <img
+                            src={`${cardInfo?.image}/low.webp`}
+                            alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
+                            title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
+                            id={cardInfo?.category}
+                            onError={(e) => {
+                                e.preventDefault();
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = selectImage(cardInfo.name);
+                            }}
+                            style={{ background: "none" }}
+                        />
                     </div>
                 </div>
                 <div className="quantity-buttons">

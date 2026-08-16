@@ -3,8 +3,8 @@
     position: relative;
 
     button {
-        font-size:70%;
-        
+        font-size: 70%;
+
     }
 }
 
@@ -61,4 +61,85 @@
     position: absolute;
     display: flex;
     z-index: 10;
+}
+
+.colors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1em;
+
+    h3 {
+        display: flex;
+        margin-right: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    span {
+        margin-left: 5px;
+        min-width: 20px;
+        width: 15px;
+        min-height: 20px;
+        background-color: white;
+    }
+
+    .color-s {
+        background-color: green;
+        color: green;
+    }
+
+    .color-e {
+        background-color: orange;
+        color: orange;
+    }
+
+    .color-i {
+        background-color: red;
+        color: red;
+    }
+    .color-o {
+        background-color: grey;
+        color: grey;
+    }
+}
+
+
+
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    .filter {
+        border: 1px solid white;
+        padding: 10px;
+        font-weight: bold;
+        width: 5em;
+        min-width: 150px;
+        min-height: 60px;
+        label {
+            margin-right: 50px;
+        }
+
+        select {
+            background-color: var(--color-fondo-transparente);
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        select:focus {
+            background-color: var(--color-principal);
+        }
+
+        select:hover {
+            background-color: var(--color-principal);
+        }
+
+        option:hover {
+            filter: brightness(1.2);
+            font-weight: bold;
+        }
+    }
+
 }

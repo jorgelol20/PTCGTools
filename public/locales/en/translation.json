@@ -27,6 +27,7 @@
     "basic": "Basic",
     "pokemon": "Pokemon",
     "trainer": "Trainer",
+    "energy":"Energy",
     "cardAppears": "% of card appearance in the starting hand",
     "mulliganPercent": "Mulligan %",
     "copyright": "PTCGTools is a non-profit, fan-made tool. This site is not affiliated with, endorsed, or supported by Nintendo, Game Freak, or The Pokémon Company. All card images and information are provided through the use of the TCGDex API.",
@@ -56,5 +57,17 @@
     "hideTextArea": "Hide text area",
     "showTextArea": "Show text area",
     "saveDeck": "Save",
-    "cardsAdvice": "Some expansions are still not available, and their availability may vary depending on the language. We apologize for any inconvenience."
+    "cardsAdvice": "Some expansions are still not available, and their availability may vary depending on the language. We apologize for any inconvenience.",
+    "searchCard": "Search card...",
+    "spanish": "Spanish",
+    "english": "English",
+    "setSelection": "Set",
+    "languageSelection": "Language",
+    "allSets": "All",
+    "legalSelection": "Legality",
+    "expanded": "Expanded",
+    "standard": "Standard",
+    "other": "Other",
+    "cleanButton": "Clean",
+    "categorySelection": "Category"
 }

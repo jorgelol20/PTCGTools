@@ -37,6 +37,18 @@
     margin: 1%;
     width: 10cqw
 }
+.standard{
+    border-color:  green;
+}
+.expanded{
+    border-color: orange;
+}
+.ilegal{
+    border-color: red;
+}
+.other{
+    border-color: grey;
+}
 
 .card:hover {
     scale: 1.1;
