@@ -211,7 +211,7 @@ const ShowDeck = ({ deck }) => {
                      */
                     load ?
                         cardQuantity >= 7 ?
-                            <NavLink key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)} id='calc' to="/results" onClick={redirectRoute} >{t('calcButton')} {numberOfHands})</NavLink>
+                            <NavLink key={"button-calc"} id='calc' to="/results" onClick={redirectRoute} >{t('calcButton')} {numberOfHands}</NavLink>
                             : <div id='calc'>{t('minCardText')}</div>
                         : <></>
                 }

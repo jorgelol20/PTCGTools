@@ -14,7 +14,6 @@ const Content = () => {
     const [actualCard, setActualCardInfo] = useState(null);
     useEffect(()=>{
         setActualCardInfo(actualCardInfo);
-        console.log(actualCardInfo)
     },[actualCardInfo])
 
     return (

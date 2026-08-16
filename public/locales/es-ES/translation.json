@@ -27,6 +27,7 @@
     "basic" : "Básico",
     "pokemon" : "Pokémon",
     "trainer": "Entrenador",
+    "energy":"Energía",
     "cardAppears": "% de Aparición de las cartas",
     "mulliganPercent": "% de mulligans",
     "copyright": "PTCGTools es una herramienta fan-made sin fines de lucro. Este sitio no está afiliado, respaldado ni apoyado por Nintendo, Game Freak o The Pokémon Company.Todas las imagenes de las cartas y su información han sido suministradas mediante el uso de TCGDex API",
@@ -56,5 +57,17 @@
     "hideTextArea": "Ocultar cuadro de texto",
     "showTextArea": "Mostrar cuadro de texto",
     "saveDeck": "Guardar",
-    "cardsAdvice": "Algunas expansiones no están disponibles aún pudiendo variar su disponibilidad según el idioma. Disculpen las molestias."
+    "cardsAdvice": "Algunas expansiones no están disponibles aún pudiendo variar su disponibilidad según el idioma. Disculpen las molestias.",
+    "searchCard": "Buscar carta...",
+    "spanish": "Español",
+    "english": "Inglés",
+    "setSelection": "Expansión",
+    "languageSelection": "Idioma",
+    "allSets": "Todos",
+    "legalSelection": "Legalidad",
+    "expanded": "Expandido",
+    "standard": "Estándard",
+    "other": "Otro",
+    "cleanButton": "Limpiar",
+    "categorySelection": "Categoría"
 }

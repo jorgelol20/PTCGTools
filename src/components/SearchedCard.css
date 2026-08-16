@@ -2,6 +2,10 @@
     width: 10em;
     min-width: 12em;
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 
     h1 {
         margin: 0;
@@ -10,9 +14,27 @@
 
     img {
         max-width: 10em;
-        padding: 1em;
+        margin: 1em;
+        border-width: 5px;
+        border-style: solid;
+        border-radius: 10px;
     }
+}
 
+.standard {
+    border-color: green;
+}
+
+.expanded {
+    border-color: orange;
+}
+
+.ilegal {
+    border-color: red;
+}
+
+.other {
+    border-color: grey;
 }
 
 @media (max-width: 1000px) {
@@ -20,6 +42,7 @@
         width: 9em;
         min-width: 6em;
         text-align: center;
+        margin: 1em;
 
         h1 {
             margin: 0;
@@ -28,7 +51,7 @@
 
         img {
             max-width: 8em;
-            padding: 1em;
+
         }
 
     }

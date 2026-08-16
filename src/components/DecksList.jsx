@@ -34,7 +34,7 @@ const DecksList = () => {
                 <div className="deck-list">
                     {
                         decksList !== undefined && decksList.length > 0 ? decksList?.map((deck) => {
-                            return <DeckPreview deckInfo={deck} />
+                            return <DeckPreview deckInfo={deck} key={deck.id} />
                         }
                         )
                             : ''

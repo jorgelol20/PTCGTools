@@ -55,7 +55,7 @@ const Results = () => {
             let uniqueCardsInHand = new Set();
 
             for (let card of newHand) {
-                const isPokemon = card.cardType === "Pokémon" || card.cardType === "Pokemon";
+                const isPokemon = card.category === "Pokémon" || card.category === "Pokemon";
                 const isBasic = card.pokemonType === "Básico" || card.pokemonType === "Basic" || card.pokemonType === t('basic');
 
                 if (isPokemon && isBasic) {

@@ -235,11 +235,11 @@ const Decks = () => {
                                 </div>
                                 <div className='cards'>
                                     {
-                                        contextDeck.cards.map((card) => {
+                                        contextDeck.cards.map((card, index) => {
                                             if (card !== undefined) {
                                                 return <Card
                                                     className="card"
-                                                    key={card.cardId}
+                                                    key={index}
                                                     cardInfo={card}
                                                     setNewCardInfo={setActualCard}
                                                     onUpdateQuantity={handleUpdateQuantity}

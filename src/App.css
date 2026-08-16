@@ -24,12 +24,15 @@ html {
 .app {
   width: 100%;
 }
-a{
+
+a {
   text-decoration: none;
   color: var(--color-texto);
 }
+
 header {
   display: flex;
+  flex-direction: column;
   position: sticky;
   top: 0;
   background-color: var(--color-fondo);
@@ -41,6 +44,15 @@ header {
   align-content: center;
   justify-content: center;
   z-index: 200;
+
+  .header-basic {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+
   h1 {
     margin-right: 2em;
   }
@@ -93,13 +105,46 @@ header {
   margin-top: 5vh;
 }
 
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid white;
+  padding: 1em;
+
+  .nav-link {
+    box-shadow: 0px 0px;
+    border-bottom: white solid 2px;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    
+  }
+
+  .nav-link:hover {
+    border-bottom: var(--color-principal) 2px solid;
+    background-color: var(--color-principal);
+    filter: brightness(1.1);
+  }
+
+  button {
+    box-shadow: 0;
+    border: 0;
+    background: 0;
+    margin: 0;
+
+  }
+}
+
 @media (min-width: 1200px) {
   html #mainTitle {
     font-size: 4em;
   }
 }
-@media (max-width: 1000px){
-  #mainTitle{
-    margin-bottom:15%;
+
+@media (max-width: 1000px) {
+  #mainTitle {
+    margin-bottom: 15%;
   }
 }
