@@ -14,10 +14,12 @@ button {
     width: 100%;
 }
 
-.cards {
+.hands {
     background-color: transparent;
     border: none;
     width: 90%;
+    max-height: 40em;
+    overflow-y: scroll;
 }
 
 button {
