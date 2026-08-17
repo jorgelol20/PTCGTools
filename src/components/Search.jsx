@@ -17,10 +17,10 @@ const Search = () => {
     const searchSet = useRef("all");
     const searchCategory = useRef("all");
     const sets = Object.entries(expansionDictionary);
-    const invalidGLCSets = sets.slice( 0 ,75).map(key => key[1]);
+    const invalidExpandedSets = sets.slice(0, 75).map(key => key[1]);
     const searchLegality = useRef("all");
     const [searchPage, setSearchPage] = useState(1);
-    const [allCards, setAllCards] = useState([]); 
+    const [allCards, setAllCards] = useState([]);
     const [loading, setLoading] = useState(false);
 
 
@@ -78,8 +78,9 @@ const Search = () => {
             case 'sm115-60':
                 return false;
             default:
-                return true;
+                return !invalidExpandedSets.includes(id.split('-')[0])
         }
+        
     }
 
     const glcBannedCards = (id) => {
@@ -105,9 +106,9 @@ const Search = () => {
             case 'base1-96':
                 return false;
             default:
-                break;
+                return !invalidExpandedSets.includes(id.split('-')[0])
         }
-        return !invalidGLCSets.includes(id.split('-')[0])
+        
 
     }
 
@@ -121,34 +122,73 @@ const Search = () => {
         }
     }
 
-    const getCategory = (category,language) => {
-        if(category === 'Pokémon'){
+    const getCategory = (category, language) => {
+        if (category === 'Pokémon') {
             return language === 'es' ? 'Pokémon' : 'Pokemon';
-        }else if(category === 'Trainer'){
+        } else if (category === 'Trainer') {
             return language === 'es' ? 'Entrenador' : 'Trainer';
-        }else if(category === 'Energy'){
+        } else if (category === 'Energy') {
             return language === 'es' ? 'Energía' : 'Energy';
         }
+    }
+
+    const getQuery = async (language = 'en', set = '', category = '') => {
+        const tcgdex = new TCGdex(language);
+        if (searchLegality.current.value.includes('standard')) {
+            return await tcgdex.card.list(
+                Query.create()
+                    .contains('name', searchText)
+                    .contains('legal.standard', 'true')
+                    .contains('id', set)
+                    .contains('category', category)
+                    .sort('localId', 'ASC')
+            );
+        } else if (searchLegality.current.value.includes('expanded')) {
+            return await tcgdex.card.list(
+                Query.create()
+                    .contains('name', searchText)
+                    .contains('legal.expanded', 'true')
+                    .contains('id', set)
+                    .contains('category', category)
+                    .sort('localId', 'ASC')
+            );
+        }else if(searchLegality.current.value.includes('glc')){
+            return await tcgdex.card.list(
+                Query.create()
+                    .contains('name', searchText)
+                    .contains('id', set)
+                    .contains('category', category)
+                    .not.contains('name', ' ex')
+                    .not.contains('name', ' V')
+                    .not.contains('name', ' EX')
+                    .not.contains('name', '-EX')
+                    .not.contains('name', ' VMax')
+                    .not.contains('name', ' GX')
+                    .not.contains('name', 'BREAK')
+                    .sort('localId', 'ASC')
+            );
+        }else {
+            return await tcgdex.card.list(
+                Query.create()
+                    .contains('name', searchText)
+                    .contains('id', set)
+                    .contains('category', category)
+                    .sort('localId', 'ASC')
+            );
+        }
+
+        return []
     }
 
     const fetchCards = async () => {
         setLoading(true);
         try {
             const language = searchLanguage.current.value === 'auto' ? i18n.language : searchLanguage.current.value;
-            const tcgdex = new TCGdex(language);
             const set = searchSet?.current === "all" || searchSet?.current?.value === "all" ? '' : searchSet.current.value;
             const category = searchCategory?.current === "all" || searchCategory?.current?.value === "all" ? '' : getCategory(searchCategory.current.value, language)
-            console.log(category)
             setSearchPage(1)
-            const results = await tcgdex.card.list(
-                Query.create()
-                    .contains('name', searchText)
-                    .contains('id', set)
-                    .contains('category', category)
-                    .sort('localId', 'ASC')
-
-            )//.filter(card => card.legal.standard == );
-            const filtered = results.filter(card => !/^[AB]\d/.test(card.id));
+            const results = await getQuery(language, set, category);
+            const filtered = results.filter(card => !/^(P-)?[AB](\-)?\d/.test(card.id));
             const resultsIds = filterLegal(filtered).map((card) => card.id);
             setAllCards(resultsIds || []);
         } catch (error) {
@@ -217,21 +257,22 @@ const Search = () => {
                             </div>
                             <div className="filter">
                                 <label htmlFor="">{t("legalSelection")}</label>
-                                <select name="setSelect" id="" ref={searchLegality} 
-                                onChange={async (e) => {
-                                    await fetchCards();
-                                }}>
+                                <select name="setSelect" id="" ref={searchLegality}
+                                    onChange={async (e) => {
+                                        await fetchCards();
+                                    }}>
                                     <option value="all" defaultValue={true}>{t('allSets')}</option>
+                                    <option value="standard">{t('standard')}</option>
                                     <option value="expanded">{t('expanded')}</option>
                                     <option value="glc">GLC</option>
                                 </select>
                             </div>
                             <div className="filter">
                                 <label htmlFor="">{t("categorySelection")}</label>
-                                <select name="setSelect" id="" ref={searchCategory} 
-                                onChange={async (e) => {
-                                    await fetchCards();
-                                }}>
+                                <select name="setSelect" id="" ref={searchCategory}
+                                    onChange={async (e) => {
+                                        await fetchCards();
+                                    }}>
                                     <option value="all" defaultValue={true}>{t('allSets')}</option>
                                     <option value="Pokémon" defaultValue={true}>{t('pokemon')}</option>
                                     <option value="Trainer">{t('trainer')}</option>

@@ -30,7 +30,6 @@ const SearchedCard = ({ cardId, language }) => {
     const tcgdex = new TCGdex(language);
     const { addCardToDeck } = useContext(cardsContext);
     const [legality, setLegality] = useState("other")
-
     const selectImage = (card) => {
         switch (card) {
             case "Energía Lucha":
