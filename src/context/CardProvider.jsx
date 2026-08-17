@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import usePokeAPI from "../hooks/usePokeAPI";
 import { errorContext } from "./ErrorProvider.jsx";
 import { parseDeckList } from "../utils/parseDeckList";
+import { checkDeckFormat } from "../utils/checkDeckFormat.js";
 
 const cardsContext = createContext();
 
@@ -57,14 +58,18 @@ const CardProvider = (props) => {
     }
 
     const saveDeck = async (deckToSave) => {
+        const format = checkDeckFormat(deckToSave.cards)
         const currentDecks = userDecks.map((deck) => {
             if (deck.id === deckToSave.id) {
-                deck = deckToSave;
+                deck = {
+                    ...deckToSave,
+                    format: format
+                };
             }
             return deck
         })
 
-        const updatedDecks = [...currentDecks];
+        const updatedDecks = [...currentDecks]
         setUserDecks(updatedDecks);
         await saveUserDecks(updatedDecks);
     }
@@ -96,6 +101,7 @@ const CardProvider = (props) => {
             id: newId,
             name: t('newDeck') + newId,
             cards: cards,
+            format: [false, false, false]
         };
         const updatedDecks = [...currentDecks, newDeckFormatted];
         setUserDecks(updatedDecks);
@@ -129,12 +135,13 @@ const CardProvider = (props) => {
             const newId = currentDecks.length > 0
                 ? Math.max(...currentDecks.map(d => d.id || 0)) + 1
                 : 1;
-
+            const cards = deckAPI.cards.filter((card) => card !== undefined);
+            const format = checkDeckFormat(cards);
             const importedDeck = {
                 id: newId,
                 name: t('importedDeck') + newId,
-                cards: deckAPI.cards.filter((card) => card !== undefined),
-                format: "unknown"
+                cards: cards,
+                format: format
             };
 
             const updatedDecks = [...currentDecks, importedDeck];

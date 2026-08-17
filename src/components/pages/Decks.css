@@ -87,6 +87,30 @@
     display: none;
 }
 
+.deck-format {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: var(--color-fondo);
+    width: 30%;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7em;
+        width: 33%;
+        margin: 0;
+        padding: 0;
+
+    }
+}
+
 @media (max-width: 1000px) {
     .decks {
         position: relative;
@@ -140,7 +164,8 @@
     .deck-cards {
         width: 100%;
     }
-    .deck-inputs{
+
+    .deck-inputs {
         flex-direction: column;
     }
 }

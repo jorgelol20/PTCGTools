@@ -108,8 +108,6 @@ const Search = () => {
             default:
                 return !invalidExpandedSets.includes(id.split('-')[0])
         }
-        
-
     }
 
     const filterLegal = (cards) => {
@@ -285,6 +283,9 @@ const Search = () => {
                                 </div>
                                 <div>
                                     <h3>{t('expanded')}<span className="color-e"></span></h3>
+                                </div>
+                                <div>
+                                    <h3>GLC<span className="color-g"></span></h3>
                                 </div>
                                 <div>
                                     <h3>Ilegal<span className="color-i"></span></h3>

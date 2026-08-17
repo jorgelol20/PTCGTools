@@ -54,7 +54,7 @@ const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
                 <div className="card-main">
                     <div onClick={() => {
                         setActualCard(cardInfo);
-                    }} className={`${checkFormat(cardInfo.legal)} card`} key={cardInfo.cardId}>
+                    }} className={`${checkFormat(cardInfo.legal, cardInfo?.cardId, cardInfo?.name)} card`} key={cardInfo.cardId}>
                         <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                         <div className="head">
                             <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
@@ -97,7 +97,7 @@ const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
     } else {
         return (<Fragment key={cardInfo.name}>
             <div className="card-main">
-                <div className={`${checkFormat(cardInfo.legal)} card`} key={cardInfo.name} onClick={() => {
+                <div className={`${checkFormat(cardInfo.legal, cardInfo?.cardId)} card`} key={cardInfo.name} onClick={() => {
                     if (cardInfo.expansion) {
                         setActualCard(cardInfo);
                     }
