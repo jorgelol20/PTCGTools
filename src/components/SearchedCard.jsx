@@ -92,7 +92,7 @@ const SearchedCard = ({ cardId, language }) => {
                         src={`${cardInfo?.image}/low.webp`}
                         alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
                         title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
-                        className={`${checkFormat(cardInfo.legal)}`}
+                        className={`${checkFormat(cardInfo?.legal)}`}
                         id={cardInfo?.category}
                         onError={(e) => {
                             e.preventDefault();
@@ -119,7 +119,7 @@ const SearchedCard = ({ cardId, language }) => {
                         src={`${cardInfo?.image}/low.webp`}
                         alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
                         title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
-                        className={`${checkFormat(cardInfo.legal)}`}
+                        className={`${checkFormat(cardInfo?.legal)}`}
                         id={cardInfo?.category}
                         onError={(e) => {
                             e.preventDefault();
