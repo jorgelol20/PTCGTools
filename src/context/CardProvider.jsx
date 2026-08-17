@@ -133,7 +133,8 @@ const CardProvider = (props) => {
             const importedDeck = {
                 id: newId,
                 name: t('importedDeck') + newId,
-                cards: deckAPI.cards.filter((card) => card !== undefined)
+                cards: deckAPI.cards.filter((card) => card !== undefined),
+                format: "unknown"
             };
 
             const updatedDecks = [...currentDecks, importedDeck];

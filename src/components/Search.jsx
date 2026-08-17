@@ -108,7 +108,6 @@ const Search = () => {
                 break;
         }
         return !invalidGLCSets.includes(id.split('-')[0])
-
     }
 
     const filterLegal = (cards) => {
