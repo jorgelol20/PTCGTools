@@ -231,17 +231,21 @@ const Decks = () => {
                                     <h1 id='title'> {t('cardListTitle')} (Total: <label style={cardQuantity != 60 ? { color: 'red' } : { color: 'green' }}> {cardQuantity} </label>)</h1>
                                     <h1 id='title'>{t('avgPriceText')}: {deckAvgPrice}€ | {Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', }).format(dolarsDeckAvgPrice)}</h1>
                                     <h1 id='title'>{t('lowPriceText')}: {deckLowPrice}€ | {Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', }).format(dolarsDeckLowPrice)}</h1>
-                                    <div className="deck-format">
-                                        <p>{t('standard')}<img src={contextDeck.format[0] ? Valid_Icon : NotValid_Icon} alt="" /></p>
-                                        <p>{t('expanded')}<img src={contextDeck.format[1] ? Valid_Icon : NotValid_Icon} alt="" /></p>
-                                        <p>GLC<img src={contextDeck.format[2] ? Valid_Icon : NotValid_Icon} alt="" /></p>
-                                    </div>
+                                    {
+                                        contextDeck?.format ?
+                                            <div className="deck-format">
+                                                <p>{t('standard')}<img src={contextDeck.format[0] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                                <p>{t('expanded')}<img src={contextDeck.format[1] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                                <p>GLC<img src={contextDeck.format[2] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                            </div>
+                                            : <></>
+                                    }
                                 </div>
                                 <div className='cardSearch'>
                                     <Search />
                                 </div>
                                 <div className='cards'>
-                                 
+
                                     {
                                         contextDeck.cards.map((card, index) => {
                                             if (card !== undefined) {
