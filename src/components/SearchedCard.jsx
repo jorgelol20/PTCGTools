@@ -75,8 +75,6 @@ const SearchedCard = ({ cardId, language }) => {
         setCard()
     }, [])
 
-
-
     if (cardInfo !== undefined && (cardInfo?.category === 'Energy' || cardInfo?.category === 'Energía')) {
         return (
             <Fragment>
@@ -87,16 +85,17 @@ const SearchedCard = ({ cardId, language }) => {
                         await addCardToDeck(newCard)
                     }}
                 >
+                    
                     <img
                         src={`${cardInfo?.image}/low.webp`}
                         alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
                         title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
-                        className={`${checkFormat(cardInfo?.legal)}`}
+                        className={`${checkFormat(cardInfo?.legal, cardInfo?.id)}`}
                         id={cardInfo?.category}
                         onError={(e) => {
                             e.preventDefault();
                             e.currentTarget.onerror = null;
-                            e.currentTarget.src = selectImage(cardInfo.name);
+                            e.currentTarget.src = selectImage(cardInfo?.name);
                         }}
                         style={{ background: "none" }}
                     />
@@ -118,7 +117,7 @@ const SearchedCard = ({ cardId, language }) => {
                         src={`${cardInfo?.image}/low.webp`}
                         alt={`${cardInfo?.name} ${cardInfo?.set?.name}`}
                         title={`${cardInfo?.name} ${cardInfo?.set?.name}`}
-                        className={`${checkFormat(cardInfo?.legal)}`}
+                        className={`${checkFormat(cardInfo?.legal, cardInfo?.id, cardInfo?.name)}`}
                         id={cardInfo?.category}
                         onError={(e) => {
                             e.preventDefault();

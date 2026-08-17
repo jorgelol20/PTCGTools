@@ -21,22 +21,6 @@
     }
 }
 
-.standard {
-    border-color: green;
-}
-
-.expanded {
-    border-color: orange;
-}
-
-.ilegal {
-    border-color: red;
-}
-
-.other {
-    border-color: grey;
-}
-
 @media (max-width: 1000px) {
     .result-card {
         width: 9em;

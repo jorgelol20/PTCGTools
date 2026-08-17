@@ -1,8 +1,7 @@
 .deck-preview {
-
     padding: 0.5em;
     position: relative;
-    height: 4em;
+    height: 5em;
     transition: 0.5s;
     width: 80%;
 
@@ -13,8 +12,10 @@
         width: 100%;
         padding-right: 1em;
         font-weight: bold;
-        z-index: 1000;
+        z-index: 100;
         position: relative;
+        margin-top: 0;
+        padding-left: 5px;
     }
 
     h1 {
@@ -23,6 +24,7 @@
         margin-bottom: 0;
         padding-bottom: 0;
         width: 100%;
+        max-width: 250px;
         padding-bottom: 0.1em;
         padding-top: 0.1em;
         box-sizing: border-box;
@@ -31,7 +33,31 @@
         z-index: 100;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+        text-overflow:ellipsis;
+        padding-left: 5px;
+    }
+    .deck-format{
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        background-color: var(--color-fondo);
+        width: 100%;
+        padding-left: 16px;
+        padding-bottom: 5px;
+        padding-right: 5px;
+        margin-top: -1px;
+        p{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            width: 33%;
+            margin: 0;
+            padding: 0;
+            
+        }
     }
 }
 
@@ -56,7 +82,7 @@
         0 0 10px #fff,
         0 0 10px #2836ff,
         0 0 10px #5246ff;
-    background-color: var(--color-principal);
+    background-color: var(--color-fondo);
     filter: brightness(1.1);
     transition: 0.2s;
 }
@@ -87,10 +113,16 @@
 
     }
 }
-
 .deck-preview-info {
     display: flex;
     justify-content: space-between;
+    .deck-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        width: 90%;
+    }
 }
 
 .delete-icon {

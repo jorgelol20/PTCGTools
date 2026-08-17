@@ -33,22 +33,12 @@
     padding: 8px;
     display: flex;
     flex-direction: column;
-    border: 5px solid var(--color-principal);
+    border: 5px solid;
     margin: 1%;
-    width: 10cqw
+    width: 10cqw;
+    border: 5px solid;
 }
-.standard{
-    border-color:  green;
-}
-.expanded{
-    border-color: orange;
-}
-.ilegal{
-    border-color: red;
-}
-.other{
-    border-color: grey;
-}
+
 
 .card:hover {
     scale: 1.1;
