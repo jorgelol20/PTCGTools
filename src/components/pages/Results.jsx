@@ -20,7 +20,7 @@ const Results = () => {
     const { t, i18n } = useTranslation();
 
 
-    if (contextDeck === undefined || contextDeck.cards.length == 0) {
+    if (contextDeck == undefined || contextDeck.cards.length == 0) {
         return (
             <Fragment>
                 <h1>{t("errorResultsTitle")}</h1>
