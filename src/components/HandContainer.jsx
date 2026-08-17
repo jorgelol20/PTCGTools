@@ -25,7 +25,7 @@ const HandContainer = ({ hands }) => {
         <Fragment>
             <div className="container">
                 <button onClick={() => {
-                    setDisplay(!display)
+                    setDisplay(prev => !prev)
                 }}>
                     {display ? t('hideHands') : hands.length > 10 ? t('showFirstHands') : t('showHands')}
                 </button>
@@ -35,7 +35,7 @@ const HandContainer = ({ hands }) => {
                 {
                     display && loadedHands === undefined && loadHands(hands)
                 }
-                <div className="cards">
+                <div className="hands">
                     {
                         display && loadedHands !== undefined && loadedHands.map((hand) => {
                             return <Hand

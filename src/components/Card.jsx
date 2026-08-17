@@ -43,7 +43,7 @@ const selectImage = (card) => {
             return null;
     }
 }
-const Card = ({ cardInfo, onUpdateQuantity }) => {
+const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
     const [displayInfo, setDisplay] = useState(false);
     const { setActualCard } = useContext(cardsContext)
 
@@ -74,18 +74,23 @@ const Card = ({ cardInfo, onUpdateQuantity }) => {
                             </picture>
                         </div>
                     </div>
-                    <div className="quantity-buttons">
-                        <button className="quantity"
-                            onClick={() => {
-                                onUpdateQuantity(cardInfo, 1);
-                            }}
-                        >+</button>
-                        <button className="quantity"
-                            onClick={() => {
-                                onUpdateQuantity(cardInfo, -1);
-                            }}
-                        >-</button>
-                    </div>
+                    {
+                        showButtons ?
+
+                            <div className="quantity-buttons">
+                                <button className="quantity"
+                                    onClick={() => {
+                                        onUpdateQuantity(cardInfo, 1);
+                                    }}
+                                >+</button>
+                                <button className="quantity"
+                                    onClick={() => {
+                                        onUpdateQuantity(cardInfo, -1);
+                                    }}
+                                >-</button>
+                            </div>
+                            : <></>
+                    }
                 </div>
             </Fragment>
         )
@@ -118,18 +123,23 @@ const Card = ({ cardInfo, onUpdateQuantity }) => {
                         />
                     </div>
                 </div>
-                <div className="quantity-buttons">
-                    <button className="quantity"
-                        onClick={() => {
-                            onUpdateQuantity(cardInfo, 1);
-                        }}
-                    >+</button>
-                    <button className="quantity"
-                        onClick={() => {
-                            onUpdateQuantity(cardInfo, -1);
-                        }}
-                    >-</button>
-                </div>
+                {
+                    showButtons ?
+
+                        <div className="quantity-buttons">
+                            <button className="quantity"
+                                onClick={() => {
+                                    onUpdateQuantity(cardInfo, 1);
+                                }}
+                            >+</button>
+                            <button className="quantity"
+                                onClick={() => {
+                                    onUpdateQuantity(cardInfo, -1);
+                                }}
+                            >-</button>
+                        </div>
+                        : <></>
+                }
             </div>
         </Fragment>
         )

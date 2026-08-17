@@ -20,6 +20,9 @@
         width: 100%;
         border: 2px solid var(--color-borde);
         background-color: var(--color-fondo);
+        .card{
+            width: 60%;
+        }
     }
 }
 
