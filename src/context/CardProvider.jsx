@@ -150,9 +150,6 @@ const CardProvider = (props) => {
         const tempUserDecks = JSON.parse(localStorage.getItem("user_decks"));
         if (tempUserDecks !== null && tempUserDecks !== undefined) setUserDecks(tempUserDecks)
     }, []);
-    useEffect(()=>{
-        console.log(actualCardInfo)
-    },[actualCardInfo])
 
     const exports = {
         contextDeck,

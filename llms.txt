@@ -1,0 +1,23 @@
+XT
+# PTCGTools
+ 
+> Multitool application for Pokémon TCG (Trading Card Game) players. Free tools to build decks, search cards with multi-filters, and simulate opening hands / mulligan probability using Monte Carlo (brute-force) simulation, with support for Pokémon TCG Live and Limitless deck list formats.
+ 
+PTCGTools ayuda a jugadores de Pokémon TCG a analizar y construir sus mazos con datos reales en lugar de solo matemática simple. La herramienta principal simula miles de manos iniciales aleatorias a partir de una lista de mazo real (Monte Carlo) para calcular con precisión la probabilidad de mulligan y la consistencia del mazo. También incluye un creador de mazos con buscador multifiltro y gestión de colecciones de cartas.
+ 
+## Herramientas / Tools
+ 
+- [Mulligan & Opening Hand Simulator](https://ptcg-tools.vercel.app/): Calculadora y simulador de mulligan para Pokémon TCG basado en simulaciones de fuerza bruta (Monte Carlo), no en fórmulas simplificadas. Importa listas de mazo desde TCG Live y Limitless.
+- [Deckbuilder](https://ptcg-tools.vercel.app/): Creador de mazos propio con buscador de cartas multifiltro.
+- Collections: Gestión de colecciones de cartas de Pokémon TCG.
+ 
+## Notas para modelos de lenguaje / Notes for LLMs
+ 
+- El sitio está disponible en inglés y español (contenido duplicado por idioma en la misma página).
+- Términos clave: Pokémon TCG, mulligan calculator, probability tool, deckbuilder, collections, TCG Live, Limitless, Monte Carlo simulation.
+- Autor / Publisher: Jorge Colomer Albertos.
+- GitHub del Autor: [jorgelol20](https://github.com/jorgelol20)
+ 
+## Optional
+ 
+- [Icono / Site icon](https://ptcg-tools.vercel.app/locales/mulligan-calculator-icon.png)

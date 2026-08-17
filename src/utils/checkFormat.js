@@ -1,5 +1,5 @@
 export function checkFormat (legal) {
-    if(legal === undefined){
+    if(legal === undefined || legal === null || !legal){
         return 'other'
     }
     if(legal.standard === true){

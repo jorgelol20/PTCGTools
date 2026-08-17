@@ -28,6 +28,7 @@ const Hand = ({ hand }) => {
                                 key={Math.random().toString(36).substring(2, 15)}
                                 cardInfo={card}
                                 setNewCardInfo={setNewCardInfo}
+                                showButtons={false}
                             />
                         })
                     }

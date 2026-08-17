@@ -1,5 +1,4 @@
 export function formatCard (card, language) {
-    console.log("Miau")
     if (card != null && card != undefined) {
         if (card.name) {
             return card;
