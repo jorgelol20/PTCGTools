@@ -167,7 +167,6 @@ const usePokeAPI = (deck) => {
             const finalDeckAPI = await Promise.all(cardListAPI);
             formatApiDeck(finalDeckAPI);
         } else {
-            console.log(cardsList)
             setNewError(t('loadingErrorAPI'));
         }
     }
