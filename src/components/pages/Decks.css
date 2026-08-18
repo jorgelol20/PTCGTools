@@ -6,8 +6,9 @@
 .decks {
     display: flex;
     position: relative;
-
     min-height: 100vh;
+    container-type: inline-size;
+    container-name: decks;
 }
 
 .cards {
@@ -33,14 +34,15 @@
     display: flex;
 
     .deck-buttons {
-        width: 40%;
+        width: 50%;
         display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
         margin-left: 1em;
 
         .button {
-            max-width: 50%;
-            width: 50%;
-            font-size: 100%;
+            width: 25%;
+            font-size: 90%;
         }
     }
 }
@@ -56,6 +58,7 @@
     border-left: 2px solid white;
     border-right: 1px solid rgba(255, 255, 255, 0.26);
     border-top: 0px;
+    height: 1.5em;
 }
 
 /* Botón hamburguesa oculto por defecto (solo aparece en mobile) */
@@ -64,24 +67,33 @@
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
+
+    width: 3em;
+    height: 3em;
+
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 1001;
+
     position: fixed;
-    top: -3em;
-    left: 1em;
+    top: 1rem;
+    left: 1rem;
+    transition: 0.6s;
+    z-index: 1001;
 }
 
 .hamburger-btn span {
     display: block;
     width: 100%;
-    height: 3px;
+    height: 1em;
+    min-height: 4px ;
     background-color: white;
     border-radius: 2px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    transition: 0.6s;
 }
+
 
 .decks-list-overlay {
     display: none;
@@ -91,7 +103,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--color-fondo);
     width: 30%;
@@ -104,22 +116,29 @@
         align-items: center;
         justify-content: center;
         font-size: 0.7em;
-        width: 33%;
         margin: 0;
         padding: 0;
+        font-weight: bold;
 
+        img {
+            width: 40px;
+        }
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1500px) {
+
     .decks {
         position: relative;
     }
 
     .hamburger-btn {
         display: flex;
-        margin-top: 10%;
+        margin-top: 35px;
         top: -1em;
+        width: clamp(36px, 8vw, 48px, 5px);
+        height: clamp(36px, 8vw, 48px, 5px);
+        font-size: clamp(10px, 2.2vw, 14px, 5px);
     }
 
     .deck-info {
@@ -127,6 +146,11 @@
         align-items: start;
         justify-content: start;
         flex-direction: column;
+
+        h1,
+        p {
+            font-size: 1em;
+        }
     }
 
     .decks-list {
@@ -135,11 +159,12 @@
         left: 0;
         height: 100%;
         min-height: 100cqh;
-        width: 70%;
+        width: 90%;
         min-width: 80cqw;
         max-width: 300px;
         background-color: var(--color-fondo);
         transform: translateX(-100%);
+        transition: 0.6s;
         z-index: 1000;
         padding-top: 4em;
         overflow-y: auto;
@@ -148,6 +173,7 @@
 
     .decks-list.open {
         transform: translateX(0);
+        transition: 0.6s;
     }
 
     .decks-list-overlay {
@@ -165,7 +191,43 @@
         width: 100%;
     }
 
+    .deck-format {
+        width: 80%;
+    }
+
     .deck-inputs {
         flex-direction: column;
+
+        .deck-name {
+            width: 90%;
+            font-size: x-large;
+        }
+
+        .deck-buttons {
+            width: 90%;
+        }
     }
+
+    .opened {
+        transition: 0.6s;
+        right: 0;
+        left: 70%;
+    }
+
+}
+
+.opened #span-1 {
+    transform: translateY(275%) rotate(45deg);
+    transition: 0.6s;
+}
+
+.opened #span-2,
+.opened #span-3 {
+    opacity: 0;
+    transition: 0.6s;
+}
+
+.opened #span-4 {
+    transform: translateY(-275%) rotate(-45deg);
+    transition: 0.6s;
 }

@@ -33,14 +33,16 @@ function App() {
             <header>
               <div className='header-basic'>
                 <h1 id='mainTitle'><a href="/">{t('mainTitle')}</a></h1>
-                <button className={i18n.language == "es" ? 'languajeButton active' : 'languajeButton'} onClick={() => changeLanguage("es")}><img src={SpainFlag} alt="Spain Flag" title='Spain Flag' /></button>
-                <button className={i18n.language == "en" ? 'languajeButton active' : 'languajeButton'} onClick={() => changeLanguage("en")}><img src={USAFlag} alt="USA Flag" title='Spain Flag' /></button>
+                <div className='language-buttons'>
+                  <button className={i18n.language == "es" ? 'languajeButton active' : 'languajeButton'} onClick={() => changeLanguage("es")}><img src={SpainFlag} alt="Spain Flag" title='Spain Flag' /></button>
+                  <button className={i18n.language == "en" ? 'languajeButton active' : 'languajeButton'} onClick={() => changeLanguage("en")}><img src={USAFlag} alt="USA Flag" title='Spain Flag' /></button>
+                </div>
               </div>
 
             </header>
             <div className='nav'>
               <NavLink to={'/deck'} className={location.pathname.includes('/deck') ? "nav-link nav-active" : "nav-link"}><button>Mazos</button></NavLink>
-              
+
               <NavLink to={'/calc'} className={location.pathname.includes('/calc') ? "nav-link nav-active" : "nav-link"}><button>Calculadora</button></NavLink>
             </div>
             <ErrorProvider>

@@ -69,5 +69,6 @@
     "standard": "Standard",
     "other": "Other",
     "cleanButton": "Clean",
-    "categorySelection": "Category"
+    "categorySelection": "Category",
+    "sortDeck": "Sort"
 }
