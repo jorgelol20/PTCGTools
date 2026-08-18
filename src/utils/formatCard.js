@@ -1,4 +1,4 @@
-export function formatCard (card, language) {
+export function formatCard(card, language) {
     if (card != null && card != undefined) {
         if (card.name) {
             return card;
@@ -33,13 +33,14 @@ export function formatCard (card, language) {
                         lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
                         isFallbackLanguage: card[2] ?? false,
                         language: language,
-                        legal: card[0].legal
+                        legal: card[0].legal,
+                        evolvesFrom: card[0].evolveFrom ?? null
                     }
                 } else {
                     return {
                         name: card[0].name,
                         expansion: card[0].set.name,
-                        cardNumber: card[0].localId, 
+                        cardNumber: card[0].localId,
                         cardId: card[0].id,
                         category: card[0].category,
                         pokemonType: card[0].stage,
@@ -54,7 +55,9 @@ export function formatCard (card, language) {
                         lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
                         isFallbackLanguage: card[2] ?? false,
                         language: language,
-                        legal: card[0].legal
+                        legal: card[0].legal,
+                        evolvesFrom: card[0].evolveFrom ?? null,
+
                     }
                 }
             default:
@@ -75,7 +78,10 @@ export function formatCard (card, language) {
                     lowTPPrice: card[0].pricing.tcgplayer?.normal?.lowPrice ?? card[0].pricing.tcgplayer?.holofoil?.lowPrice ?? card[0].pricing.tcgplayer?.["reverse-holofoil"]?.lowPrice ?? NaN,
                     isFallbackLanguage: card[2] ?? false,
                     language: language,
-                    legal: card[0].legal
+                    legal: card[0].legal,
+                    evolvesFrom: card[0].evolveFrom ?? null,
+                    trainerType: card[0].trainerType ?? null,
+                    energyType: card[0].energyType ?? null
                 }
         }
     }

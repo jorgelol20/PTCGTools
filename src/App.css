@@ -34,7 +34,7 @@ header {
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: 0;
+  top: -4%;
   background-color: var(--color-fondo);
   border-bottom: 1px solid var(--color-borde);
   height: 10vh;
@@ -44,6 +44,10 @@ header {
   align-content: center;
   justify-content: center;
   z-index: 200;
+
+  .language-buttons {
+    display: flex;
+  }
 
   .header-basic {
     display: flex;
@@ -122,7 +126,7 @@ header {
     padding-right: 1em;
     font-size: 1em;
     font-weight: bold;
-    
+
   }
 
   .nav-link:hover {
@@ -146,8 +150,28 @@ header {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1500px) {
   #mainTitle {
     margin-bottom: 15%;
+  }
+  .header-basic {
+    width: 100%;
+
+    .language-buttons {
+      align-items: end;
+      justify-content: end;
+      width: 100%;
+      display: flex;
+      margin-right: 5%;
+    }
+
+    h1 {
+      position: absolute;
+      top: 0;
+      margin-right: 55%;
+      margin-top: 25px;
+      margin-left: 5em;
+      font-size: 7cqw !important;
+    }
   }
 }

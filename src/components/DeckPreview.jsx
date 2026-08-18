@@ -10,7 +10,7 @@ import Valid_Icon from './../assets/img/valid.svg';
 import { useEffect } from "react";
 import { useState } from "react";
 
-const DeckPreview = ({ deckInfo }) => {
+const DeckPreview = ({ deckInfo,setIsMenuOpen }) => {
     const { contextDeck, setContextDeck, deleteDeck } = useContext(cardsContext);
     const [cardsQuantity, setCardsQuantity] = useState();
     const [active, setActive] = useState(false);
@@ -40,6 +40,7 @@ const DeckPreview = ({ deckInfo }) => {
             >
                 <div className="deck-preview"
                     onClick={() => {
+                        setIsMenuOpen(false)
                         setContextDeck(deckInfo)
                     }}
 
