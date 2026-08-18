@@ -1,3 +1,7 @@
+import expansionDictionary from '../assets/db/expansionSet.json';
+const sets = Object.entries(expansionDictionary);
+const invalidExpandedSets = sets.slice(0, 75).map(key => key[1]);
+
 const checkGLC = (id, name) => {
     if (name.includes(" ex")) return false;
     if (name.includes(" V")) return false;
@@ -6,6 +10,7 @@ const checkGLC = (id, name) => {
     if (name.includes("VMAX")) return false;
     if (name.includes(" GX")) return false;
     if (name.includes("BREAK")) return false;
+    if(invalidExpandedSets.includes(id.split('-')[0])) return false;
     switch (id) {
         case 'xy4-99':
         case 'xy4-118':
