@@ -21,22 +21,32 @@ import { checkFormat } from "../utils/checkFormat";
 
 const selectImage = (card) => {
     switch (card) {
+        case "Energía Lucha":
         case "Fight Energy":
+        case "Fighting Energy":
             return Fight_Energy;
+        case "Energía Oscura":
         case "Darkness Energy":
             return Dark_Energy;
+        case "Energía Fuego":
         case "Fire Energy":
             return Fire_Energy;
+        case "Energía Planta":
         case "Grass Energy":
             return Grass_Energy;
+        case "Energía Rayo":
         case "Lightning Energy":
             return Light_Energy;
+        case "Energía Psíquica":
         case "Psychic Energy":
             return Psychic_Energy;
+        case "Energía Agua":
         case "Water Energy":
             return Water_Energy;
+        case "Energía Metálica":
         case "Metal Energy":
             return Metal_Energy;
+        case "Energía Hada":
         case "Fairy Energy":
             return Fairy_Energy;
         default:
@@ -54,10 +64,10 @@ const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
                 <div className="card-main">
                     <div onClick={() => {
                         setActualCard(cardInfo);
-                    }} className={`${checkFormat(cardInfo.legal)} card`} key={cardInfo.cardId}>
+                    }} className={`${checkFormat(cardInfo.legal, cardInfo?.cardId, cardInfo?.name)} card`} key={cardInfo.cardId}>
                         <img className="languaje-icon" src={cardInfo.language == 'es' ? SpainFlag : USAFlag} alt="" />
                         <div className="head">
-                            <label htmlFor="card" className="quantity">{cardInfo.quantity}</label>
+                            <label htmlFor="card" className={cardInfo.quantity > 4 ? "quantity ilegal-quantity":"quantity"}>{cardInfo.quantity}</label>
                         </div>
                         <div className="body">
                             <picture id="image">
@@ -97,7 +107,7 @@ const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
     } else {
         return (<Fragment key={cardInfo.name}>
             <div className="card-main">
-                <div className={`${checkFormat(cardInfo.legal)} card`} key={cardInfo.name} onClick={() => {
+                <div className={`${checkFormat(cardInfo.legal, cardInfo?.cardId)} card`} key={cardInfo.name} onClick={() => {
                     if (cardInfo.expansion) {
                         setActualCard(cardInfo);
                     }

@@ -265,7 +265,7 @@
     }
 
     .prices {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         gap: 0.25rem;
     }
@@ -275,7 +275,7 @@
     }
 
     .prices h2 {
-        font-size: 0.9rem;
+        font-size: 1.5rem;
     }
 
     .card-links {
@@ -315,9 +315,11 @@
     #cardImage > img:not(.languaje-icon) {
         width: min(55vw, 190px);
     }
-
+    .prices{
+        width: 100%;
+    }
     .prices h2 {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
     .price-icon {

@@ -16,10 +16,14 @@ import { NavLink, useLocation } from "react-router-dom";
 import { errorContext } from "./../../context/ErrorProvider";
 import ErrorAlert from "./../structure/ErrorAlert.jsx";
 import Advice from "../structure/Advice.jsx";
+import { checkDeckFormat } from "../../utils/checkDeckFormat.js";
+import NotValid_Icon from './../../assets/img/notValid.svg';
+import Valid_Icon from './../../assets/img/valid.svg';
 
 const Decks = () => {
-    const { contextDeck, setContextDeck, saveDeck, setActualCard } = useContext(cardsContext)
+    const { contextDeck, setContextDeck, saveDeck, setActualCard, sortDeck } = useContext(cardsContext)
     const [deckName, setDeckName] = useState(contextDeck?.name ?? '')
+    const [deckFormat, setDeckFormat] = useState([false, false, false])
     const { deckAPI, loading } = usePokeAPI();
     const [actualDeckName, setActualDeckName] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +42,7 @@ const Decks = () => {
     useEffect(() => {
         if (contextDeck !== null) {
             setDeckName(contextDeck.name)
+            setDeckFormat(contextDeck.format)
         }
     }, [contextDeck])
 
@@ -113,6 +118,7 @@ const Decks = () => {
             setDeckAvgPrice(0);
             setDeckLowPrice(0);
             changePriceDolar(0, 0);
+            setDeckFormat([false, false, false])
             return;
         }
 
@@ -152,6 +158,8 @@ const Decks = () => {
         }, 0);
 
         // Guardamos los valores finales redondeados
+        const newDeckFormats = checkDeckFormat(contextDeck.cards)
+        setDeckFormat(newDeckFormats)
         setCardQuantity(totalQuantity);
         setDeckAvgPrice(Number(totalAvgPrice.toFixed(2)));
         setDeckLowPrice(Number(totalMinPrice.toFixed(2)));
@@ -161,23 +169,20 @@ const Decks = () => {
 
     }, [contextDeck]);
 
-
-
-
-
     return (
         <Fragment>
             <div className="decks">
-                {/* Solo visible a 1000px de resolución (width) mediante CSS */}
+                {/* Solo visible a 1500px de resolución (width) mediante CSS */}
                 <button
-                    className="hamburger-btn"
+                    className={isMenuOpen?"hamburger-btn opened":"hamburger-btn"}
                     aria-label="Abrir lista de decks"
                     aria-expanded={isMenuOpen}
                     onClick={() => setIsMenuOpen(prev => !prev)}
                 >
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span id="span-1"></span>
+                    <span id="span-2"></span>
+                    <span id="span-3"></span>
+                    <span id="span-4"></span>
                 </button>
 
                 {isMenuOpen && (
@@ -188,7 +193,7 @@ const Decks = () => {
                 )}
 
                 <div className={`decks-list ${isMenuOpen ? 'open' : ''}`}>
-                    <DecksList />
+                    <DecksList setIsMenuOpen={setIsMenuOpen}/>
                 </div>
                 <div className="deck-cards">
                     <div className="error">
@@ -207,6 +212,9 @@ const Decks = () => {
                                 <div className="deck-inputs">
                                     <input className="deck-name" type="text" value={deckName} onChange={(e) => setDeckName(e.target.value)} />
                                     <div className="deck-buttons">
+                                        <button className="button" onClick={sortDeck}>
+                                            {t('sortDeck')}
+                                        </button>
                                         <button className="button"
                                             onClick={() => {
                                                 const newInfo = {
@@ -225,15 +233,24 @@ const Decks = () => {
                                     </div>
                                 </div>
                                 <div className="deck-info">
-
                                     <h1 id='title'> {t('cardListTitle')} (Total: <label style={cardQuantity != 60 ? { color: 'red' } : { color: 'green' }}> {cardQuantity} </label>)</h1>
                                     <h1 id='title'>{t('avgPriceText')}: {deckAvgPrice}€ | {Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', }).format(dolarsDeckAvgPrice)}</h1>
                                     <h1 id='title'>{t('lowPriceText')}: {deckLowPrice}€ | {Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', }).format(dolarsDeckLowPrice)}</h1>
+                                    {
+                                        deckFormat ?
+                                            <div className="deck-format">
+                                                <p>{t('standard')}<img src={deckFormat[0] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                                <p>{t('expanded')}<img src={deckFormat[1] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                                <p>GLC<img src={deckFormat[2] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                            </div>
+                                            : <></>
+                                    }
                                 </div>
                                 <div className='cardSearch'>
                                     <Search />
                                 </div>
                                 <div className='cards'>
+
                                     {
                                         contextDeck.cards.map((card, index) => {
                                             if (card !== undefined) {
@@ -252,7 +269,7 @@ const Decks = () => {
                             </div>
                             : ''
                     }
-                    
+
 
                 </div>
 

@@ -7,6 +7,7 @@ import TPAvg from './../assets/img/TP-Avg.webp';
 import TPLow from './../assets/img/TP-Low.webp';
 import SpainFlag from './../assets/img/Flag-Spain.png';
 import USAFlag from './../assets/img/Flag-USA.png';
+import { checkFormat } from "../utils/checkFormat";
 
 const CardInfo = ({ cardInfo, setNewCardInfo }) => {
     return (
@@ -27,6 +28,7 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                                 {
                                     cardInfo.image ?
                                         <img
+                                            className={checkFormat(cardInfo.legal, cardInfo?.cardId, cardInfo?.name)}
                                             src={cardInfo.image.replace('low', 'high')}
                                             onError={(e) => {
                                                 e.preventDefault();
@@ -36,6 +38,7 @@ const CardInfo = ({ cardInfo, setNewCardInfo }) => {
                                             alt={cardInfo.name}
                                         />
                                         : <img
+                                            className={checkFormat(cardInfo.legal, cardInfo?.cardId, cardInfo?.name)}
                                             src={selectImage(cardInfo.name)}
                                             alt={cardInfo.name} />
                                 }

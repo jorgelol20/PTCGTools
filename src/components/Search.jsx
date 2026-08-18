@@ -108,8 +108,6 @@ const Search = () => {
             default:
                 return !invalidExpandedSets.includes(id.split('-')[0])
         }
-        
-
     }
 
     const filterLegal = (cards) => {
@@ -287,6 +285,9 @@ const Search = () => {
                                     <h3>{t('expanded')}<span className="color-e"></span></h3>
                                 </div>
                                 <div>
+                                    <h3>GLC<span className="color-g"></span></h3>
+                                </div>
+                                <div>
                                     <h3>Ilegal<span className="color-i"></span></h3>
                                 </div>
                                 <div>
@@ -300,7 +301,9 @@ const Search = () => {
 
                 <div className="filters">
                 </div>
+                
                 <div className="search-results" style={{ display: `${(allCards.length === 0) ? "none" : ""}` }}>
+                    <h1 htmlFor="">Resultados</h1>
                     {loading && <Loading key={"loadgin-key"} />}
 
                     {!loading && allCards.length === 0 && searchText && (

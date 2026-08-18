@@ -3,8 +3,95 @@ import { useTranslation } from "react-i18next";
 import usePokeAPI from "../hooks/usePokeAPI";
 import { errorContext } from "./ErrorProvider.jsx";
 import { parseDeckList } from "../utils/parseDeckList";
+import { checkDeckFormat } from "../utils/checkDeckFormat.js";
 
 const cardsContext = createContext();
+
+
+/*==========FUNCIONES AUXILIARES=========== */
+const getTrainerSubOrder = (card) => {
+    switch (card.trainerType) {
+        case 'Partidario':
+        case 'Supporter':
+            return 0; // Entrenador
+        case 'Objeto':
+        case 'Item':
+            return 1;      // Item
+        case 'Herramienta':
+        case 'Tool':
+            return 1;      // Herramienta Pokémon, la agrupo con Item
+        case 'Estadio':
+        case 'Stadium':
+            return 2;   // Estadio
+        default: return 3;          // cualquier otro caso, al final
+    }
+};
+
+const getEnergySubOrder = (card) => {
+    const subtypes = card.subtypes || [];
+    return subtypes.includes('Special') || subtypes.includes('Especial') ? 0 : 1; // especiales primero, luego básicas
+};
+
+const sortPokemonCards = (cards) => {
+    const byName = new Map(cards.map(c => [c.name, c]));
+    const childrenMap = new Map();
+    const roots = [];
+
+    cards.forEach(card => {
+        const parentName = card.evolvesFrom ?? null;
+        const hasParentInDeck = parentName !== null && byName.has(parentName);
+
+        if (hasParentInDeck) {
+            if (!childrenMap.has(parentName)) childrenMap.set(parentName, []);
+            childrenMap.get(parentName).push(card);
+        } else {
+            roots.push(card);
+        }
+    });
+
+    roots.sort((a, b) => a.name.localeCompare(b.name));
+    childrenMap.forEach(list => list.sort((a, b) => a.name.localeCompare(b.name)));
+
+    const result = [];
+    const visit = (card) => {
+        result.push(card);
+        (childrenMap.get(card.name) || []).forEach(visit);
+    };
+    roots.forEach(visit);
+    return result;
+};
+
+const sortTrainerCards = (cards) => {
+    return [...cards].sort((a, b) => {
+        const diff = getTrainerSubOrder(a) - getTrainerSubOrder(b);
+        return diff !== 0 ? diff : a.name.localeCompare(b.name);
+    });
+};
+
+const sortEnergyCards = (cards) => {
+    return [...cards].sort((a, b) => {
+        const diff = getEnergySubOrder(a) - getEnergySubOrder(b);
+        return diff !== 0 ? diff : a.name.localeCompare(b.name);
+    });
+};
+
+const sortDeckCards = (cards = []) => {
+    const isPokemon = (c) => c.category === 'Pokémon' || c.category === 'Pokemon';
+    const isTrainer = (c) => c.category === 'Trainer' || c.category === 'Entrenador';
+    const isEnergy = (c) => c.category === 'Energy' || c.category === 'Energía';
+
+    const pokemonCards = cards.filter(isPokemon);
+    const trainerCards = cards.filter(isTrainer);
+    const energyCards = cards.filter(isEnergy);
+    const others = cards.filter(c => !isPokemon(c) && !isTrainer(c) && !isEnergy(c));
+
+    return [
+        ...sortPokemonCards(pokemonCards),
+        ...sortTrainerCards(trainerCards),
+        ...sortEnergyCards(energyCards),
+        ...others
+    ];
+};
 
 
 const CardProvider = (props) => {
@@ -57,14 +144,18 @@ const CardProvider = (props) => {
     }
 
     const saveDeck = async (deckToSave) => {
+        const format = checkDeckFormat(deckToSave.cards)
         const currentDecks = userDecks.map((deck) => {
             if (deck.id === deckToSave.id) {
-                deck = deckToSave;
+                deck = {
+                    ...deckToSave,
+                    format: format
+                };
             }
             return deck
         })
 
-        const updatedDecks = [...currentDecks];
+        const updatedDecks = [...currentDecks]
         setUserDecks(updatedDecks);
         await saveUserDecks(updatedDecks);
     }
@@ -96,6 +187,7 @@ const CardProvider = (props) => {
             id: newId,
             name: t('newDeck') + newId,
             cards: cards,
+            format: [false, false, false]
         };
         const updatedDecks = [...currentDecks, newDeckFormatted];
         setUserDecks(updatedDecks);
@@ -117,6 +209,16 @@ const CardProvider = (props) => {
         }
     }
 
+    const sortDeck = () => {
+        setDeck(prevDeck => {
+            if (!prevDeck || !prevDeck.cards) return prevDeck;
+            return {
+                ...prevDeck,
+                cards: sortDeckCards(prevDeck.cards)
+            };
+        });
+    }
+
     useEffect(() => {
         if (deckAPI !== undefined && deckAPI.cards !== undefined && deckAPI.cards.length > 0) {
             if (deckAPI.cards.includes(undefined)) {
@@ -129,19 +231,19 @@ const CardProvider = (props) => {
             const newId = currentDecks.length > 0
                 ? Math.max(...currentDecks.map(d => d.id || 0)) + 1
                 : 1;
-
+            const cards = deckAPI.cards.filter((card) => card !== undefined);
+            const format = checkDeckFormat(cards);
             const importedDeck = {
                 id: newId,
                 name: t('importedDeck') + newId,
-                cards: deckAPI.cards.filter((card) => card !== undefined),
-                format: "unknown"
+                cards: cards,
+                format: format
             };
 
             const updatedDecks = [...currentDecks, importedDeck];
             setUserDecks(updatedDecks);
             saveUserDecks(updatedDecks);
             setContextDeck(importedDeck);
-
             setClipboardCards(undefined);
         }
     }, [deckAPI])
@@ -165,6 +267,7 @@ const CardProvider = (props) => {
         setActualCard,
         importDeckFromClipboard,
         setContextNumberOfHands,
+        sortDeck
     }
     return (
         <Fragment>

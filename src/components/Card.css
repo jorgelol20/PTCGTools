@@ -1,7 +1,6 @@
 .container-cards {
     display: flex;
-    flex-wrap: nowrap;
-    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
     gap: 12px;
     padding: 12px;
     background-color: var(--color-fondo);
@@ -11,18 +10,21 @@
 #image {
     position: relative;
 }
-.languaje-icon{
+
+.languaje-icon {
     width: 25px;
-    position:absolute;
+    position: absolute;
     z-index: 100;
     right: 0;
     bottom: 0;
 }
+
 .card-main {
     display: flex;
     flex-wrap: nowrap;
     margin: 0.5em;
-    width: 12cqw;
+    width: 125px;
+    /* base = móvil */
     position: relative;
 }
 
@@ -33,21 +35,10 @@
     padding: 8px;
     display: flex;
     flex-direction: column;
-    border: 5px solid var(--color-principal);
+    border: 5px solid;
     margin: 1%;
-    width: 10cqw
-}
-.standard{
-    border-color:  green;
-}
-.expanded{
-    border-color: orange;
-}
-.ilegal{
-    border-color: red;
-}
-.other{
-    border-color: grey;
+    width: 100%;
+    /* base = móvil */
 }
 
 .card:hover {
@@ -63,27 +54,25 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    /* min-height: 10%; */
 }
 
 .head .title {
     margin-right: 10%;
-    font-size: 1.3rem;
+    font-size: 0.5rem;
+    /* base = móvil */
     font-weight: bold;
     text-align: left;
     padding-left: 5%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-wrap: wrap;
-
 }
 
 .head .quantity {
     background-color: var(--color-principal);
-    width: 2cqw;
-    height: 2cqw;
-    font-size: calc(100% + 10px);
+    width: 5cqw;
+    height: 5cqw;
+    font-size: 1em;
     align-items: center;
     align-content: center;
     position: absolute;
@@ -92,7 +81,13 @@
     border-radius: 100%;
     text-align: center;
     z-index: 10;
+}
 
+.quantity-buttons {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    width: 20%;
 }
 
 .body img {
@@ -100,66 +95,91 @@
     position: relative;
 }
 
-/* Ajustes para PC (Pantallas mayores a 768px) */
-@media (min-width: 1000px) {
+.ilegal-quantity {
+    background-color: red !important;
+}
+
+/* ---------- Tablet (600px - 767px) ---------- */
+@media (min-width: 100px) {
     .container-cards {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 20px;
-        padding: 40px;
+        gap: 16px;
+        padding: 20px;
     }
 
-    .cardInfo h3 {
-        font-size: 1.2rem;
+    .card-main {
+        width: 160px;
     }
 
-    .cardInfo {
-        min-height: 5vh;
+    .head .title {
+        font-size: 0.8rem;
+    }
+
+    .head .quantity {
+        width: 4cqw;
+        height: 4cqw;
     }
 }
 
-@media (max-width: 1000px) {
-    .card-main {
-        display: grid;
-        margin: 0.5em;
-        width: 125px;
-
+/* ---------- Tablet grande / laptop pequeño (768px - 999px) ---------- */
+@media (min-width: 768px) {
+    .container-cards {
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 24px;
     }
-    .quantity-buttons{
-        width: 100px;
-        display: flex;
+
+    .card-main {
+        width: 280px;
+    }
+
+    .head .title {
+        font-size: 1rem;
     }
 
     .head .quantity {
         width: 3cqw;
         height: 3cqw;
-        top: -3%;
-        right: -5%;
-    }
-
-    .head .title {
-        font-size: 0.5rem;
-    }
-
-}
-
-@media (max-width: 1000px) {
-    .card {
-        width: 100%;
-    }
-
-    .head .quantity {
-        width: 5cqw;
-        height: 5cqw;
-        top: -3%;
-        right: -5%;
-        font-size: 1em;
-    }
-
-    .head .title {
-        font-size: 0.5rem;
     }
 
     .cardInfo h3 {
         font-size: 1cqw;
+    }
+}
+
+/* ---------- Desktop (1200px en adelante) ---------- */
+@media (min-width: 1200px) {
+    .container-cards {
+        gap: 20px;
+        padding: 40px;
+    }
+
+    .quantity-buttons{
+        width: 20%;
+    }
+    .card-main {
+        width: 15cqw;
+    }
+
+    .card {
+        min-width: 70%;
+    }
+
+    .head .title {
+        font-size: 1.3rem;
+        text-wrap: wrap;
+    }
+
+    .head .quantity {
+        width: 2cqw;
+        height: 2cqw;
+        font-size: calc(100% + 10px);
+    }
+
+    .cardInfo {
+        min-height: 5vh;
+    }
+
+    .cardInfo h3 {
+        font-size: 1.2rem;
     }
 }

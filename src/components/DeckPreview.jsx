@@ -5,10 +5,12 @@ import { useContext } from "react";
 import { cardsContext } from "../context/CardProvider";
 import { useTranslation } from "react-i18next";
 import Delete_Icon from './../assets/img/delete.svg';
+import NotValid_Icon from './../assets/img/notValid.svg';
+import Valid_Icon from './../assets/img/valid.svg';
 import { useEffect } from "react";
 import { useState } from "react";
 
-const DeckPreview = ({ deckInfo }) => {
+const DeckPreview = ({ deckInfo,setIsMenuOpen }) => {
     const { contextDeck, setContextDeck, deleteDeck } = useContext(cardsContext);
     const [cardsQuantity, setCardsQuantity] = useState();
     const [active, setActive] = useState(false);
@@ -38,14 +40,24 @@ const DeckPreview = ({ deckInfo }) => {
             >
                 <div className="deck-preview"
                     onClick={() => {
+                        setIsMenuOpen(false)
                         setContextDeck(deckInfo)
                     }}
 
                 >
                     <div className="deck-preview-info">
-                        <div >
+                        <div className="deck-info">
                             <h1>{deckInfo.name}</h1>
                             <p>{t("cardsOnDeck")} {cardsQuantity}</p>
+                            {
+                                deckInfo.format ?
+                                    <div className="deck-format">
+                                        <p>S <img src={deckInfo.format[0] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                        <p>E <img src={deckInfo.format[1] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                        <p>GLC <img src={deckInfo.format[2] ? Valid_Icon : NotValid_Icon} alt="" /></p>
+                                    </div> :
+                                    <></>
+                            }
                         </div>
 
                     </div>
