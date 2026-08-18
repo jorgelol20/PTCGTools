@@ -15,7 +15,7 @@ import ErrorAlert from "./structure/ErrorAlert";
 
 
 
-const DecksList = () => {
+const DecksList = ({setIsMenuOpen}) => {
     const [decksList, setDecksList] = useState([]);
     const { userDecks, addNewDeck, importDeckFromClipboard } = useContext(cardsContext);
     const { t, i18n } = useTranslation();
@@ -34,7 +34,7 @@ const DecksList = () => {
                 <div className="deck-list">
                     {
                         decksList !== undefined && decksList.length > 0 ? decksList?.map((deck) => {
-                            return <DeckPreview deckInfo={deck} key={deck.id} />
+                            return <DeckPreview setIsMenuOpen={setIsMenuOpen} deckInfo={deck} key={deck.id} />
                         }
                         )
                             : ''

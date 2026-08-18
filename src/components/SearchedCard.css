@@ -1,6 +1,5 @@
 .result-card {
     width: 10em;
-    min-width: 12em;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -39,4 +38,22 @@
         }
 
     }
+}
+@media (max-width: 500px) {
+    .result-card{
+
+        width: 6em;
+        min-width: 1em;
+        margin: 0;
+        h1 {
+            margin: 0;
+            font-size: 0.7em;
+        }
+
+        img {
+            max-width: 6em;
+
+        }
+    }
+
 }

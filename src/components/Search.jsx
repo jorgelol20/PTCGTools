@@ -301,7 +301,9 @@ const Search = () => {
 
                 <div className="filters">
                 </div>
+                
                 <div className="search-results" style={{ display: `${(allCards.length === 0) ? "none" : ""}` }}>
+                    <h1 htmlFor="">Resultados</h1>
                     {loading && <Loading key={"loadgin-key"} />}
 
                     {!loading && allCards.length === 0 && searchText && (

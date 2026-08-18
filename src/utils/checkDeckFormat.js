@@ -2,11 +2,53 @@ import expansionDictionary from '../assets/db/expansionSet.json';
 const sets = Object.entries(expansionDictionary);
 const invalidExpandedSets = sets.slice(0, 75).map(key => key[1]);
 
-const checkGLCCards = (deck) => {
+const checkEnergy = (card) => {
+        switch (card) {
+            case "Energía Lucha":
+            case "Fight Energy":
+            case "Fighting Energy":
+            case "Energía Oscura":
+            case "Darkness Energy":
+            case "Energía Fuego":
+            case "Fire Energy":
+            case "Energía Planta":
+            case "Grass Energy":
+            case "Energía Rayo":
+            case "Lightning Energy":
+            case "Energía Psíquica":
+            case "Psychic Energy":
+            case "Energía Agua":
+            case "Water Energy":
+            case "Energía Metálica":
+            case "Metal Energy":
+            case "Energía Hada":
+            case "Fairy Energy":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+const checkCardsQuantity = (deck) => {
+    let isValidDeck = true;
+    deck.map((card) => {
+        if (card.cardId != null && !checkEnergy(card.name)) {
+            if (card.quantity > 4) {
+                isValidDeck = false;
+            }
+        }
+    });
+    return isValidDeck;
+}
+
+
+
+
+const checkGLCCardsQuantity = (deck) => {
     let isGlcDeck = true;
     deck.map((card) => {
-        if(card.cardId != null){
-            if(card.quantity > 1){
+        if (card.cardId != null && !checkEnergy(card.name)) {
+            if (card.quantity > 1) {
                 isGlcDeck = false;
             }
         }
@@ -14,7 +56,7 @@ const checkGLCCards = (deck) => {
     return isGlcDeck;
 }
 const glcBannedCards = (id) => {
-    if(id == undefined) return true
+    if (id == undefined) return true
     switch (id) {
         case 'xy4-99':
         case 'xy4-118':
@@ -48,8 +90,8 @@ export function checkDeckFormat(deck) {
     const cardsNum = deck.reduce((cont, card) => cont + (Number(card?.quantity) || 0),
         0);
     if (cardsNum !== 60) return [false, false, false]
-    let isStandard = true;
-    let isExpanded = true;
+    let isStandard = checkCardsQuantity(deck);
+    let isExpanded = checkCardsQuantity(deck);
     let isGlc = true;
     deck.map((card) => {
         if (card?.legal != null) {
@@ -64,6 +106,6 @@ export function checkDeckFormat(deck) {
             }
         }
     });
-    isGlc = checkGLCCards(deck);
+    isGlc = checkGLCCardsQuantity(deck);
     return [isStandard, isExpanded, isGlc]
 }
