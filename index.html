@@ -5,85 +5,175 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Pokémon TCG Tools | Mulligan Calculator | Probability Tool | Deckbuilder | Collections</title>
+  <title>Pokémon TCG Mulligan Calculator & Draw Odds Simulator | Deckbuilder</title>
   <meta name="description"
-    content="Calcula tus posibilidades de mulligan para Pokémon TCG con precisión. Soporte para TCG Live y Limitless. Herramienta gratuita para jugadores amantes del Pokémon TCG." />
+    content="Free Pokémon TCG mulligan calculator and draw odds simulator using real Monte Carlo simulation. Build decks with our multi-filter deckbuilder. Import from TCG Live & Limitless." />
 
+  <link rel="canonical" href="https://ptcg-tools.vercel.app/" />
+
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="keywords"
+    content="pokemon mulligan calculator, tcg odds calculator, pokemon tcg draw calculator, pokemon deckbuilder, pokemon tcg live, limitless tcg, monte carlo simulation" />
+  <meta name="author" content="Jorge Colomer Albertos" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ptcg-tools.vercel.app/" />
-  <meta property="og:title" content="Pokémon TCG Mulligan Simulator" />
+  <meta property="og:site_name" content="PTCGTools" />
+  <meta property="og:title" content="Pokémon TCG Mulligan Calculator & Draw Odds Simulator" />
   <meta property="og:description"
-    content="Brute-force simulation for accurate mulligan odds. See how your deck actually performs." />
-  <meta property="og:image" content="/locales/mulligan-calculator-icon.png" />
+    content="Brute-force Monte Carlo simulation for accurate Pokémon TCG mulligan and draw odds. Plus a free multi-filter deckbuilder. See how your deck actually performs." />
+  <meta property="og:image" content="https://ptcg-tools.vercel.app/locales/mulligan-calculator-icon.png" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pokémon TCG Mulligan Calculator & Draw Odds Simulator" />
+  <meta name="twitter:description"
+    content="Free Monte Carlo mulligan & draw odds simulator plus a multi-filter Pokémon TCG deckbuilder." />
+  <meta name="twitter:image" content="https://ptcg-tools.vercel.app/locales/mulligan-calculator-icon.png" />
 
   <meta name="google-site-verification" content="uGw0m67vhVWVM5rrpqiqs_WZaJPE1_DPLj9wDX8RRHg" />
   <link rel="icon" type="image/png" href="/locales/mulligan-calculator-icon.png" />
 
-  <!-- SEO Improvements -->
-  <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="Pokémon TCG, mulligan calculator, probability tool, deckbuilder, collections, TCG Live, Limitless" />
-  <meta name="author" content="Tu Nombre" />
-
-  <!-- Structured Data for Search Engines -->
+  <!-- Structured Data: SoftwareApplication (correct @context + valid @type) -->
   <script type="application/ld+json">
-    {
-      "@context": "https://ptcg-tools.vercel.app/",
-      "@type": "WebPage",
-      "name": "Pokémon TCG Tools",
-      "url": "https://ptcg-tools.vercel.app/",
-      "description": "Calcula tus posibilidades de mulligan para Pokémon TCG con precisión. Soporte para TCG Live y Limitless. Herramienta gratuita para jugadores amantes del Pokémon TCG.",
-      "image": "/locales/mulligan-calculator-icon.png",
-      "publisher": {
-        "@type": "JCA",
-        "name": "Jorge Colomer Albertos",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "/locales/mulligan-calculator-icon.png"
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PTCGTools",
+    "url": "https://ptcg-tools.vercel.app/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any (Web-based)",
+    "description": "Free Pokémon TCG mulligan calculator and draw odds simulator using Monte Carlo simulation, plus a multi-filter deckbuilder. Supports TCG Live and Limitless deck import.",
+    "image": "https://ptcg-tools.vercel.app/locales/mulligan-calculator-icon.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Pokémon TCG mulligan calculator",
+      "TCG odds calculator",
+      "Pokémon TCG draw probability calculator",
+      "Pokémon deckbuilder with multi-filter search",
+      "TCG Live and Limitless import"
+    ],
+    "publisher": {
+      "@type": "Person",
+      "name": "Jorge Colomer Albertos"
+    },
+    "datePublished": "2026-08-17",
+    "dateModified": "2026-08-17"
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage targeting core search queries -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Pokémon TCG mulligan calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Pokémon TCG mulligan calculator estimates how often you'll draw an opening hand with no Basic Pokémon, forcing a mulligan. PTCGTools uses a brute-force Monte Carlo simulation on your actual deck list rather than simplified math, for a more realistic result."
         }
       },
-      "datePublished": "2026-08-17",
-      "dateModified": "2026-08-17"
-    }
+      {
+        "@type": "Question",
+        "name": "How does the TCG odds calculator work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The TCG odds calculator runs thousands of simulated shuffles and draws against your decklist to calculate real-world probabilities, such as your mulligan rate or the odds of drawing a specific card by a given turn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I calculate Pokémon TCG draw odds for a specific card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Pokémon TCG draw calculator simulates opening hands and subsequent draws from your decklist, so you can see the probability of drawing a specific card, a Basic Pokémon, or a full combo by a given turn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Pokémon deckbuilder free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the Pokémon deckbuilder is free. It includes a multi-filter card search and supports instant import and export in TCG Live and Limitless formats."
+        }
+      }
+    ]
+  }
   </script>
 </head>
 
 <body>
   <div id="root">
-    <div style="padding: 20px; font-family: sans-serif;">
-      <section>
-        <h1>PTCGTools. Multitool application for Pokémon TCG players.</h1>
-        <h2>Our own deckbuild with multifilter searcher.</h2>
-        <h2>Pokémon TCG Mulligan & Opening Hand Simulator</h1>
+    <!-- Pre-rendered fallback content for SEO/crawlers before the React app hydrates -->
+    <main style="padding: 20px; font-family: sans-serif;">
+      <header>
+        <h1>Pokémon TCG Mulligan Calculator &amp; Draw Odds Simulator</h1>
+        <p>
+          Most calculators use simple math. PTCGTools uses a <strong>brute-force Monte Carlo
+          simulation</strong>, running thousands of randomized opening hands against your actual
+          decklist to give you a real-world Pokémon TCG mulligan calculator and draw odds calculator
+          in one tool.
+        </p>
+      </header>
+
+      <article>
+        <section>
+          <h2>Pokémon TCG Draw Calculator</h2>
           <p>
-            Most calculators use simple math. We use <strong>brute-force Monte Carlo simulations</strong>.
-            By simulating thousands of random opening hands from your actual deck list, we provide a
-            real-world look at your deck's consistency and mulligan probability.
+            Simulate thousands of shuffles to see accurate Basic Pokémon draw rates and the true
+            probability of opening the hand you need, turn by turn.
           </p>
           <ul>
-            <li>Real-world shuffle simulation (Monte Carlo method).</li>
-            <li>Instant import from TCG Live and Limitless formats.</li>
-            <li>Accurate Basic Pokémon draw rates.</li>
+            <li>Real-world shuffle simulation (Monte Carlo method)</li>
+            <li>Instant import from TCG Live and Limitless formats</li>
+            <li>Accurate Basic Pokémon draw rates and mulligan odds</li>
           </ul>
-      </section>
-      <section>
-        <h1>PTCGTools. Aplicación multiherramienta para jugadores de Pokémon TCG</h1>
-        <h2>Creador de mazos propio con buscador incorporado.</h2>
-        <h2>Calculadora y Simulador de Mulligan para Pokémon TCG</h2>
-        <p>
-          No te quedes solo con la teoría. Nuestro simulador realiza <strong>miles de pruebas de "fuerza
-            bruta"</strong>
-          generando manos aleatorias reales para decirte cuántas veces tendrás que hacer mulligan con tu mazo de
-          <strong>Pokémon TCG Live</strong> o <strong>Limitless</strong>.
-        </p>
-        <ul>
-          <li>Real-world shuffle simulation (Monte Carlo method).</li>
-          <li>Instant import from TCG Live and Limitless formats.</li>
-          <li>Accurate Basic Pokémon draw rates.</li>
-        </ul>
-      </section>
-    </div>
+        </section>
+
+        <section>
+          <h2>Pokémon Deckbuilder</h2>
+          <p>
+            Build and refine your decklist with our own deckbuilder, featuring a multi-filter card
+            searcher to find exactly the card you need.
+          </p>
+        </section>
+      </article>
+
+      <article lang="es">
+        <section>
+          <h2>Calculadora de Mulligan y Probabilidades para Pokémon TCG</h2>
+          <p>
+            No te quedes solo con la teoría. Nuestro simulador realiza <strong>miles de pruebas de
+            "fuerza bruta"</strong> generando manos aleatorias reales para decirte cuántas veces
+            tendrás que hacer mulligan con tu mazo de <strong>Pokémon TCG Live</strong> o
+            <strong>Limitless</strong>.
+          </p>
+          <ul>
+            <li>Simulación de barajado real (método Monte Carlo)</li>
+            <li>Importación instantánea desde TCG Live y Limitless</li>
+            <li>Tasas de robo de Pokémon Básico precisas</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Creador de Mazos Pokémon TCG</h2>
+          <p>
+            Nuestro propio creador de mazos incluye un buscador con múltiples filtros para encontrar
+            cualquier carta al instante.
+          </p>
+        </section>
+      </article>
+    </main>
   </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
