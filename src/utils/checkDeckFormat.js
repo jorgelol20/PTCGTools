@@ -1,7 +1,6 @@
 import expansionDictionary from '../assets/db/expansionSet.json';
 const sets = Object.entries(expansionDictionary);
 const invalidExpandedSets = sets.slice(0, 75).map(key => key[1]);
-
 const checkEnergy = (card) => {
         switch (card) {
             case "Energía Lucha":
