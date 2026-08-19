@@ -12,18 +12,22 @@ import Advice from "./structure/Advice";
 import { useLocation } from "react-router-dom";
 import { errorContext } from "../context/ErrorProvider";
 import ErrorAlert from "./structure/ErrorAlert";
+import Form from './Form.jsx';
 
 
 
-const DecksList = ({setIsMenuOpen}) => {
+const DecksList = ({ setIsMenuOpen }) => {
     const [decksList, setDecksList] = useState([]);
+    const [isMobile, setIsMobile] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
     const { userDecks, addNewDeck, importDeckFromClipboard } = useContext(cardsContext);
     const { t, i18n } = useTranslation();
     const location = useLocation();
-    
+
 
     useEffect(() => {
         setDecksList(userDecks);
+        setIsMobile(window.matchMedia('(pointer: coarse)').matches)
     }, [userDecks])
 
 
@@ -45,9 +49,25 @@ const DecksList = ({setIsMenuOpen}) => {
                                 addNewDeck();
                             }}
                         >{t('newDeck')} +</button> : <></>}
-                        <button className="import-button" onClick={importDeckFromClipboard}>
-                            {t('importDeck')} <br /><span style={{ fontSize: "10px" }}>(Limitless, Pokémon TCG Live)</span>
-                        </button>
+                        {
+                            !isMobile &&
+                            <button className="import-button" onClick={importDeckFromClipboard}>
+                                {t('importDeck')} <br /><span style={{ fontSize: "10px" }}>(Limitless, Pokémon TCG Live)</span>
+                            </button>
+                        }
+                        <div className={`textArea ${isOpen ? "open" : "closed"}`}>
+                            <button
+                                className="textAreaToggle"
+                                onClick={() => setIsOpen(!isOpen)}
+                                type="button"
+                            >
+                                {isOpen ? t('hideTextArea') : t('showTextArea')}
+                            </button>
+                            <div className="textAreaContent">
+                                <Form />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

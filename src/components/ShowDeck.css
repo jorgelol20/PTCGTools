@@ -6,6 +6,8 @@
     border: 2px var(--color-borde) solid;
     border-radius: 5px;
     padding-top: 5px;
+
+    margin-left: 1em;
 }
 
 #title {
@@ -78,6 +80,9 @@ section {
 .cards {
     background-color: var(--color-fondo);
     color-scheme: dark;
+    width: 100%;
+    margin-left: 1em;
+
 
 }
 

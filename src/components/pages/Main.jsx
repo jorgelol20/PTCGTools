@@ -17,7 +17,6 @@ const Main = () => {
     const [error, setError] = useState(false);
     const { contextError } = useContext(errorContext);
     const { setContextDeck } = useContext(cardsContext);
-    const [isOpen, setIsOpen] = useState(false);
     const { t } = useTranslation();
     const location = useLocation();
 
@@ -54,20 +53,6 @@ const Main = () => {
                         {
                             error && moveToError() && <ErrorAlert id="error" errorMessage={contextError} />
                         }
-                    </div>
-                    <div className={`textArea ${isOpen ? "open" : "closed"}`}>
-                        <button
-                            className="textAreaToggle"
-                            onClick={() => setIsOpen(!isOpen)}
-                            type="button"
-                        >
-                            {isOpen ? t('hideTextArea') : t('showTextArea')}
-                        </button>
-                        <div className="textAreaContent">
-                            <Form
-                                setNewDeck={setNewDeck}
-                            />
-                        </div>
                     </div>
                     <div className="textArea">
                         <DecksList />

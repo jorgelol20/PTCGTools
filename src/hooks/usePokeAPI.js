@@ -186,7 +186,7 @@ const usePokeAPI = (deck) => {
         const newDeckList = {
             name: 'TempDeck',
             cards: formatedDeckAPI,
-            id: crypto.randomUUID()
+            id: Date.now()
         }
         setDeckAPI(newDeckList);
     }
