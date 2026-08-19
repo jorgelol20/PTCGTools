@@ -50,6 +50,9 @@ importers:
       recharts:
         specifier: ^3.10.1
         version: 3.10.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(redux@5.0.1)
+      vite-plugin-image-optimizer:
+        specifier: ^2.0.3
+        version: 2.0.3(vite@7.3.6)
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.5
@@ -78,9 +81,6 @@ importers:
       vite:
         specifier: ^7.3.6
         version: 7.3.6
-      vite-plugin-image-optimizer:
-        specifier: ^2.0.3
-        version: 2.0.3(vite@7.3.6)
       vite-plugin-sitemap:
         specifier: ^0.8.2
         version: 0.8.2
