@@ -7,7 +7,7 @@ PTCGTools helps Pokémon TCG players analyze and build decks using real simulati
 ## Tools
 
 - [Mulligan & Draw Odds Calculator](https://ptcg-tools.vercel.app/calc): Monte Carlo simulation-based calculator for opening hand and mulligan probability, and the odds of drawing a specific card by a given turn. Imports deck lists from TCG Live and Limitless formats.
-- [Deckbuilder](https://ptcg-tools.vercel.app/decks): Deck builder with multi-filter card search for constructing and editing Pokémon TCG deck lists.
+- [Deckbuilder](https://ptcg-tools.vercel.app/deck): Deck builder with multi-filter card search for constructing and editing Pokémon TCG deck lists.
 
 ## Notes
 
