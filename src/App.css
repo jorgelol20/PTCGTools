@@ -116,7 +116,7 @@ header {
   align-items: center;
   border-bottom: 1px solid white;
   padding: 1em;
-  position: sticky;
+  position: relative;
   top: 0;
 
   .nav-link {

@@ -39,7 +39,7 @@ const HandContainer = ({ hands }) => {
                     {
                         display && loadedHands !== undefined && loadedHands.map((hand) => {
                             return <Hand
-                                key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)}
+                                key={Date.now()}
                                 hand={hand}
                             />
                         })

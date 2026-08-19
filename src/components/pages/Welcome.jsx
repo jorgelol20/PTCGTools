@@ -16,7 +16,7 @@ const Welcome = () => {
                         </div>
                         <h2>{t("builder-howItWorks")}</h2>
                         <div className="bottonToAction">
-                            <NavLink key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)} id='calc' to="/deck" >{t('builder-goToCreate')}</NavLink>
+                            <NavLink key={Date.now()} id='calc' to="/deck" >{t('builder-goToCreate')}</NavLink>
                         </div>
                     </div>
                     <div className="menuContainer">
@@ -32,7 +32,7 @@ const Welcome = () => {
                         </ol>
                         <div className="bottonToAction">
                             <h3>{t("welcome-startToCalc")}</h3>
-                            <NavLink key={window.crypto ? crypto.randomUUID?.() : Math.random().toString(36).substring(2, 15)} id='calc' to="/calc" >{t('welcome-goToCalc')}</NavLink>
+                            <NavLink key={Date.now()} id='calc' to="/calc" >{t('welcome-goToCalc')}</NavLink>
                         </div>
                     </div>
                 </div>

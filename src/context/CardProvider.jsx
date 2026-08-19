@@ -194,19 +194,29 @@ const CardProvider = (props) => {
         await saveUserDecks(updatedDecks);
     };
 
-    const importDeckFromClipboard = async () => {
-        try {
-            const text = await navigator.clipboard.readText();
-            const parsedCards = parseDeckList(text);
+    const importDeckFromClipboard = async (deckText = null) => {
+        if (deckText == null) {
+            try {
+                const text = await navigator.clipboard.readText();
+                const parsedCards = parseDeckList(text);
 
-            if (parsedCards.includes(null) || parsedCards.includes(undefined) || parsedCards.length === 0) {
+                if (parsedCards.includes(null) || parsedCards.includes(undefined) || parsedCards.length === 0) {
+                    setNewError(t('errorFormat'));
+                    return;
+                }
+                setClipboardCards(parsedCards);
+            } catch (error) {
+                setNewError(t('clipboardError'));
+            }
+        } else {
+            const parsedCardsFromText = parseDeckList(deckText);
+            if (parsedCardsFromText.includes(null) || parsedCardsFromText.includes(undefined) || parsedCardsFromText.length === 0) {
                 setNewError(t('errorFormat'));
                 return;
             }
-            setClipboardCards(parsedCards);
-        } catch (error) {
-            setNewError(t('clipboardError'));
+            setClipboardCards(parsedCardsFromText);
         }
+
     }
 
     const sortDeck = () => {
