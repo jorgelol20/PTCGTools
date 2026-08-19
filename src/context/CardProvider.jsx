@@ -154,7 +154,7 @@ const CardProvider = (props) => {
             }
             return deck
         })
-
+        setDeck(deckToSave);
         const updatedDecks = [...currentDecks]
         setUserDecks(updatedDecks);
         await saveUserDecks(updatedDecks);
@@ -220,6 +220,7 @@ const CardProvider = (props) => {
     }
 
     const sortDeck = () => {
+        
         setDeck(prevDeck => {
             if (!prevDeck || !prevDeck.cards) return prevDeck;
             return {
