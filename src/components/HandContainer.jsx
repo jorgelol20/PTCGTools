@@ -37,9 +37,9 @@ const HandContainer = ({ hands }) => {
                 }
                 <div className="hands">
                     {
-                        display && loadedHands !== undefined && loadedHands.map((hand) => {
+                        display && loadedHands !== undefined && loadedHands.map((hand,index) => {
                             return <Hand
-                                key={Date.now()}
+                                key={Date.now() * index}
                                 hand={hand}
                             />
                         })

@@ -60,7 +60,7 @@ const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
     const { t, i18n } = useTranslation();
     if (cardInfo.category == "Pokémon" || cardInfo.category == "Entrenador" || cardInfo.category == "Trainer" || cardInfo.category == "Pokemon") {
         return (
-            <Fragment key={cardInfo.cardId}>
+            <Fragment key={Date.now()+cardInfo.cardId}>
                 <div className="card-main">
                     <div onClick={() => {
                         setActualCard(cardInfo);
@@ -105,7 +105,7 @@ const Card = ({ cardInfo, onUpdateQuantity, showButtons = true }) => {
             </Fragment>
         )
     } else {
-        return (<Fragment key={cardInfo.name}>
+        return (<Fragment key={Date.now()+cardInfo.name}>
             <div className="card-main">
                 <div className={`${checkFormat(cardInfo.legal, cardInfo?.cardId)} card`} key={cardInfo.name} onClick={() => {
                     if (cardInfo.expansion) {

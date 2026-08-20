@@ -256,7 +256,7 @@ const Decks = () => {
                                             if (card !== undefined) {
                                                 return <Card
                                                     className="card"
-                                                    key={index}
+                                                    key={Date.now() * index}
                                                     cardInfo={card}
                                                     setNewCardInfo={setActualCard}
                                                     onUpdateQuantity={handleUpdateQuantity}

@@ -10,7 +10,7 @@ import Valid_Icon from './../assets/img/valid.svg';
 import { useEffect } from "react";
 import { useState } from "react";
 
-const DeckPreview = ({ deckInfo,setIsMenuOpen }) => {
+const DeckPreview = ({ deckInfo, setIsMenuOpen }) => {
     const { contextDeck, setContextDeck, deleteDeck } = useContext(cardsContext);
     const [cardsQuantity, setCardsQuantity] = useState();
     const [active, setActive] = useState(false);
@@ -40,7 +40,9 @@ const DeckPreview = ({ deckInfo,setIsMenuOpen }) => {
             >
                 <div className="deck-preview"
                     onClick={() => {
-                        setIsMenuOpen(false)
+                        if (setIsMenuOpen != null) {
+                            setIsMenuOpen(false)
+                        }
                         setContextDeck(deckInfo)
                     }}
 
@@ -52,9 +54,9 @@ const DeckPreview = ({ deckInfo,setIsMenuOpen }) => {
                             {
                                 deckInfo.format ?
                                     <div className="deck-format">
-                                        <p>S <img src={deckInfo.format[0] ? Valid_Icon : NotValid_Icon} alt={deckInfo.format[0] ? "Valid" : "No valid"} title={deckInfo.format[0] ? "Valid" : "No valid"}/></p>
-                                        <p>E <img src={deckInfo.format[1] ? Valid_Icon : NotValid_Icon} alt={deckInfo.format[1] ? "Valid" : "No valid"} title={deckInfo.format[1] ? "Valid" : "No valid"}/></p>
-                                        <p>GLC <img src={deckInfo.format[2] ? Valid_Icon : NotValid_Icon} alt={deckInfo.format[2] ? "Valid" : "No valid"} title={deckInfo.format[2] ? "Valid" : "No valid"}/></p>
+                                        <p>S <img src={deckInfo.format[0] ? Valid_Icon : NotValid_Icon} alt={deckInfo.format[0] ? "Valid" : "No valid"} title={deckInfo.format[0] ? "Valid" : "No valid"} /></p>
+                                        <p>E <img src={deckInfo.format[1] ? Valid_Icon : NotValid_Icon} alt={deckInfo.format[1] ? "Valid" : "No valid"} title={deckInfo.format[1] ? "Valid" : "No valid"} /></p>
+                                        <p>GLC <img src={deckInfo.format[2] ? Valid_Icon : NotValid_Icon} alt={deckInfo.format[2] ? "Valid" : "No valid"} title={deckInfo.format[2] ? "Valid" : "No valid"} /></p>
                                     </div> :
                                     <></>
                             }
