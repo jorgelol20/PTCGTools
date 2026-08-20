@@ -312,7 +312,7 @@ const Search = () => {
                     <div className="results-cards">
                         {!loading &&
                             displayedCards.map((card) => (
-                                <SearchedCard cardId={card} key={card} language={searchLanguage.current.value === 'auto' ? i18n.language : searchLanguage.current.value} />
+                                <SearchedCard cardId={card} key={Date.now() + card} language={searchLanguage.current.value === 'auto' ? i18n.language : searchLanguage.current.value} />
                             ))}
                     </div>
                     <div className="pageButtons">

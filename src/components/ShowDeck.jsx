@@ -254,7 +254,7 @@ const ShowDeck = ({ deck }) => {
                                 if (card !== undefined) {
                                     return <Card
                                         className="card"
-                                        key={card.cardId}
+                                        key={Date.now() + card.cardId}
                                         cardInfo={card}
                                         setNewCardInfo={setNewCardInfo}
                                         onUpdateQuantity={handleUpdateQuantity}
