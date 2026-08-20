@@ -195,7 +195,7 @@ const CardProvider = (props) => {
     };
 
     const importDeckFromClipboard = async (deckText = null) => {
-        if (deckText == null) {
+        if (deckText.type !== null) {
             try {
                 const text = await navigator.clipboard.readText();
                 const parsedCards = parseDeckList(text);
